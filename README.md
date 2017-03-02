@@ -1,5 +1,16 @@
 ### Short Description
 
-### (Core) User Stories
+### User Stories
+The following user stories ***must*** be completed:
+1.
+2.
+3.
+4.
+5.
+6.
 
-### (Optional) User Stories
+The following user stories are ***optional***:
+1.
+2.
+3.
+
