@@ -10,10 +10,7 @@ The following user stories ***must*** be completed: <br>
    any Drivers departing in that area for a specified time. <br>
 4. Driver must be able to specify how many seats he or she wants to make
    available in their car. <br>
-5.
-6.
 
 The following user stories are ***optional***:
-1.
-2.
-3.
+1. Riders can rate Drivers and vice versa <br>
+2. Riders can message Drivers and vice versa <br>
