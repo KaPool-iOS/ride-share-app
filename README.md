@@ -24,8 +24,8 @@ wireframes:
 ![alt tag](Screenshot (3).png)
 
 ## Data Schema
-***Tables on parse server:***<br>
-<u>Ride Table Fields</u>
+Tables on parse server: <br>
+<u>Ride Table Fields</u><br>
 Driver <br>
 Rider <br>
 Destination <br>
@@ -33,7 +33,7 @@ Location <br>
 Date <br>
 Price <br>
 
-<u>User Table Fields</u>
+<u>User Table Fields </u><br>
 Username<br>
 Password<br>
 First Name<br>
@@ -46,7 +46,7 @@ Car Type<br>
 Car Color<br>
 
 
-***Existing APIs we're gonna use:***<br>
+Existing APIs we're gonna use:<br>
 1. Venmo<br>
 2. Facebook <br>
 3. Google Map API <br>
