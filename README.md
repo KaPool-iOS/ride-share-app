@@ -14,3 +14,39 @@ The following user stories ***must*** be completed: <br>
 The following user stories are ***optional***:
 1. Riders can rate Drivers and vice versa <br>
 2. Riders can message Drivers and vice versa <br>
+3. Supporting different currencies <br>
+4. Adding a visual map <br>
+5. Intermediate Destinations <br>
+
+
+wireframes:
+
+![alt tag](Screenshot (3).png)
+
+## Data Schema
+Tables on parse server: <br>
+<u>Ride Table Fields</u><br>
+Driver <br>
+Rider <br>
+Destination <br>
+Location <br>
+Date <br>
+Price <br>
+
+<u>User Table Fields </u><br>
+Username<br>
+Password<br>
+First Name<br>
+Last Name<br>
+Email<br>
+Phone Number<br>
+License Plate<br>
+Car Model<br>
+Car Type<br>
+Car Color<br>
+
+
+Existing APIs we're gonna use:<br>
+1. Venmo<br>
+2. Facebook <br>
+3. Google Map API <br>
