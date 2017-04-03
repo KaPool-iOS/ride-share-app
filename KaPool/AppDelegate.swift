@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +17,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        Parse.enableLocalDatastore()
+        
+        let parseConfiguration = ParseClientConfiguration(block: { (ParseMutableClientConfiguration) -> Void in
+            ParseMutableClientConfiguration.applicationId = "db9eeca8a04922973124b1e91ea8afb3a0e833a8"
+            ParseMutableClientConfiguration.clientKey = "e6557cd377048085e511463d9a786751f7b11897"
+            ParseMutableClientConfiguration.server = "http://ec2-54-213-1-146.us-west-2.compute.amazonaws.com:80/parse"
+        })
+        
+        Parse.initialize(with: parseConfiguration)
+        
+        //PFUser.enableAutomaticUser()
+        
+        let defaultACL = PFACL();
+        
+        // If you would like all objects to be private by default, remove this line.
+        defaultACL.getPublicReadAccess = true
+        
+        PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
+        
+        //login()
+        
+        // color of window
+        window?.backgroundColor = .white
+        
         return true
     }
 
