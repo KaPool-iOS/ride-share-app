@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A521E68D6F3009BE18F /* AppDelegate.swift */; };
-		21CE5A551E68D6F3009BE18F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A541E68D6F3009BE18F /* ViewController.swift */; };
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
 		21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A5B1E68D6F4009BE18F /* LaunchScreen.storyboard */; };
+		6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */; };
+		6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */; };
+		6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */; };
 		F891E329D9D6AC86C1D8B5FF /* Pods_KaPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */; };
 /* End PBXBuildFile section */
 
@@ -20,11 +22,13 @@
 		18C23D11571A5F75B850A9F7 /* Pods-KaPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KaPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-KaPool/Pods-KaPool.release.xcconfig"; sourceTree = "<group>"; };
 		21CE5A4F1E68D6F3009BE18F /* KaPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CE5A521E68D6F3009BE18F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		21CE5A541E68D6F3009BE18F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		21CE5A571E68D6F3009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		21CE5A591E68D6F4009BE18F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21CE5A5C1E68D6F4009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21CE5A5E1E68D6F4009BE18F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFirstViewController.swift; sourceTree = "<group>"; };
+		6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSecondViewController.swift; sourceTree = "<group>"; };
 		BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KaPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -73,7 +77,6 @@
 				6E175FD51E92E52700040B25 /* Views */,
 				6E175FD41E92E51D00040B25 /* Models */,
 				21CE5A521E68D6F3009BE18F /* AppDelegate.swift */,
-				21CE5A541E68D6F3009BE18F /* ViewController.swift */,
 				21CE5A561E68D6F3009BE18F /* Main.storyboard */,
 				21CE5A591E68D6F4009BE18F /* Assets.xcassets */,
 				21CE5A5B1E68D6F4009BE18F /* LaunchScreen.storyboard */,
@@ -101,6 +104,9 @@
 		6E175FD51E92E52700040B25 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */,
+				6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */,
+				6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -236,7 +242,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				21CE5A551E68D6F3009BE18F /* ViewController.swift in Sources */,
+				6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */,
+				6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */,
+				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,
 				21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
