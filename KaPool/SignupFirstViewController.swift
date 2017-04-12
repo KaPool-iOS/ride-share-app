@@ -12,6 +12,7 @@ import Parse
 class SignupFirstViewController: UIViewController {
     
     
+    
 
     @IBOutlet var nameText: UITextField!
     @IBOutlet var emailText: UITextField!
@@ -19,8 +20,10 @@ class SignupFirstViewController: UIViewController {
     @IBOutlet var confirmPassText: UITextField!
     @IBOutlet var phoneNumText: UITextField!
     let appName = "Kapool"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.verifyEmail()
 
         // Do any additional setup after loading the view.
     }
@@ -68,6 +71,7 @@ class SignupFirstViewController: UIViewController {
                         
                     } else {
                         
+                        
                         self.alertControl(title: self.appName, message: "Signed up Successfully")
                         
                         
@@ -79,8 +83,35 @@ class SignupFirstViewController: UIViewController {
                         //appDelegate.login()
                     }
                 })
+                
+                
             }
         }
+    }
+    
+    func verifyEmail () {
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: "https://api.mailgun.net/v3/sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org/messages")! as URL)
+        request.httpMethod = "POST"
+        
+        let username = "api"
+        let password = "key-26ed8d792fb56983f3d0f65c8ed18487"
+        
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.data(using: String.Encoding.utf8.rawValue)! as NSData
+        
+        let base64LoginString = loginData.base64EncodedString(options: [])
+        
+        request.setValue("Test Email", forHTTPHeaderField: "Authorization")
+        
+        let bodyStr = "from=Mailgun Sandbox <sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org>&to=Receiver name <madel.asistio@gmail.com>&subject=Test&text=thank you!"
+
+        // appending the data
+        request.httpBody = bodyStr.data(using: String.Encoding.utf8);
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            // ... do other stuff here
+            print("email sent")
+        })
     }
 
     

@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Parse.initialize(with: parseConfiguration)
         
+        
         //PFUser.enableAutomaticUser()
         
         let defaultACL = PFACL();
