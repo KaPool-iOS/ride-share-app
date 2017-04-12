@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import mailgun
 
 class SignupFirstViewController: UIViewController {
     
@@ -90,6 +91,30 @@ class SignupFirstViewController: UIViewController {
     }
     
     func verifyEmail () {
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.mailgun.net/v3/https://api.mailgun.net/v3/sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org/messages")! as URL)
+        
+        request.httpMethod = "POST"
+        let credentials = "api:key-26ed8d792fb56983f3d0f65c8ed18487"
+        
+        request.setValue("Basic \(credentials.toBase64())", forHTTPHeaderField: "Authorization")
+        
+        let data = "from: Swift Email <sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org>&to: <madel.asistio@gmail.com>&subject:Hello&text:Testing_some_Mailgun_awesomness"
+        request.httpBody = data.data(using: String.Encoding.ascii)
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+            if let error = error {
+                print(error)
+            }
+            if let response = response {
+                print("url = \(response.url!)")
+                print("response = \(response)")
+                let httpResponse = response as! HTTPURLResponse
+                print("response code = \(httpResponse.statusCode)")
+            }
+        })
+        task.resume()
+        /*
         let request: NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: "https://api.mailgun.net/v3/sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org/messages")! as URL)
         request.httpMethod = "POST"
         
@@ -101,7 +126,7 @@ class SignupFirstViewController: UIViewController {
         
         let base64LoginString = loginData.base64EncodedString(options: [])
         
-        request.setValue("Test Email", forHTTPHeaderField: "Authorization")
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
         
         let bodyStr = "from=Mailgun Sandbox <sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org>&to=Receiver name <madel.asistio@gmail.com>&subject=Test&text=thank you!"
 
@@ -110,9 +135,18 @@ class SignupFirstViewController: UIViewController {
         
         let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             // ... do other stuff here
-            print("email sent")
+            
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("email sent")
+            }
+            
         })
+        
+        task.resume() */
     }
+    
 
     
     func alertControl (title: String, message: String) {
@@ -139,4 +173,19 @@ class SignupFirstViewController: UIViewController {
     }
     */
 
+}
+
+extension String {
+    
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        
+        return String(data: data, encoding: .utf8)
+    }
+    
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
 }
