@@ -8,8 +8,10 @@
 
 import UIKit
 import Parse
+import mailgun
 
 class SignupFirstViewController: UIViewController {
+    
     
     
 
@@ -19,8 +21,10 @@ class SignupFirstViewController: UIViewController {
     @IBOutlet var confirmPassText: UITextField!
     @IBOutlet var phoneNumText: UITextField!
     let appName = "Kapool"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.verifyEmail()
 
         // Do any additional setup after loading the view.
     }
@@ -68,6 +72,7 @@ class SignupFirstViewController: UIViewController {
                         
                     } else {
                         
+                        
                         self.alertControl(title: self.appName, message: "Signed up Successfully")
                         
                         
@@ -79,9 +84,69 @@ class SignupFirstViewController: UIViewController {
                         //appDelegate.login()
                     }
                 })
+                
+                
             }
         }
     }
+    
+    func verifyEmail () {
+        let session = URLSession.shared
+        let request = NSMutableURLRequest(url: NSURL(string: "https://api.mailgun.net/v3/https://api.mailgun.net/v3/sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org/messages")! as URL)
+        
+        request.httpMethod = "POST"
+        let credentials = "api:key-26ed8d792fb56983f3d0f65c8ed18487"
+        
+        request.setValue("Basic \(credentials.toBase64())", forHTTPHeaderField: "Authorization")
+        
+        let data = "from: Swift Email <sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org>&to: <madel.asistio@gmail.com>&subject:Hello&text:Testing_some_Mailgun_awesomness"
+        request.httpBody = data.data(using: String.Encoding.ascii)
+        
+        let task = session.dataTask(with: request as URLRequest, completionHandler: {(data, response, error) in
+            if let error = error {
+                print(error)
+            }
+            if let response = response {
+                print("url = \(response.url!)")
+                print("response = \(response)")
+                let httpResponse = response as! HTTPURLResponse
+                print("response code = \(httpResponse.statusCode)")
+            }
+        })
+        task.resume()
+        /*
+        let request: NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: "https://api.mailgun.net/v3/sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org/messages")! as URL)
+        request.httpMethod = "POST"
+        
+        let username = "api"
+        let password = "key-26ed8d792fb56983f3d0f65c8ed18487"
+        
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: NSData = loginString.data(using: String.Encoding.utf8.rawValue)! as NSData
+        
+        let base64LoginString = loginData.base64EncodedString(options: [])
+        
+        request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+        
+        let bodyStr = "from=Mailgun Sandbox <sandboxae2893df622b4453980b0dcaebe136dc.mailgun.org>&to=Receiver name <madel.asistio@gmail.com>&subject=Test&text=thank you!"
+
+        // appending the data
+        request.httpBody = bodyStr.data(using: String.Encoding.utf8);
+        
+        let task = URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            // ... do other stuff here
+            
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("email sent")
+            }
+            
+        })
+        
+        task.resume() */
+    }
+    
 
     
     func alertControl (title: String, message: String) {
@@ -108,4 +173,19 @@ class SignupFirstViewController: UIViewController {
     }
     */
 
+}
+
+extension String {
+    
+    func fromBase64() -> String? {
+        guard let data = Data(base64Encoded: self) else {
+            return nil
+        }
+        
+        return String(data: data, encoding: .utf8)
+    }
+    
+    func toBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
+    }
 }

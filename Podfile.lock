@@ -1,15 +1,21 @@
 PODS:
+  - AFNetworking (1.1.0)
   - Bolts/Tasks (1.8.4)
+  - mailgun (1.0.3):
+    - AFNetworking (~> 1.1.0)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
 
 DEPENDENCIES:
+  - mailgun (~> 1.0.3)
   - Parse
 
 SPEC CHECKSUMS:
+  AFNetworking: e6427e782b25a2289d909960df8ef41358b3277c
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  mailgun: 17290deea4db24050dd03ca59cd7385d508904b3
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
 
-PODFILE CHECKSUM: 735f140699797c86801e40c7f0537a0f362fc094
+PODFILE CHECKSUM: 76b543d7e822a424f103004d7f3b189f3c6d40ce
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0
