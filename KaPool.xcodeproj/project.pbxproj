@@ -14,6 +14,7 @@
 		6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */; };
 		6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */; };
 		6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */; };
+		6E2AE63B1EA0B1F7005C21A9 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */; };
 		F891E329D9D6AC86C1D8B5FF /* Pods_KaPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFirstViewController.swift; sourceTree = "<group>"; };
 		6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSecondViewController.swift; sourceTree = "<group>"; };
+		6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KaPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -107,6 +109,7 @@
 				6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */,
 				6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */,
 				6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */,
+				6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */,
+				6E2AE63B1EA0B1F7005C21A9 /* SigninViewController.swift in Sources */,
 				6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */,
 				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,
 				21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */,
