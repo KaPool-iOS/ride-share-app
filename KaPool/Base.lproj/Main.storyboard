@@ -409,10 +409,10 @@
             </objects>
             <point key="canvasLocation" x="5225" y="-331"/>
         </scene>
-        <!--View Controller-->
+        <!--Find Ride View Controller-->
         <scene sceneID="4IL-QG-fux">
             <objects>
-                <viewController id="mEm-zw-jrL" sceneMemberID="viewController">
+                <viewController id="mEm-zw-jrL" customClass="FindRideViewController" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ir2-rj-eGq"/>
                         <viewControllerLayoutGuide type="bottom" id="0U4-NF-s88"/>
@@ -473,19 +473,22 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="How many seats do you need" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5a-sP-pOd">
-                                        <rect key="frame" x="9" y="131" width="183" height="30"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Seats" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5a-sP-pOd">
+                                        <rect key="frame" x="9" y="131" width="145" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="aaR-2G-naM">
                                         <rect key="frame" x="257" y="132" width="94" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <connections>
+                                            <action selector="stepperChangeValue:" destination="mEm-zw-jrL" eventType="valueChanged" id="R6m-ho-4hx"/>
+                                        </connections>
                                     </stepper>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kI1-hg-zos">
-                                        <rect key="frame" x="229" y="137" width="8" height="21"/>
+                                        <rect key="frame" x="213" y="137" width="24" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -510,10 +513,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="42G-pI-uzO"/>
+                    <connections>
+                        <outlet property="dateText" destination="iMb-VI-z5J" id="EFm-GB-f48"/>
+                        <outlet property="fromText" destination="xZt-rW-A3R" id="zJQ-Qs-3Dh"/>
+                        <outlet property="seatsText" destination="kI1-hg-zos" id="xkX-F5-UyI"/>
+                        <outlet property="stepper" destination="aaR-2G-naM" id="zsh-vo-cT7"/>
+                        <outlet property="timeText" destination="KPz-lH-7cg" id="hIk-ZN-w3r"/>
+                        <outlet property="toText" destination="fKb-Fz-qg3" id="7T3-T2-yao"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3py-aC-yEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6098.3999999999996" y="-330.58470764617692"/>
+            <point key="canvasLocation" x="6156" y="-363.86806596701655"/>
         </scene>
         <!--Signup Second View Controller-->
         <scene sceneID="GAc-4Y-SqR">
