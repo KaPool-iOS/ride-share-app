@@ -1,22 +1,42 @@
 //
-//  RideViewController.swift
+//  FindRideViewController.swift
 //  KaPool
 //
-//  Created by Jake Vo on 4/16/17.
+//  Created by  Alex Sumak on 4/17/17.
 //  Copyright © 2017 Madel Asistio. All rights reserved.
 //
 
 import UIKit
-import Parse
 
-class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    var rideArray: [Ride] = []
+class FindRideViewController:
+UIViewController {
+  
+  @IBOutlet weak var fromText: UITextField!
+  
+  @IBOutlet weak var toText: UITextField!
+  
+  @IBOutlet weak var dateText: UITextField!
+  
+  @IBOutlet weak var timeText: UITextField!
+  
+  @IBOutlet weak var seatsText: UILabel!
+  
+  @IBOutlet weak var stepper: UIStepper!
+  
+  @IBAction func stepperChangeValue(_ sender: UIStepper) {
     
+    seatsText.text = Int(sender.value).description
+  }
+  
+  
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        getData()
-
+      super.viewDidLoad()
+      stepper.wraps = true
+      stepper.autorepeat = true
+      stepper.maximumValue = 4
+      
         // Do any additional setup after loading the view.
     }
 
@@ -25,31 +45,6 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "rideCell") as! RideCell
-        
-        
-        return cell
-    }
-    
-    
-    
-    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        
-        return 0
-    }
-    
-    func getData() {
-        
-        
-        
-    }
-
 
     /*
     // MARK: - Navigation
