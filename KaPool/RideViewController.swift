@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import Parse
 
-class RideViewController: UIViewController {
+class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+    
+    var rideArray: [Ride] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getData()
 
         // Do any additional setup after loading the view.
     }
@@ -21,6 +26,31 @@ class RideViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "rideCell") as! RideCell
+        
+        
+        return cell
+    }
+    
+    
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        
+        return 0
+    }
+    
+    func getData() {
+        
+        
+        
+    }
+
 
     /*
     // MARK: - Navigation

@@ -11,6 +11,7 @@
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
 		21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A5B1E68D6F4009BE18F /* LaunchScreen.storyboard */; };
+		6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0A995B1EA5C16B0039BE67 /* Ride.swift */; };
 		6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */; };
 		6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */; };
 		6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */; };
@@ -29,6 +30,7 @@
 		21CE5A591E68D6F4009BE18F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21CE5A5C1E68D6F4009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21CE5A5E1E68D6F4009BE18F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E0A995B1EA5C16B0039BE67 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFirstViewController.swift; sourceTree = "<group>"; };
 		6E2AE6381E9C1E73005C21A9 /* SignupSecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupSecondViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 		6E175FD41E92E51D00040B25 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6E0A995B1EA5C16B0039BE67 /* Ride.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -162,7 +165,7 @@
 				TargetAttributes = {
 					21CE5A4E1E68D6F3009BE18F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = WFB978387N;
+						DevelopmentTeam = YXRDGGLHC4;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -252,6 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */,
+				6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */,
 				6E2AE63B1EA0B1F7005C21A9 /* SigninViewController.swift in Sources */,
 				6E57A1021EA49E10005CF461 /* RideViewController.swift in Sources */,
 				6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */,
@@ -379,7 +383,7 @@
 			baseConfigurationReference = 0F45B5E3E9DAF057A73B5769 /* Pods-KaPool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WFB978387N;
+				DEVELOPMENT_TEAM = YXRDGGLHC4;
 				INFOPLIST_FILE = KaPool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -395,7 +399,7 @@
 			baseConfigurationReference = 18C23D11571A5F75B850A9F7 /* Pods-KaPool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = WFB978387N;
+				DEVELOPMENT_TEAM = YXRDGGLHC4;
 				INFOPLIST_FILE = KaPool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

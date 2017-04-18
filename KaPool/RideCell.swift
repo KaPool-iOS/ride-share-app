@@ -19,9 +19,6 @@ class RideCell: UITableViewCell {
     @IBOutlet var timeText: UILabel!
     
     
-    
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
