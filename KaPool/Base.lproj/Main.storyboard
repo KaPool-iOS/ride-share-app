@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -223,7 +223,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17a-1i-Gsf" id="OZg-qx-DQV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UCSD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGd-Sm-zM1">
@@ -293,11 +293,7 @@
                                                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7c-8r-fVi">
-<<<<<<< HEAD
-                                                    <rect key="frame" x="14" y="32" width="37" height="24"/>
-=======
                                                     <rect key="frame" x="16" y="60" width="37" height="24"/>
->>>>>>> a20afb410990b0126a3269c2bacdf4f8bd1e3a89
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="Thonburi" family="Thonburi" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -346,8 +342,6 @@
             </objects>
             <point key="canvasLocation" x="4495.1999999999998" y="-669.71514242878561"/>
         </scene>
-<<<<<<< HEAD
-=======
         <!--Tab Bar Controller-->
         <scene sceneID="k7v-z7-T9H">
             <objects>
@@ -629,7 +623,6 @@
             </objects>
             <point key="canvasLocation" x="2472.8000000000002" y="965.6671664167917"/>
         </scene>
->>>>>>> a20afb410990b0126a3269c2bacdf4f8bd1e3a89
         <!--Kapool-->
         <scene sceneID="wHF-3O-UxU">
             <objects>
@@ -841,19 +834,11 @@
             </objects>
             <point key="canvasLocation" x="1670" y="63"/>
         </scene>
-<<<<<<< HEAD
-        <!--Item-->
-        <scene sceneID="l2R-If-N8q">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oKv-La-yvh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Stc-5x-iHk"/>
-=======
         <!--My rides-->
         <scene sceneID="l2R-If-N8q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oKv-La-yvh" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="My rides" image="Car-30" id="dJf-Yv-f2U"/>
->>>>>>> a20afb410990b0126a3269c2bacdf4f8bd1e3a89
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mLf-Zv-nAH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
