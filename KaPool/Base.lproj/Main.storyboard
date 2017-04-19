@@ -378,7 +378,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jC6-TV-WB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5619" y="710"/>
+            <point key="canvasLocation" x="5807" y="480"/>
         </scene>
         <!--Offer ride-->
         <scene sceneID="cN4-NY-935">
@@ -853,10 +853,10 @@
             </objects>
             <point key="canvasLocation" x="3556" y="-670.61469265367316"/>
         </scene>
-        <!--View Controller-->
+        <!--Offer RideVC-->
         <scene sceneID="lxy-HU-Dgq">
             <objects>
-                <viewController id="Lan-qU-XZB" sceneMemberID="viewController">
+                <viewController id="Lan-qU-XZB" customClass="OfferRideVC" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jGM-Be-ksx"/>
                         <viewControllerLayoutGuide type="bottom" id="mQs-ue-qAq"/>
@@ -1012,10 +1012,13 @@
                         <color key="backgroundColor" red="0.99607843139999996" green="0.94509803920000002" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="priceView" destination="KOa-12-7IE" id="u3h-UT-u99"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kgl-v3-bHG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4060" y="1130.2848575712144"/>
+            <point key="canvasLocation" x="4047" y="1090"/>
         </scene>
     </scenes>
     <resources>

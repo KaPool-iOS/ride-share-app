@@ -12,6 +12,7 @@
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
 		21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A5B1E68D6F4009BE18F /* LaunchScreen.storyboard */; };
+		21F728971EA8003600DEB36B /* OfferRideVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F728961EA8003600DEB36B /* OfferRideVC.swift */; };
 		6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0A995B1EA5C16B0039BE67 /* Ride.swift */; };
 		6E2AE6351E9C1983005C21A9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */; };
 		6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */; };
@@ -32,6 +33,7 @@
 		21CE5A591E68D6F4009BE18F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		21CE5A5C1E68D6F4009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		21CE5A5E1E68D6F4009BE18F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		21F728961EA8003600DEB36B /* OfferRideVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferRideVC.swift; sourceTree = "<group>"; };
 		6E0A995B1EA5C16B0039BE67 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		6E2AE6341E9C1983005C21A9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFirstViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				6E57A1071EA4A2C2005CF461 /* RideCell.swift */,
+				21F728961EA8003600DEB36B /* OfferRideVC.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,
 				6E57A1081EA4A2C2005CF461 /* RideCell.swift in Sources */,
 				21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */,
+				21F728971EA8003600DEB36B /* OfferRideVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
