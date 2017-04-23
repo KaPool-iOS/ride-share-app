@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -223,7 +223,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17a-1i-Gsf" id="OZg-qx-DQV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="UCSD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGd-Sm-zM1">
@@ -340,7 +340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLt-go-0PJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4495.1999999999998" y="-669.71514242878561"/>
+            <point key="canvasLocation" x="6170" y="-331"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="k7v-z7-T9H">
@@ -380,11 +380,11 @@
             </objects>
             <point key="canvasLocation" x="5807" y="480"/>
         </scene>
-        <!--Offer ride-->
+        <!--Messages-->
         <scene sceneID="cN4-NY-935">
             <objects>
                 <navigationController id="Ofy-8W-81W" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Offer ride" image="Driver-30" id="mAe-K4-olH"/>
+                    <tabBarItem key="tabBarItem" title="Messages" image="Message-30" id="mAe-K4-olH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yia-pS-HCP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -397,11 +397,11 @@
             </objects>
             <point key="canvasLocation" x="4921" y="709"/>
         </scene>
-        <!--Find ride-->
+        <!--My rides-->
         <scene sceneID="8sM-Ya-uKt">
             <objects>
                 <navigationController id="xkV-pM-EJf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Find ride" image="Search-30" id="YYv-2y-WiW"/>
+                    <tabBarItem key="tabBarItem" title="My rides" image="Car-30" id="YYv-2y-WiW"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="azu-ne-cJS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -529,7 +529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3py-aC-yEV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6156" y="-363.86806596701655"/>
+            <point key="canvasLocation" x="4486" y="-1084"/>
         </scene>
         <!--Signup Second View Controller-->
         <scene sceneID="GAc-4Y-SqR">
@@ -834,11 +834,11 @@
             </objects>
             <point key="canvasLocation" x="1670" y="63"/>
         </scene>
-        <!--My rides-->
+        <!--My profile-->
         <scene sceneID="l2R-If-N8q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oKv-La-yvh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My rides" image="Car-30" id="dJf-Yv-f2U"/>
+                    <tabBarItem key="tabBarItem" title="My profile" image="User-30" id="dJf-Yv-f2U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="mLf-Zv-nAH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1023,8 +1023,8 @@
     </scenes>
     <resources>
         <image name="Car-30" width="30" height="30"/>
-        <image name="Driver-30" width="30" height="30"/>
-        <image name="Search-30" width="30" height="30"/>
+        <image name="Message-30" width="30" height="30"/>
+        <image name="User-30" width="30" height="30"/>
         <image name="background" width="553" height="826"/>
         <image name="button" width="420" height="101"/>
         <image name="destIcon" width="20" height="21"/>
