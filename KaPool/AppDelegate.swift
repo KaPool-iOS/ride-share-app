@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
-        login()
+        //login()
         
         // color of window
         window?.backgroundColor = .white
@@ -67,14 +67,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func login() {
+    func login() -> Bool {
         
+        //let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+
         if PFUser.current() != nil {
-            //user is logged in 
+            //let offerRide = storyboard.instantiateViewController(withIdentifier: "offerRide") as! UITabBarController
+            //window?.rootViewController = offerRide
+            return true
+        } else {
+
+            //let vc = storyboard.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
+        
+            return false
             
-            
-            
-            
+
         }
     }
 

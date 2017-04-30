@@ -25,6 +25,34 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func onOfferRide(_ sender: Any) {
+        
+        let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        
+        if appDelegate.login() {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
+            
+            //vc.tweet = tweetsArray[0]
+            
+            
+            self.present(vc, animated: true, completion: nil)
+
+        } else {
+            
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
+            
+            //vc.tweet = tweetsArray[0]
+            
+            
+            self.present(vc, animated: true, completion: nil)
+
+            
+            
+        }
+        
+    }
     
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
