@@ -118,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				6E57A1071EA4A2C2005CF461 /* RideCell.swift */,
-				21F728961EA8003600DEB36B /* OfferRideVC.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -132,6 +131,7 @@
 				6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */,
 				6E57A1011EA49E10005CF461 /* RideViewController.swift */,
 				0B7E02DE1EA5C1F5007FB045 /* FindRideViewController.swift */,
+				21F728961EA8003600DEB36B /* OfferRideVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
