@@ -330,10 +330,10 @@
             </objects>
             <point key="canvasLocation" x="5962" y="596"/>
         </scene>
-        <!--View Controller-->
+        <!--Driver Profile View Controller-->
         <scene sceneID="OAp-i1-Gki">
             <objects>
-                <viewController id="CPm-bv-Ipk" sceneMemberID="viewController">
+                <viewController id="CPm-bv-Ipk" customClass="DriverProfileViewController" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EGg-ro-ROQ"/>
                         <viewControllerLayoutGuide type="bottom" id="rWm-59-HT6"/>
@@ -598,6 +598,19 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="ageLabel" destination="s7v-lE-A6Z" id="xy1-RS-gea"/>
+                        <outlet property="carImage" destination="IVd-fe-mFG" id="LKz-Gp-u91"/>
+                        <outlet property="colorLabel" destination="e4v-J3-c6a" id="aE2-vQ-29K"/>
+                        <outlet property="driverImage" destination="6qP-IC-rZl" id="uMR-eV-5HB"/>
+                        <outlet property="foodImage" destination="acN-PQ-O17" id="PMK-9c-ZtT"/>
+                        <outlet property="infoText" destination="jLH-eW-CYb" id="jo7-v2-7Q5"/>
+                        <outlet property="makeLabel" destination="f0Q-dq-zga" id="pj1-fV-VRN"/>
+                        <outlet property="modelLabel" destination="w8n-ws-6Hu" id="Hb5-0E-HLb"/>
+                        <outlet property="nameLabel" destination="uq6-rU-VAz" id="JbS-xB-XEL"/>
+                        <outlet property="smokingImage" destination="8x8-Ac-QCg" id="7i8-Hx-104"/>
+                        <outlet property="yearLabel" destination="v9J-Hf-fys" id="M0P-LK-LUW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ZM-ns-p3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

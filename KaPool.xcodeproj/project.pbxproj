@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B7E02DF1EA5C1F5007FB045 /* FindRideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E02DE1EA5C1F5007FB045 /* FindRideViewController.swift */; };
+		0B970A691EB678C4006D061A /* DriverProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B970A681EB678C4006D061A /* DriverProfileViewController.swift */; };
 		21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A521E68D6F3009BE18F /* AppDelegate.swift */; };
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		0B7E02DE1EA5C1F5007FB045 /* FindRideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindRideViewController.swift; sourceTree = "<group>"; };
+		0B970A681EB678C4006D061A /* DriverProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DriverProfileViewController.swift; sourceTree = "<group>"; };
 		0F45B5E3E9DAF057A73B5769 /* Pods-KaPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KaPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KaPool/Pods-KaPool.debug.xcconfig"; sourceTree = "<group>"; };
 		18C23D11571A5F75B850A9F7 /* Pods-KaPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KaPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-KaPool/Pods-KaPool.release.xcconfig"; sourceTree = "<group>"; };
 		21CE5A4F1E68D6F3009BE18F /* KaPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,6 +134,7 @@
 				6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */,
 				6E57A1011EA49E10005CF461 /* RideViewController.swift */,
 				0B7E02DE1EA5C1F5007FB045 /* FindRideViewController.swift */,
+				0B970A681EB678C4006D061A /* DriverProfileViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,
 				6E57A1081EA4A2C2005CF461 /* RideCell.swift in Sources */,
 				21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */,
+				0B970A691EB678C4006D061A /* DriverProfileViewController.swift in Sources */,
 				21F728971EA8003600DEB36B /* OfferRideVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
