@@ -76,19 +76,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func login() -> Bool {
+    func login(){
         
-        //let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
         if PFUser.current() != nil {
             //let offerRide = storyboard.instantiateViewController(withIdentifier: "offerRide") as! UITabBarController
             //window?.rootViewController = offerRide
-            return true
+            let vc = storyboard.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
+            
+            //vc.tweet = tweetsArray[0]
+            
+            
+            window?.rootViewController = vc
+     
         } else {
 
-            //let vc = storyboard.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
         
-            return false
+            window?.rootViewController = vc
             
 
         }

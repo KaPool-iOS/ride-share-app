@@ -30,27 +30,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
         
         
-        if appDelegate.login() {
-            
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
-            
-            //vc.tweet = tweetsArray[0]
-            
-            
-            self.present(vc, animated: true, completion: nil)
-
-        } else {
-            
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
-            
-            //vc.tweet = tweetsArray[0]
-            
-            
-            self.present(vc, animated: true, completion: nil)
-
-            
-            
-        }
+        appDelegate.login()
         
     }
     

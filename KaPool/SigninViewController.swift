@@ -56,8 +56,9 @@ class SigninViewController: UIViewController {
                     UserDefaults.standard.set(user!.username, forKey: "username")
                     UserDefaults.standard.synchronize()
                     
-                    //let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
-                    //appDelegate.login()
+                    
+                    let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.login()
                     //self.performSegue(withIdentifier: "showHomepage", sender: self)
                 }
             })
