@@ -8,8 +8,14 @@
 
 import UIKit
 
+protocol SelectDateViewControllerDelegate: class {
+    func changeDepTime(_ dateChosen: Date)
+}
+
 class SelectDateViewController: UIViewController {
 
+    weak var delegate: SelectDateViewControllerDelegate?
+    
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var goBttn: UIButton!
     var selectedDate: Date?
