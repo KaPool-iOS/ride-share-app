@@ -7,19 +7,163 @@
 //
 
 import UIKit
+import GooglePlaces
+import GoogleMaps
 
-class OfferRideVC: UIViewController {
-    @IBOutlet weak var priceView: UIView!
+class OfferRideVC: UIViewController, CLLocationManagerDelegate{
+
+    // place variables
+    @IBOutlet weak var frmBttn: UIButton!
+    @IBOutlet weak var toBttn: UIButton!
+    
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation?
+    var mapViewPlaces: GMSMapView!
+    var placesClient: GMSPlacesClient!
+    var zoomLevel: Float = 15.0
+    
+    var likelyPlaces: [GMSPlace] = []
+    var currPlace: GMSPlace?
+    var placeSelected: GMSPlace?
+
+    var toLoc: GMSPlace?
+    var frmLoc: GMSPlace?
+    var toFlag: Int = 0
+    var fromFlag: Int = 0
+    
+    // map variables
+    @IBOutlet weak var mapView: GMSMapView!
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        priceView.layer.shadowColor = UIColor.black.cgColor
-        priceView.layer.shadowOpacity = 1
-        priceView.layer.shadowOffset = CGSize.zero
-        priceView.layer.shadowRadius = 10
+        
+        
+        /* LOAD MAP */
+        self.view.layoutIfNeeded()
+        // set up map
+        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
+        let map = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        
+        mapView = map
+        
+        // Creates a marker in the center of the map.
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
+        marker.title = "Sydney"
+        marker.snippet = "Australia"
+        marker.map = mapView as! GMSMapView?
 
-        // Do any additional setup after loading the view.
+        /* END MAP LOAD */
+        
+        
+        /* LOAD PLACES */
+        locationManager = CLLocationManager()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        locationManager.distanceFilter = 50
+        locationManager.startUpdatingLocation()
+        locationManager.delegate = self
+        
+        placesClient = GMSPlacesClient.shared()
+        /* END LOAD PLACES*/
     }
+    
+    // Handle incoming location events.
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location: CLLocation = locations.last!
+        print("Location: \(location)")
+        
+        listLikelyPlaces()
+        
+        /* DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+         
+         self.fromBttn.setTitle(self.currPlace?.name, for: .normal)
+         // Put your code which should be executed with a delay here
+         }) */
+        
+    }
+    
+    // Handle authorization for the location manager.
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .restricted:
+            print("Location access was restricted.")
+        case .denied:
+            print("User denied access to location.")
+            // Display the map using the default location.
+            mapView.isHidden = false
+        case .notDetermined:
+            print("Location status not determined.")
+        case .authorizedAlways: fallthrough
+        case .authorizedWhenInUse:
+            print("Location status is OK.")
+        }
+    }
+    
+    // Handle location manager errors.
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        print("Error: \(error)")
+    }
+    
+    @IBAction func searchLocation(_ sender: UIButton) {
+        
+        self.toFlag = 0
+        self.fromFlag = 0
+        
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        
+        // Set a filter to return only addresses.
+        let addressFilter = GMSAutocompleteFilter()
+        addressFilter.type = .address
+        autocompleteController.autocompleteFilter = addressFilter
+        
+        if (sender.restorationIdentifier == "toLoc") {
+            self.toFlag = 1
+            /*
+             print (self.toLoc?.name)
+             
+             self.ToBttn.setTitle(self.toLoc?.name, for: .normal)*/
+            
+        } else {
+            self.fromFlag = 1
+        }
+        
+        present(autocompleteController, animated: true, completion: {})
+
+    }
+    
+  
+    
+    // Populate the array with the list of likely places.
+    func listLikelyPlaces() {
+        // Clean up from previous sessions.
+        likelyPlaces.removeAll()
+        
+        placesClient.currentPlace(callback: { (placeLikelihoods, error) -> Void in
+            if let error = error {
+                // TODO: Handle the error.
+                print("Current Place error: \(error.localizedDescription)")
+                return
+            }
+            
+            // Get likely places and add to the list.
+            if let likelihoodList = placeLikelihoods {
+                for likelihood in likelihoodList.likelihoods {
+                    let place = likelihood.place
+                    self.likelyPlaces.append(place)
+                }
+            }
+            
+            self.currPlace = self.likelyPlaces[0]
+        })
+        
+        
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -38,3 +182,92 @@ class OfferRideVC: UIViewController {
     */
 
 }
+
+extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        // Print place info to the console.
+        print("Place name: \(place.name)")
+        print("Place address: \(place.formattedAddress!)")
+        print("Place attributions: \(place.attributions)")
+        
+        //self.placeSelected = place
+        
+        if (self.toFlag == 1) {
+            self.toLoc = place
+            
+            print (self.toLoc?.name)
+            
+            self.toBttn.setTitle(self.toLoc?.name, for: .normal)
+            self.toBttn.setTitleColor(UIColor.black, for: .normal)
+            
+        } else {
+            self.frmLoc = place
+            
+            print (self.frmLoc?.name)
+            
+            
+            self.frmBttn.setTitle(self.frmLoc?.name, for: .normal
+            )
+            
+            self.frmBttn.setTitleColor(UIColor.black, for: .normal)
+        }
+        /*
+        // Get the address components.
+        if let addressLines = place.addressComponents {
+            // Populate all of the address fields we can find.
+            for field in addressLines {
+                switch field.type {
+                case kGMSPlaceTypeStreetNumber:
+                    street_number = field.name
+                case kGMSPlaceTypeRoute:
+                    route = field.name
+                case kGMSPlaceTypeNeighborhood:
+                    neighborhood = field.name
+                case kGMSPlaceTypeLocality:
+                    locality = field.name
+                case kGMSPlaceTypeAdministrativeAreaLevel1:
+                    administrative_area_level_1 = field.name
+                case kGMSPlaceTypeCountry:
+                    country = field.name
+                case kGMSPlaceTypePostalCode:
+                    postal_code = field.name
+                case kGMSPlaceTypePostalCodeSuffix:
+                    postal_code_suffix = field.name
+                // Print the items we aren't using.
+                default:
+                    print("Type: \(field.type), Name: \(field.name)")
+                }
+            }
+        } */
+        
+        // Call custom function to populate the address form.
+   //     fillAddressForm()
+        
+        // Close the autocomplete widget.
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Show the network activity indicator.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    // Hide the network activity indicator.
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
+}
+
+
