@@ -53,8 +53,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate{
         marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
         marker.title = "Sydney"
         marker.snippet = "Australia"
-        marker.map = mapView as! GMSMapView?
-
+        marker.map = mapView
         /* END MAP LOAD */
         
         
@@ -197,7 +196,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
         if (self.toFlag == 1) {
             self.toLoc = place
             
-            print (self.toLoc?.name)
+           // print (self.toLoc?.name)
             
             self.toBttn.setTitle(self.toLoc?.name, for: .normal)
             self.toBttn.setTitleColor(UIColor.black, for: .normal)
@@ -205,7 +204,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
         } else {
             self.frmLoc = place
             
-            print (self.frmLoc?.name)
+           // print (self.frmLoc?.name)
             
             
             self.frmBttn.setTitle(self.frmLoc?.name, for: .normal
