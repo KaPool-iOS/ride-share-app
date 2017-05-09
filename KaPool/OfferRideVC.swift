@@ -10,8 +10,12 @@ import UIKit
 import GooglePlaces
 import GoogleMaps
 
-class OfferRideVC: UIViewController, CLLocationManagerDelegate{
-
+class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewControllerDelegate{
+    
+    // label variables
+    @IBOutlet weak var dateLabel: UILabel!
+    var departDate: Date!
+    
     // place variables
     @IBOutlet weak var frmBttn: UIButton!
     @IBOutlet weak var toBttn: UIButton!
@@ -38,7 +42,6 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         /* LOAD MAP */
         self.view.layoutIfNeeded()
@@ -67,6 +70,16 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate{
         
         placesClient = GMSPlacesClient.shared()
         /* END LOAD PLACES*/
+        
+        
+        /* add default date */
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
+        let currDate = dateFormatter.string(from: Date())
+        departDate = Date()
+        print("DEPART DATE IS \(departDate)")
+        
+        dateLabel.text = currDate
     }
     
     // Handle incoming location events.
@@ -135,6 +148,16 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate{
 
     }
     
+    func changeDepTime(_ dateChosen: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
+        departDate = dateFormatter.date(from: dateChosen)
+        
+        print("CHANGED DEPART DATE IS \(departDate)")
+
+        dateLabel.text = dateChosen
+    }
+    
   
     
     // Populate the array with the list of likely places.
@@ -170,15 +193,18 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate{
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        
+        let dateVC = segue.destination as! SelectDateViewController
+        dateVC.delegate = self
     }
-    */
+ 
 
 }
 

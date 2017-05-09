@@ -9,16 +9,17 @@
 import UIKit
 
 protocol SelectDateViewControllerDelegate: class {
-    func changeDepTime(_ dateChosen: Date)
+    func changeDepTime(_ dateChosen: String)
 }
 
 class SelectDateViewController: UIViewController {
+    
 
     weak var delegate: SelectDateViewControllerDelegate?
     
     @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var goBttn: UIButton!
-    var selectedDate: Date?
+    
+    var selectedDate: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,19 @@ class SelectDateViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func goClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
+        selectedDate = dateFormatter.string(from: datePicker.date)
+        
+        self.delegate?.changeDepTime(selectedDate!)
+        
+    }
 
     /*
     // MARK: - Navigation
