@@ -15,6 +15,12 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     // label variables
     @IBOutlet weak var dateLabel: UILabel!
     var departDate: Date!
+    @IBOutlet weak var seatTextField: UITextField!
+    var seatAvail: Int = 0
+    
+    @IBOutlet weak var priceTextField: UITextField!
+    let formatter = NumberFormatter()
+    var price: Double = 0.00
     
     // place variables
     @IBOutlet weak var frmBttn: UIButton!
@@ -77,7 +83,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
         let currDate = dateFormatter.string(from: Date())
         departDate = Date()
-        print("DEPART DATE IS \(departDate)")
+       // print("DEPART DATE IS \(departDate)")
         
         dateLabel.text = currDate
     }
@@ -153,11 +159,14 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
         departDate = dateFormatter.date(from: dateChosen)
         
-        print("CHANGED DEPART DATE IS \(departDate)")
+      //  print("CHANGED DEPART DATE IS \(departDate)")
 
         dateLabel.text = dateChosen
     }
     
+    @IBAction func goBttnClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
   
     
     // Populate the array with the list of likely places.
@@ -181,9 +190,21 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             }
             
             self.currPlace = self.likelyPlaces[0]
+            print("CURRPLACE IS \(self.currPlace!)")
         })
+    }
+    
+    
+    @IBAction func editedSeatVal(_ sender: Any) {
+        self.seatAvail = Int(seatTextField.text!) ?? 0
+    }
+      @IBAction func doneEditing(_ sender: Any) {
         
-        
+        if (priceTextField.text != nil) {
+            self.price = Double(priceTextField.text!)!
+            formatter.numberStyle = .currency
+            priceTextField.text = formatter.string(from: price as NSNumber)
+        }
     }
 
 
@@ -225,7 +246,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
            // print (self.toLoc?.name)
             
             self.toBttn.setTitle(self.toLoc?.name, for: .normal)
-            self.toBttn.setTitleColor(UIColor.black, for: .normal)
+            self.toBttn.setTitleColor(UIColor.blue, for: .normal)
             
         } else {
             self.frmLoc = place
@@ -236,7 +257,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.frmBttn.setTitle(self.frmLoc?.name, for: .normal
             )
             
-            self.frmBttn.setTitleColor(UIColor.black, for: .normal)
+            self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
         }
         /*
         // Get the address components.
