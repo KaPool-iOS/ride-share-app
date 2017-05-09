@@ -84,8 +84,6 @@ class SignupFirstViewController: UIViewController {
                         //appDelegate.login()
                     }
                 })
-                
-                
             }
         }
     }

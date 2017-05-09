@@ -12,6 +12,14 @@ import GoogleMaps
 
 class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewControllerDelegate{
     
+    /* labels to input in the database 
+     * price: Double
+     * seatAvail: Int
+     * toLoc: GMSPlace
+     * fromLoc: GMSPlace
+     * departDate: Date
+     */
+    
     // label variables
     @IBOutlet weak var dateLabel: UILabel!
     var departDate: Date!
@@ -190,7 +198,8 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             }
             
             self.currPlace = self.likelyPlaces[0]
-            print("CURRPLACE IS \(self.currPlace!)")
+            self.frmLoc = self.currPlace
+            //print("CURRPLACE IS \(self.currPlace!)")
         })
     }
     
