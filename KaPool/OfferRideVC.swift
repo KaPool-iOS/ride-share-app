@@ -251,10 +251,12 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     }
     
     
-    @IBAction func editedSeatVal(_ sender: Any) {
+    @IBAction func editedSeatCount(_ sender: Any) {
         self.seatAvail = Int(seatTextField.text!) ?? 0
+        print("changed seat")
+
     }
-      @IBAction func doneEditing(_ sender: Any) {
+    @IBAction func doneEditing(_ sender: Any) {
         
         if (priceTextField.text != nil) {
             self.price = Double(priceTextField.text!) ?? 0.0

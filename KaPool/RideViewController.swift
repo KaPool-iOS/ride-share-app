@@ -11,10 +11,13 @@ import Parse
 
 class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    var rideArray: [Ride] = []
+    @IBOutlet weak var tableView: UITableView!
+    var rides: [PFObject] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         getData()
 
         // Do any additional setup after loading the view.
@@ -48,13 +51,32 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        
         return 0
     }
     
     func getData() {
         
+        // construct query
+        let query = PFQuery(className: "Ride")
+        query.limit = 20
         
+        // fetch data asynchronously
+        query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
+            if let ride = ride {
+                // do something with the array of object returned by the call
+                
+                for i in (0...ride.count-1).reversed() {
+                    self.rides.append(ride[i])
+                    print(ride[i])
+                }
+                
+                // self.instaPosts = posts
+                self.tableView.reloadData()
+                
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
         
     }
 

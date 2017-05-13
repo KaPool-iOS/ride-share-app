@@ -13,34 +13,24 @@ import GooglePlaces
 
 class Ride: NSObject {
     
-    /*
-
-    var driverName:String = ""
-    var rideID:String = ""
-    
-    var location:String = ""
-    var destination:String = ""
-    
-    var rideDate:Date?
-    
-    var time:String = ""
-    var price:String = ""
+    var driver: String = ""
+    var origin: GMSPlace?
+    var destination: GMSPlace?
+    var departDate: Date?
+    var price: Double?
+    var seats: Int?
     
     
-    
-    init(driverName:String, location:String, destination:String, rideDate:Date, time:String, price:String) {
+    init(ride: PFObject?) {
         
+        self.driver = ride?.object(forKey: "Driver") as! String
+       // self.origin = ride[
+     //   self.destination = destination
+        self.departDate = ride?.object(forKey: "Date") as! Date?
+        self.price = ride?.object(forKey: "Price") as! Double?
+        self.seats = ride?.object(forKey: "SeatsAvail") as! Int?
         
-        self.driverName = driverName
-        self.riderName = riderName
-        self.rideID = rideID
-        
-        self.location = location
-        self.destination = destination
-        self.rideDate = rideDate
-        self.time = time
-        self.price = price
-    } */
+    }
     
     class func addRide(destination: GMSPlace?, origin: GMSPlace?,
                        price: Double?, departDate: Date?, seats: Int?, withCompletion completion: PFBooleanResultBlock?) {

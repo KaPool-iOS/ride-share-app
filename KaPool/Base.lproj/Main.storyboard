@@ -284,6 +284,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Search-30" id="eg7-tp-uIu"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="Pdv-Ii-FqI" id="zy7-Ek-j3T"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLt-go-0PJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1081,7 +1084,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <connections>
-                                            <action selector="editedSeatVal:" destination="Lan-qU-XZB" eventType="valueChanged" id="jo4-tI-VmE"/>
+                                            <action selector="editedSeatCount:" destination="Lan-qU-XZB" eventType="editingDidEnd" id="YIH-fo-Qpu"/>
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Seats Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRN-bn-4Sp">
@@ -1179,7 +1182,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7740" y="-68.815592203898049"/>
+            <point key="canvasLocation" x="7778" y="-47"/>
         </scene>
         <!--Select Date View Controller-->
         <scene sceneID="g4X-cw-Ur0">
