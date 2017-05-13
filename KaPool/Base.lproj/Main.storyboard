@@ -991,6 +991,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-mq-mQk">
+                                <rect key="frame" x="0.0" y="-222" width="375" height="889"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="GDb-x5-yhs" appends="YES" id="PPH-3u-4XF"/>
+                                </connections>
+                            </scrollView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="01f-TW-a5a">
                                 <rect key="frame" x="9" y="221" width="358" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1051,10 +1059,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRU-c8-8aE">
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hRU-c8-8aE" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="223"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vyZ-Xr-asI">
                                 <rect key="frame" x="9" y="444" width="175" height="114"/>
@@ -1065,7 +1072,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <connections>
                                             <action selector="editedSeatVal:" destination="Lan-qU-XZB" eventType="valueChanged" id="jo4-tI-VmE"/>
                                         </connections>
@@ -1114,7 +1121,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                         <connections>
                                             <action selector="doneEditing:" destination="Lan-qU-XZB" eventType="editingDidEnd" id="iqn-1d-8mG"/>
                                         </connections>
@@ -1147,7 +1154,9 @@
                         <outlet property="frmBttn" destination="5sk-FK-5zQ" id="Zi6-7h-VZU"/>
                         <outlet property="mapView" destination="hRU-c8-8aE" id="dBs-JL-7eJ"/>
                         <outlet property="priceTextField" destination="z2Q-IH-QIy" id="CDq-aO-Rko"/>
+                        <outlet property="scrollView" destination="0h6-mq-mQk" id="1t3-EL-dGO"/>
                         <outlet property="seatTextField" destination="0gH-Lq-KBu" id="GF9-4v-MAP"/>
+                        <outlet property="seatView" destination="vyZ-Xr-asI" id="bf3-6y-x3T"/>
                         <outlet property="toBttn" destination="Suz-uj-VAs" id="ceg-So-HpX"/>
                     </connections>
                 </viewController>
@@ -1155,6 +1164,11 @@
                 <tapGestureRecognizer id="s9g-WB-rr6">
                     <connections>
                         <segue destination="Fbn-i1-cuQ" kind="presentation" id="t6Y-yA-M44"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="GDb-x5-yhs">
+                    <connections>
+                        <action selector="dismissKB:" destination="Lan-qU-XZB" id="0Fk-eD-17v"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

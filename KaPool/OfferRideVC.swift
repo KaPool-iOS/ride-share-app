@@ -19,7 +19,10 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
      * fromLoc: GMSPlace
      * departDate: Date
      */
+    @IBOutlet weak var scrollView: UIScrollView!
     
+ 
+    @IBOutlet weak var seatView: UIView!
     // label variables
     @IBOutlet weak var dateLabel: UILabel!
     var departDate: Date!
@@ -38,7 +41,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     var currentLocation: CLLocation?
     var mapViewPlaces: GMSMapView!
     var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 15.0
+    var zoomLevel: Float = 17.0
     
     var likelyPlaces: [GMSPlace] = []
     var currPlace: GMSPlace?
@@ -56,22 +59,13 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        /* HANDLES KEYBOARD */
         
-        /* LOAD MAP */
-        self.view.layoutIfNeeded()
-        // set up map
-        let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
-        let map = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        mapView = map
         
-        // Creates a marker in the center of the map.
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: -33.86, longitude: 151.20)
-        marker.title = "Sydney"
-        marker.snippet = "Australia"
-        marker.map = mapView
-        /* END MAP LOAD */
+        /* END HANDLE KEY */
         
         
         /* LOAD PLACES */
@@ -96,10 +90,56 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         dateLabel.text = currDate
     }
     
+    @IBAction func dismissKB(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    // HANDLES KEYBOARD
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= (keyboardSize.height - (self.seatView.frame.height))
+            }
+            
+            let contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height, 0.0)
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            scrollView.isScrollEnabled = true
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += (keyboardSize.height - (self.seatView.frame.height))
+            }
+            let contentInsets = UIEdgeInsets()
+            scrollView.contentInset = contentInsets
+            scrollView.scrollIndicatorInsets = contentInsets
+            scrollView.isScrollEnabled = true
+        }
+    }
+    
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         print("Location: \(location)")
+        
+        let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
+                                              longitude: location.coordinate.longitude,
+                                              zoom: zoomLevel)
+        
+        if mapView.isHidden {
+            mapView.isHidden = false
+            mapView.camera = camera
+        } else {
+            mapView.animate(to: camera)
+        }
+        
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        marker.map = self.mapView
+    
         
         listLikelyPlaces()
         
@@ -172,7 +212,13 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         dateLabel.text = dateChosen
     }
     
+    
     @IBAction func goBttnClicked(_ sender: Any) {
+        
+        Ride.addRide(destination: toLoc, origin: frmLoc, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
+            print("ride added from go")
+        }
+        
         self.dismiss(animated: true, completion: nil)
     }
   
@@ -200,6 +246,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             self.currPlace = self.likelyPlaces[0]
             self.frmLoc = self.currPlace
             //print("CURRPLACE IS \(self.currPlace!)")
+            
         })
     }
     
@@ -210,7 +257,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
       @IBAction func doneEditing(_ sender: Any) {
         
         if (priceTextField.text != nil) {
-            self.price = Double(priceTextField.text!)!
+            self.price = Double(priceTextField.text!) ?? 0.0
             formatter.numberStyle = .currency
             priceTextField.text = formatter.string(from: price as NSNumber)
         }
