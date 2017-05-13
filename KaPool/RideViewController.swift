@@ -12,7 +12,7 @@ import Parse
 class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var rides: [PFObject] = []
+    var rides: [Ride] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,15 +59,15 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // construct query
         let query = PFQuery(className: "Ride")
         query.limit = 20
-        
+       
         // fetch data asynchronously
         query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
             if let ride = ride {
                 // do something with the array of object returned by the call
                 
                 for i in (0...ride.count-1).reversed() {
-                    self.rides.append(ride[i])
-                    print(ride[i])
+                    self.rides.append(Ride.init(ride[i]))
+        
                 }
                 
                 // self.instaPosts = posts
@@ -76,7 +76,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             } else {
                 print(error?.localizedDescription)
             }
-        }
+        } 
         
     }
 

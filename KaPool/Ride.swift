@@ -14,21 +14,30 @@ import GooglePlaces
 class Ride: NSObject {
     
     var driver: String = ""
-    var origin: GMSPlace?
-    var destination: GMSPlace?
+    var originID: String?
+    var destinationID: String?
     var departDate: Date?
     var price: Double?
     var seats: Int?
+    var rideID: String?
     
     
-    init(ride: PFObject?) {
+    init(_ ride: PFObject?) {
+        
+        super.init()
+        
+        /*
+        getPlace(ride?.object(forKey: "Origin") as? String, "Origin")
+        getPlace(ride?.object(forKey: "Destination") as? String, "Destination")
+ */
         
         self.driver = ride?.object(forKey: "Driver") as! String
-       // self.origin = ride[
-     //   self.destination = destination
-        self.departDate = ride?.object(forKey: "Date") as! Date?
+        self.departDate = ride?.object(forKey: "Date") as? Date
         self.price = ride?.object(forKey: "Price") as! Double?
         self.seats = ride?.object(forKey: "SeatsAvail") as! Int?
+        self.rideID = ride?.object(forKey: "objectId") as? String
+        self.originID = ride?.object(forKey: "Origin") as? String
+        self.destinationID = ride?.object(forKey: "Destination") as? String
         
     }
     
@@ -41,10 +50,8 @@ class Ride: NSObject {
         // saves ride information into database
         ride["Price"] = price
         ride["Date"] = departDate
-        ride["DestLatitude"] = (destination?.coordinate.latitude)!
-        ride["DestLongitude"] = (destination?.coordinate.longitude)!
-        ride["OriginLatitude"] = (origin?.coordinate.latitude)!
-        ride["OriginLongitude"] = (origin?.coordinate.longitude)!
+        ride["Destination"] = destination?.placeID
+        ride["Origin"] = origin?.placeID
         ride["Active"] = true
         ride["SeatsAvail"] = seats
         ride["Driver"] = PFUser.current()?.objectId
@@ -52,6 +59,39 @@ class Ride: NSObject {
         ride.saveInBackground(block: completion)
         
     }
+    /*
+    func getPlace(_ placeID: String?, _ key: String?) {
+        
+        let placesClient = GMSPlacesClient()
+        var thisPlace: GMSPlace?
+        
+        placesClient.lookUpPlaceID(placeID!, callback: { (place, error) -> Void in
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let place = place else {
+                print("No place details for \(placeID)")
+                return
+            }
+            
+            print("Place name \(place.name)")
+            print("Place address \(place.formattedAddress)")
+            print("Place placeID \(place.placeID)")
+            print("Place attributions \(place.attributions)")
+            
+            thisPlace = place
+            
+            if key == "Origin" {
+                self.origin = thisPlace
+            } else {
+                self.destination = thisPlace
+            }
+            
+        })
+    } */
+    
     
     
 }
