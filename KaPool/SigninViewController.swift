@@ -14,7 +14,7 @@ class SigninViewController: UIViewController {
     
     @IBOutlet var emailText: UITextField!
     @IBOutlet var passwordText: UITextField!
-    
+    var signal = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +28,8 @@ class SigninViewController: UIViewController {
     }
     
     @IBAction func onLogin(_ sender: Any) {
+        
+        
         
         if (emailText.text?.isEmpty)! || (passwordText.text?.isEmpty)! {
             
@@ -56,6 +58,12 @@ class SigninViewController: UIViewController {
                     UserDefaults.standard.set(user!.username, forKey: "username")
                     UserDefaults.standard.synchronize()
                     
+                    if self.signal == "offer" {
+                        
+                        let vc = self.storyboard?.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
+                        
+                        self.present(vc, animated: true, completion: nil)
+                    }
                     
                     let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.login()

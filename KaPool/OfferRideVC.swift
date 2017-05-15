@@ -207,9 +207,10 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         dateFormatter.dateFormat = "MMM d, yyyy  h:mm a"
         departDate = dateFormatter.date(from: dateChosen)
         
-      //  print("CHANGED DEPART DATE IS \(departDate)")
+        //print("CHANGED DEPART DATE IS \(departDate)")
 
         dateLabel.text = dateChosen
+        print(dateLabel.text!)
     }
     
     
@@ -217,9 +218,13 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         
         Ride.addRide(destination: toLoc, origin: frmLoc, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
             print("ride added from go")
+            
         }
+        let vc = storyboard?.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
         
-        self.dismiss(animated: true, completion: nil)
+        self.present(vc, animated: true, completion: nil)
+
+        
     }
   
     
@@ -294,7 +299,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
         // Print place info to the console.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress!)")
-        print("Place attributions: \(place.attributions)")
+        //print("Place attributions: \(place.attributions)")
         
         //self.placeSelected = place
         

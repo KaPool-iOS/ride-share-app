@@ -79,11 +79,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func login(){
         
         let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-
+        
+        
         if PFUser.current() != nil {
             //let offerRide = storyboard.instantiateViewController(withIdentifier: "offerRide") as! UITabBarController
             //window?.rootViewController = offerRide
-            let vc = storyboard.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
+            let vc = storyboard.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
             
             //vc.tweet = tweetsArray[0]
             

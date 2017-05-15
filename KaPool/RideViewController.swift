@@ -30,11 +30,25 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     @IBAction func onOfferRide(_ sender: Any) {
         
-        let appDelegate : AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        if PFUser.current() != nil {
+            //let offerRide = storyboard.instantiateViewController(withIdentifier: "offerRide") as! UITabBarController
+            //window?.rootViewController = offerRide
+            let vc = storyboard?.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
+            
+            self.present(vc, animated: true, completion: nil)
+            
+        } else {
+            
+            let vc = storyboard?.instantiateViewController(withIdentifier: "loginPage") as! SigninViewController
+            vc.signal = "offer"
+            
+            self.present(vc, animated: true, completion: nil)
+
+            
+        }
+
         
-        
-        appDelegate.login()
-        
+
     }
     
     
