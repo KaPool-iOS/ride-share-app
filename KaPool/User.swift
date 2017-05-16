@@ -20,4 +20,5 @@ class User: NSObject {
     var email: String?
     
 
+  
 }

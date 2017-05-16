@@ -235,14 +235,48 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     
     @IBAction func goBttnClicked(_ sender: Any) {
       
-
+      if (toLoc==nil){
+        let alert2 = UIAlertView()
+        alert2.title = "Alert"
+        alert2.message = "please set the date!!!"
+        alert2.addButton(withTitle: "Understood")
+        alert2.show()
+        
+        print(departDate.timeIntervalSinceReferenceDate)
+        
+        
+      }
+      
+      else if (seatAvail>4){
+        let alert3 = UIAlertView()
+        alert3.title = "Alert"
+        alert3.message = "4 seats only!!!"
+        alert3.addButton(withTitle: "Understood")
+        alert3.show()
+        
+        print(departDate.timeIntervalSinceReferenceDate)
+        
+      }
+      else if (price<0.01){
+        let alert4 = UIAlertView()
+        alert4.title = "Alert"
+        alert4.message = "please add at least 1 cent!!"
+        alert4.addButton(withTitle: "Understood")
+        alert4.show()
+      }
+      
+      
+      else{
         Ride.addRide(destination: toLoc, origin: frmLoc, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
           print("ride added from go")
           
         }
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
         
         self.present(vc, animated: true, completion: nil)
+      }
+      
       
         
       
@@ -288,7 +322,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
       }else{
         seatTextField.text=String(4)
         self.seatAvail = Int(seatTextField.text!) ?? 0
-        let alert = UIAlertController(title: "Alert", message: "I should 4 or less seats", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Alert", message: "It be should 4 or less seats", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
       }
