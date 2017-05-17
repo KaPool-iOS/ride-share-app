@@ -8,11 +8,14 @@
 
 import UIKit
 import Parse
+import GooglePlaces
+import GoogleMaps
 
 class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var rides: [Ride] = []
+    //var tweetsArray: [Tweet]! = [Tweet]()
+    var rides: [Ride]! = [Ride]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +26,6 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @IBAction func onOfferRide(_ sender: Any) {
         
@@ -55,7 +54,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "rideCell") as! RideCell
-        
+        cell.ride = rides[indexPath.row]
         
         return cell
     }
@@ -65,7 +64,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        return 0
+        return rides.count
     }
     
     func getData() {
@@ -79,9 +78,12 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let ride = ride {
                 // do something with the array of object returned by the call
                 
-                for i in (0...ride.count-1).reversed() {
-                    self.rides.append(Ride.init(ride[i]))
-        
+                if ride.count > 0 {
+                    for i in (0...ride.count-1).reversed() {
+                        
+                        self.rides.append(Ride.init(ride[i]))
+                        
+                    }
                 }
                 
                 // self.instaPosts = posts
@@ -95,6 +97,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
 
 
+    
     /*
     // MARK: - Navigation
 

@@ -26,10 +26,6 @@ class Ride: NSObject {
         
         super.init()
         
-        /*
-        getPlace(ride?.object(forKey: "Origin") as? String, "Origin")
-        getPlace(ride?.object(forKey: "Destination") as? String, "Destination")
- */
         
         self.driver = ride?.object(forKey: "Driver") as! String
         self.departDate = ride?.object(forKey: "Date") as? Date
