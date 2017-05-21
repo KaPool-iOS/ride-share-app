@@ -42,6 +42,11 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         getData()
         // Do any additional setup after loading the view.
     }
+    
+    // SOMETHING TO ADD
+    override func viewWillAppear(_ animated: Bool) {
+        self.tableView.reloadData()
+    }
 
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedWhenInUse) {
@@ -55,6 +60,8 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if PFUser.current() != nil {
             //let offerRide = storyboard.instantiateViewController(withIdentifier: "offerRide") as! UITabBarController
             //window?.rootViewController = offerRide
+            
+            // SOMETHING TO ADD -- PASS IN THE NEW RIDE
             let vc = storyboard?.instantiateViewController(withIdentifier: "offerRide") as! OfferRideVC
             
             self.present(vc, animated: true, completion: nil)
@@ -152,6 +159,13 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return rides.count
     }
     
+    // SOMETHING TO ADD
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "rideDetSegue", sender: UITableViewCell.self)
+        
+    }
+    
     func getData() {
         
         
@@ -208,14 +222,17 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
 
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let rideCell = sender as! RideCell
+        let rideDeets = segue.destination as! RideDetailsVC
+        rideDeets.curr = rideCell.ride
     }
-    */
+    
 
 }

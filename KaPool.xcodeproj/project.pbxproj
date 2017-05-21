@@ -11,6 +11,7 @@
 		0B970A691EB678C4006D061A /* DriverProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B970A681EB678C4006D061A /* DriverProfileViewController.swift */; };
 		0BE46B441ECA95A3008223CD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE46B431ECA95A3008223CD /* ProfileViewController.swift */; };
 		21162A741EC691FC00681C4E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21162A731EC691FC00681C4E /* User.swift */; };
+		213045A91ED1F8DE0059DB5C /* RideDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213045A81ED1F8DE0059DB5C /* RideDetailsVC.swift */; };
 		217FAF3C1EC1018A001D6A4D /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */; };
 		21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A521E68D6F3009BE18F /* AppDelegate.swift */; };
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		0F45B5E3E9DAF057A73B5769 /* Pods-KaPool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KaPool.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KaPool/Pods-KaPool.debug.xcconfig"; sourceTree = "<group>"; };
 		18C23D11571A5F75B850A9F7 /* Pods-KaPool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KaPool.release.xcconfig"; path = "Pods/Target Support Files/Pods-KaPool/Pods-KaPool.release.xcconfig"; sourceTree = "<group>"; };
 		21162A731EC691FC00681C4E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		213045A81ED1F8DE0059DB5C /* RideDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideDetailsVC.swift; sourceTree = "<group>"; };
 		217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		21CE5A4F1E68D6F3009BE18F /* KaPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CE5A521E68D6F3009BE18F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */,
 				0BE46B431ECA95A3008223CD /* ProfileViewController.swift */,
 				6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */,
+				213045A81ED1F8DE0059DB5C /* RideDetailsVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				21162A741EC691FC00681C4E /* User.swift in Sources */,
+				213045A91ED1F8DE0059DB5C /* RideDetailsVC.swift in Sources */,
 				6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */,
 				6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */,
 				6E2AE63B1EA0B1F7005C21A9 /* SigninViewController.swift in Sources */,
