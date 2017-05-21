@@ -10,7 +10,7 @@ PODS:
     - GoogleMaps/Base (= 2.2.0)
   - mailgun (1.0.3):
     - AFNetworking (~> 1.1.0)
-  - Parse (1.14.2):
+  - Parse (1.14.4):
     - Bolts/Tasks (~> 1.8)
 
 DEPENDENCIES:
@@ -25,8 +25,8 @@ SPEC CHECKSUMS:
   GoogleMaps: 104c418d61ab8a05dff06ed0784c25ea9d37da45
   GooglePlaces: bca867d5e9da15384c794b945e4226848bc6e9d9
   mailgun: 17290deea4db24050dd03ca59cd7385d508904b3
-  Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  Parse: b0aa91d2c435e53d4a9af26e741e014c9b35c42e
 
-PODFILE CHECKSUM: f332b10b6ddf52bad8904321d35986ce90ae178d
+PODFILE CHECKSUM: 8b68cf7bbe36f122e6c96ce97645b6a6be9d0369
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.1.1

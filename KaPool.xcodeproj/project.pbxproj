@@ -25,6 +25,12 @@
 		6E57A1021EA49E10005CF461 /* RideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A1011EA49E10005CF461 /* RideViewController.swift */; };
 		6E57A1081EA4A2C2005CF461 /* RideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A1071EA4A2C2005CF461 /* RideCell.swift */; };
 		6E77A4801ECAB7910031E7D6 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A47F1ECAB7910031E7D6 /* arrow.png */; };
+		6E77A4821ECC5F0B0031E7D6 /* location-icon-png-4235.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A4811ECC5F0B0031E7D6 /* location-icon-png-4235.png */; };
+		6E77A4841ECC5F140031E7D6 /* location-icon-png-4236.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A4831ECC5F140031E7D6 /* location-icon-png-4236.png */; };
+		6E77A4861ECD7F5D0031E7D6 /* 1495109130_calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A4851ECD7F5D0031E7D6 /* 1495109130_calendar.png */; };
+		6E77A4881ECD7FE80031E7D6 /* 1495109285_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */; };
+		6E77A48A1ED02AAB0031E7D6 /* draftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */; };
+		6E77A48C1ED0E3E50031E7D6 /* noride.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A48B1ED0E3E50031E7D6 /* noride.png */; };
 		F891E329D9D6AC86C1D8B5FF /* Pods_KaPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +57,12 @@
 		6E57A1011EA49E10005CF461 /* RideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideViewController.swift; sourceTree = "<group>"; };
 		6E57A1071EA4A2C2005CF461 /* RideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideCell.swift; sourceTree = "<group>"; };
 		6E77A47F1ECAB7910031E7D6 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		6E77A4811ECC5F0B0031E7D6 /* location-icon-png-4235.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon-png-4235.png"; sourceTree = "<group>"; };
+		6E77A4831ECC5F140031E7D6 /* location-icon-png-4236.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-icon-png-4236.png"; sourceTree = "<group>"; };
+		6E77A4851ECD7F5D0031E7D6 /* 1495109130_calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1495109130_calendar.png; sourceTree = "<group>"; };
+		6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1495109285_user.png; sourceTree = "<group>"; };
+		6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = draftViewController.swift; sourceTree = "<group>"; };
+		6E77A48B1ED0E3E50031E7D6 /* noride.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noride.png; sourceTree = "<group>"; };
 		BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KaPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -101,6 +113,11 @@
 				21CE5A521E68D6F3009BE18F /* AppDelegate.swift */,
 				21CE5A561E68D6F3009BE18F /* Main.storyboard */,
 				21CE5A591E68D6F4009BE18F /* Assets.xcassets */,
+				6E77A48B1ED0E3E50031E7D6 /* noride.png */,
+				6E77A4851ECD7F5D0031E7D6 /* 1495109130_calendar.png */,
+				6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */,
+				6E77A4831ECC5F140031E7D6 /* location-icon-png-4236.png */,
+				6E77A4811ECC5F0B0031E7D6 /* location-icon-png-4235.png */,
 				6E77A47F1ECAB7910031E7D6 /* arrow.png */,
 				21CE5A5B1E68D6F4009BE18F /* LaunchScreen.storyboard */,
 				21CE5A5E1E68D6F4009BE18F /* Info.plist */,
@@ -147,6 +164,7 @@
 				0B970A681EB678C4006D061A /* DriverProfileViewController.swift */,
 				217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */,
 				0BE46B431ECA95A3008223CD /* ProfileViewController.swift */,
+				6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -214,8 +232,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E77A4881ECD7FE80031E7D6 /* 1495109285_user.png in Resources */,
+				6E77A4821ECC5F0B0031E7D6 /* location-icon-png-4235.png in Resources */,
 				21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */,
+				6E77A4841ECC5F140031E7D6 /* location-icon-png-4236.png in Resources */,
+				6E77A48C1ED0E3E50031E7D6 /* noride.png in Resources */,
 				6E77A4801ECAB7910031E7D6 /* arrow.png in Resources */,
+				6E77A4861ECD7F5D0031E7D6 /* 1495109130_calendar.png in Resources */,
 				21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */,
 				21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */,
 			);
@@ -288,6 +311,7 @@
 				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,
 				6E57A1081EA4A2C2005CF461 /* RideCell.swift in Sources */,
 				21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */,
+				6E77A48A1ED02AAB0031E7D6 /* draftViewController.swift in Sources */,
 				0B970A691EB678C4006D061A /* DriverProfileViewController.swift in Sources */,
 				21F728971EA8003600DEB36B /* OfferRideVC.swift in Sources */,
 			);

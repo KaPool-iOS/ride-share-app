@@ -10,6 +10,17 @@ import UIKit
 import GooglePlaces
 import GoogleMaps
 
+extension Date
+{
+    func toString(dateFormat format  : String ) -> String
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
+    }
+    
+}
+
 class RideCell: UITableViewCell {
 
     
@@ -18,9 +29,8 @@ class RideCell: UITableViewCell {
     @IBOutlet var fromText: UILabel!
     @IBOutlet var toText: UILabel!
     @IBOutlet var dateText: UILabel!
-    @IBOutlet var timeText: UILabel!
     @IBOutlet var priceText: UILabel!
-    @IBOutlet var seatAvalText: UILabel!
+    @IBOutlet var seatNumText: UILabel!
     
   
     var ride: Ride! {
@@ -30,19 +40,19 @@ class RideCell: UITableViewCell {
             
             getPlace(ride.originID, check: 1)
             getPlace(ride.destinationID,check: 0)
-            dateText.text = (String) (describing: ride.departDate!)
-            print("depart date is\(String(describing: ride.departDate!))")
+            priceText.text = (String) (describing: ride.price!).components(separatedBy: ".0")[0]
+            dateText.text = ride.departDate?.toString(dateFormat: "MM/dd")
+            seatNumText.text = (String) (describing: ride.seats!)
+            
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
-    func getDate() {
-        
-        
-    }
+    
     
     func getTime() {
         
@@ -65,8 +75,8 @@ class RideCell: UITableViewCell {
                 return
             }
             
-            print("Place name \(place.name)")
-            print("Place address \(String(describing: place.formattedAddress))")
+            print("Place name: \(place.name)")
+            print("Place address \(String(describing: place.formattedAddress!))")
             print("Place placeID \(place.placeID)")
             print("Place attributions \(String(describing: place.attributions))")
             

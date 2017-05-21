@@ -20,6 +20,9 @@ class Ride: NSObject {
     var price: Double?
     var seats: Int?
     var rideID: String?
+    var destName: String?
+    var originName: String?
+    
     
     
     init(_ ride: PFObject?) {
@@ -34,12 +37,15 @@ class Ride: NSObject {
         self.rideID = ride?.object(forKey: "objectId") as? String
         self.originID = ride?.object(forKey: "Origin") as? String
         self.destinationID = ride?.object(forKey: "Destination") as? String
-        
+        self.destName = ride?.object(forKey: "destName") as? String
+        self.originName = ride?.object(forKey: "originName") as? String
     }
     
     class func addRide(destination: GMSPlace?, origin: GMSPlace?,
                        price: Double?, departDate: Date?, seats: Int?, withCompletion completion: PFBooleanResultBlock?) {
         
+        
+        let placesClient = GMSPlacesClient()
         // create Parse object PFObject
         let ride = PFObject(className: "Ride")
         
@@ -52,43 +58,33 @@ class Ride: NSObject {
         ride["SeatsAvail"] = seats
         ride["Driver"] = PFUser.current()?.objectId
         
-        ride.saveInBackground(block: completion)
         
-    }
-    /*
-    func getPlace(_ placeID: String?, _ key: String?) {
+        placesClient.lookUpPlaceID((origin?.placeID)!, callback: { (place, error) -> Void in
+            
+            if let error = error {
+                print("lookup place id query error: \(error.localizedDescription)")
+                return
+            }
+            print("the place is \(place!.name)")
+           
+            ride["originName"] = place!.name
+        })
         
-        let placesClient = GMSPlacesClient()
-        var thisPlace: GMSPlace?
-        
-        placesClient.lookUpPlaceID(placeID!, callback: { (place, error) -> Void in
+        placesClient.lookUpPlaceID((destination?.placeID)!, callback: { (place, error) -> Void in
+            
             if let error = error {
                 print("lookup place id query error: \(error.localizedDescription)")
                 return
             }
             
-            guard let place = place else {
-                print("No place details for \(placeID)")
-                return
-            }
             
-            print("Place name \(place.name)")
-            print("Place address \(place.formattedAddress)")
-            print("Place placeID \(place.placeID)")
-            print("Place attributions \(place.attributions)")
+            ride["destName"] = place!.name
             
-            thisPlace = place
-            
-            if key == "Origin" {
-                self.origin = thisPlace
-            } else {
-                self.destination = thisPlace
-            }
-            
+             ride.saveInBackground(block: completion)
         })
-    } */
-    
-    
+        
+        
+    }
     
 }
 

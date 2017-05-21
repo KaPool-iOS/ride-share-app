@@ -124,7 +124,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
-        print("Location: \(location)")
+        print("Location: \(location.coordinate)")
         
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
@@ -235,7 +235,16 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     
     @IBAction func goBttnClicked(_ sender: Any) {
       
-      if (toLoc==nil){
+       
+        
+        if (priceTextField.text != nil && priceTextField.text?.isEmpty == false) {
+             self.price = Double(priceTextField.text!) ?? 0.0
+            formatter.numberStyle = .currency
+            priceTextField.text = formatter.string(from: price as NSNumber)
+        }
+    
+        
+      if (toLoc == nil){
         let alert2 = UIAlertView()
         alert2.title = "Alert"
         alert2.message = "please set the date!!!"
@@ -247,7 +256,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         
       }
       
-      else if (seatAvail>4){
+      else if (seatAvail > 4){
         let alert3 = UIAlertView()
         alert3.title = "Alert"
         alert3.message = "4 seats only!!!"
@@ -257,7 +266,8 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         print(departDate.timeIntervalSinceReferenceDate)
         
       }
-      else if (price<0.01){
+      else if (price < 0.01){
+        print(priceTextField.text!)
         let alert4 = UIAlertView()
         alert4.title = "Alert"
         alert4.message = "please add at least 1 cent!!"
@@ -267,6 +277,7 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
       
       
       else{
+        
         Ride.addRide(destination: toLoc, origin: frmLoc, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
           print("ride added from go")
           
@@ -276,12 +287,6 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         
         self.present(vc, animated: true, completion: nil)
       }
-      
-      
-        
-      
-
-        
     }
   
     
@@ -328,14 +333,14 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
       }
 
     }
-    @IBAction func doneEditing(_ sender: Any) {
+   // @IBAction func doneEditing(_ sender: Any) {
         
-        if (priceTextField.text != nil) {
-            self.price = Double(priceTextField.text!) ?? 0.0
-            formatter.numberStyle = .currency
-            priceTextField.text = formatter.string(from: price as NSNumber)
-        }
-    }
+     //   if (priceTextField.text != nil) {
+       //     self.price = Double(priceTextField.text!) ?? 0.0
+         //   formatter.numberStyle = .currency
+           // priceTextField.text = formatter.string(from: price as NSNumber)
+        //}
+    //}
 
 
     override func didReceiveMemoryWarning() {
@@ -365,10 +370,11 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         // Print place info to the console.
         print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress!)")
+        print("Place address: \((String) (describing: place.formattedAddress!))")
         //print("Place attributions: \(place.attributions)")
         
         //self.placeSelected = place
+        
         
         if (self.toFlag == 1) {
             self.toLoc = place

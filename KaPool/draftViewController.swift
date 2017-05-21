@@ -5,7 +5,7 @@
 //  Created by Jake Vo on 4/16/17.
 //  Copyright © 2017 Madel Asistio. All rights reserved.
 //
-
+/*
 import UIKit
 import Parse
 import GooglePlaces
@@ -13,20 +13,20 @@ import GoogleMaps
 import MapKit
 
 class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     //var tweetsArray: [Tweet]! = [Tweet]()
     var rides: [Ride]! = [Ride]()
     
     var startLocation: CLLocation!
     let defaults = UserDefaults.standard
-    var globalValid = false
+    
     
     var currLocName:String?
     
     var locationManager = CLLocationManager()
     var locationLatest:CLLocation!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -37,12 +37,11 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        //locationManager.startUpdatingLocation()
-
-        getData()
+        //getData()
+        
         // Do any additional setup after loading the view.
     }
-
+    
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedWhenInUse) {
             // User has granted autorization to location, get location
@@ -65,20 +64,20 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             vc.signal = "offer"
             
             self.present(vc, animated: true, completion: nil)
-
+            
             
         }
     }
     
     /*
-        get user current location
-        convert it into place name
-        then comapre if the places in ride array are close to this place
-    */
+     get user current location
+     convert it into place name
+     then comapre if the places in ride array are close to this place
+     */
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        
+        print("I am here")
         
         
         locationLatest = locations[locations.count - 1]
@@ -103,32 +102,23 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         if placemark.subThoroughfare != nil {
                             
                             address += placemark.subThoroughfare! + " "
-                                                    }
+                        }
                         
                         if placemark.thoroughfare != nil {
                             
                             address += placemark.thoroughfare! + "?"
                             
                         }
-                      
+                        
                         self.currLocName = address
                     }
                     
                 }
+                self.getData(currLocName: self.currLocName!)
                 
- 
             })
             
         }
-        
-        
-    }
-    
-    
-    @IBAction func onFindRide(_ sender: Any) {
-        
-        
-        
         
         
     }
@@ -144,6 +134,25 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
     
+    func showRideAround(originName: String) -> Bool {
+        
+        
+        
+        //let token = "AIzaSyA2UuVKx6XIhxAzoNlEWXJcbLS0Jqx8qDI"
+        let valid = false
+        
+        print(originName)
+        
+        //print("current loc is \(self.currLocName)")
+        
+        //
+        //locationManager.stopUpdatingLocation()
+        
+        
+        return valid
+        
+        
+    }
     
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,14 +161,14 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return rides.count
     }
     
-    func getData() {
+    func getData(currLocName: String) {
         
         
         locationManager.stopUpdatingLocation()
         // construct query
         let query = PFQuery(className: "Ride")
         query.limit = 20
-       
+        
         // fetch data asynchronously
         query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
             if let ride = ride {
@@ -167,55 +176,39 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 if ride.count > 0 {
                     
-                    /*for i in (0...ride.count-1).reversed() {
+                    for i in (0...ride.count-1).reversed() {
                         
                         self.rides.append(Ride.init(ride[i]))
                         
-                        print (self.showRideAround(originName: self.rides[i].originName!, currLoc: currLocName))
+                        print (self.showRideAround(originName: "56th San Diego"))
                         
-                    }*/
-                    
-                    for i in 0...(ride.count - 1) {
-                        self.rides.append(Ride.init(ride[i]))
                     }
-                    
-                    
-                } else {
-                    
-                    
-                    let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-                    noDataLabel.text          = "No Upcoming Ride"
-                    noDataLabel.textColor     = UIColor.black
-                    noDataLabel.font = UIFont(name: "Noteworthy", size: 25)
-                    noDataLabel.textAlignment = .center
-                    self.tableView.backgroundView  = noDataLabel
-                    self.tableView.separatorStyle  = .none
-                    
                 }
                 
                 
                 
-                self.tableView.reloadData()
+                //self.tableView.reloadData()
                 // self.instaPosts = posts
                 
                 
             } else {
                 print(error!)
             }
-        } 
+        }
         
     }
-
-
+    
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+*/
