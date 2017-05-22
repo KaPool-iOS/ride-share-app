@@ -90,6 +90,11 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         
         dateLabel.text = currDate
     }
+    @IBAction func cancelPressed(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     @IBAction func dismissKB(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)

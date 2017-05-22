@@ -1281,8 +1281,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-mq-mQk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-mq-mQk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-lc-6Bx">
+                                        <rect key="frame" x="32" y="593" width="154" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.2612197221" green="0.74090819610000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Offer"/>
+                                        <connections>
+                                            <action selector="goBttnClicked:" destination="Lan-qU-XZB" eventType="touchUpInside" id="lLq-iO-WRY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-0P-Pch">
+                                        <rect key="frame" x="194" y="593" width="149" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="Lan-qU-XZB" eventType="touchUpInside" id="xkE-fb-dkW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="GDb-x5-yhs" appends="YES" id="PPH-3u-4XF"/>
@@ -1511,18 +1531,6 @@
                                     <constraint firstAttribute="trailing" secondItem="ZtI-Lv-sGq" secondAttribute="trailing" constant="20" id="kQl-9Z-vey"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-lc-6Bx">
-                                <rect key="frame" x="144" y="582" width="86" height="34"/>
-                                <color key="backgroundColor" red="0.2612197221" green="0.74090819610000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="86" id="f44-wo-MBx"/>
-                                    <constraint firstAttribute="height" constant="34" id="vbT-ua-fJr"/>
-                                </constraints>
-                                <state key="normal" title="GO"/>
-                                <connections>
-                                    <action selector="goBttnClicked:" destination="Lan-qU-XZB" eventType="touchUpInside" id="lLq-iO-WRY"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1533,10 +1541,8 @@
                             <constraint firstItem="Tke-sj-f7L" firstAttribute="leading" secondItem="5Ki-UK-QEZ" secondAttribute="leading" constant="9" id="8ul-hh-ozC"/>
                             <constraint firstAttribute="trailing" secondItem="hRU-c8-8aE" secondAttribute="trailing" id="9PX-pK-deq"/>
                             <constraint firstItem="mQs-ue-qAq" firstAttribute="top" secondItem="0h6-mq-mQk" secondAttribute="bottom" id="AFf-o7-mf0"/>
-                            <constraint firstAttribute="trailing" secondItem="MYc-lc-6Bx" secondAttribute="trailing" constant="145" id="AcS-kX-kPd"/>
                             <constraint firstAttribute="trailing" secondItem="01f-TW-a5a" secondAttribute="trailing" constant="8" id="EOe-BR-1ub"/>
                             <constraint firstItem="hRU-c8-8aE" firstAttribute="leading" secondItem="5Ki-UK-QEZ" secondAttribute="leading" id="GaT-CC-OwQ"/>
-                            <constraint firstItem="MYc-lc-6Bx" firstAttribute="leading" secondItem="5Ki-UK-QEZ" secondAttribute="leading" constant="144" id="ULh-Ag-srB"/>
                             <constraint firstItem="01f-TW-a5a" firstAttribute="leading" secondItem="5Ki-UK-QEZ" secondAttribute="leading" constant="9" id="XXU-jF-sxp"/>
                             <constraint firstItem="01f-TW-a5a" firstAttribute="top" secondItem="jGM-Be-ksx" secondAttribute="bottom" constant="201" id="YiG-xk-tFr"/>
                             <constraint firstItem="0h6-mq-mQk" firstAttribute="top" secondItem="5Ki-UK-QEZ" secondAttribute="top" id="gKC-aP-PSV"/>
@@ -1545,7 +1551,6 @@
                             <constraint firstItem="Tke-sj-f7L" firstAttribute="top" secondItem="01f-TW-a5a" secondAttribute="bottom" constant="5" id="iPq-E6-qmK"/>
                             <constraint firstAttribute="trailing" secondItem="Tke-sj-f7L" secondAttribute="trailing" constant="8" id="nHa-Q0-e10"/>
                             <constraint firstItem="vyZ-Xr-asI" firstAttribute="top" secondItem="Tke-sj-f7L" secondAttribute="bottom" constant="5" id="q5S-Gf-jxL"/>
-                            <constraint firstItem="MYc-lc-6Bx" firstAttribute="top" secondItem="6Xx-8l-TKj" secondAttribute="bottom" constant="24" id="qCB-VU-IRC"/>
                             <constraint firstAttribute="trailing" secondItem="0h6-mq-mQk" secondAttribute="trailing" id="td6-LT-C0g"/>
                         </constraints>
                     </view>
