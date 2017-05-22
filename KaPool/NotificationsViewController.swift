@@ -9,25 +9,45 @@
 import UIKit
 import Parse
 
-class NotificationsViewController: UIViewController {
+class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var notifs: [Trip] = []
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+        
         Trip.getNotifs { (trips: [Trip]) in
             self.notifs = trips
+            self.tableView.reloadData()
             
-            
-            for notif in self.notifs {
-                print(notif)
-            }
         }
-        
         
 
         // Do any additional setup after loading the view.
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+       
+        let cell = tableView.dequeueReusableCell(withIdentifier: "notifCell") as! NotifCell
+        cell.trip = self.notifs[indexPath.row]
+        
+        
+        return cell
+    }
+    
+    
+    
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        
+        return notifs.count
     }
 
     override func didReceiveMemoryWarning() {

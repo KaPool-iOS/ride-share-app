@@ -16,6 +16,7 @@
 		217FAF3C1EC1018A001D6A4D /* SelectDateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */; };
 		21858DED1ED2B508005FF501 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DEC1ED2B508005FF501 /* Trip.swift */; };
 		21858DEF1ED2CACC005FF501 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DEE1ED2CACC005FF501 /* NotificationsViewController.swift */; };
+		21858DF11ED2DBF2005FF501 /* NotifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DF01ED2DBF2005FF501 /* NotifCell.swift */; };
 		21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A521E68D6F3009BE18F /* AppDelegate.swift */; };
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
@@ -50,6 +51,7 @@
 		217FAF3B1EC1018A001D6A4D /* SelectDateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDateViewController.swift; sourceTree = "<group>"; };
 		21858DEC1ED2B508005FF501 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		21858DEE1ED2CACC005FF501 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		21858DF01ED2DBF2005FF501 /* NotifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifCell.swift; sourceTree = "<group>"; };
 		21CE5A4F1E68D6F3009BE18F /* KaPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CE5A521E68D6F3009BE18F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CE5A571E68D6F3009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				6E57A1071EA4A2C2005CF461 /* RideCell.swift */,
+				21858DF01ED2DBF2005FF501 /* NotifCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			files = (
 				21858DEF1ED2CACC005FF501 /* NotificationsViewController.swift in Sources */,
 				21162A741EC691FC00681C4E /* User.swift in Sources */,
+				21858DF11ED2DBF2005FF501 /* NotifCell.swift in Sources */,
 				213045A91ED1F8DE0059DB5C /* RideDetailsVC.swift in Sources */,
 				6E2AE6391E9C1E73005C21A9 /* SignupSecondViewController.swift in Sources */,
 				6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */,
