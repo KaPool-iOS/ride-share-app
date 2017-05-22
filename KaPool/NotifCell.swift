@@ -14,18 +14,26 @@ class NotifCell: UITableViewCell {
     @IBOutlet weak var fromLabel: UILabel!
     var ride: Ride!
     
+    var riderName: String!
+    var destName: String!
+    var departDate: Date!
+    
     var trip: Trip! {
         didSet {
             
-            // get ride
-            Ride.getRideWithId(rideId: trip.rideID!) { (ride: Ride) in
-                self.ride = ride
-            }
-            
             //get user
             User.getUser(userid: (trip?.riderID)!) { (rider: User) in
-                self.fromLabel.text = "\(rider.username!) would like to accept your ride to \(self.ride.destName) at \(self.ride.departDate)"
+                self.riderName = rider.username!
                 
+                // get ride
+                Ride.getRideWithId(rideId: self.trip.rideID!) { (ride: Ride) in
+                    self.ride = ride
+                    self.riderName = ride.destName!
+                    self.departDate = ride.departDate!
+                    
+                     self.fromLabel.text = "\(rider.username!) would like to accept your ride to \(self.ride.destName) at \(self.ride.departDate)"
+                }
+               
             }
         }
     }
@@ -39,6 +47,7 @@ class NotifCell: UITableViewCell {
             self.fromLabel.text = rider.username
             
         } */
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
