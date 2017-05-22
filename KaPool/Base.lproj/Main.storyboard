@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -311,11 +313,7 @@
                                             <outlet property="priceText" destination="uWd-6Q-215" id="ZvV-r3-ctW"/>
                                             <outlet property="seatNumText" destination="BvN-Ee-NI2" id="2YK-NB-sjH"/>
                                             <outlet property="toText" destination="hOx-Jf-QKv" id="6kC-Ix-9Y1"/>
-<<<<<<< HEAD
-                                            <segue destination="wyF-ch-R0B" kind="show" identifier="rideDetSegue" id="gbl-LL-cGr"/>
-=======
                                             <segue destination="DC5-Ta-aTA" kind="presentation" identifier="rideDetSegue" id="b2b-Pm-fhI"/>
->>>>>>> 8879fab3fea4705035fdf0789be36ddaf7e9fca4
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -511,7 +509,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWr-WQ-Q4w" id="o1P-GM-pGl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="User-30" translatesAutoresizingMaskIntoConstraints="NO" id="sX8-pI-gCH">
@@ -1170,7 +1168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHv-5U-vEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5097" y="-454"/>
+            <point key="canvasLocation" x="4110" y="-586"/>
         </scene>
         <!--Kapool-->
         <scene sceneID="wHF-3O-UxU">
@@ -1292,7 +1290,6 @@
             </objects>
             <point key="canvasLocation" x="5334" y="-94"/>
         </scene>
-<<<<<<< HEAD
         <!--Ride DetailsVC-->
         <scene sceneID="BDJ-1f-V8J">
             <objects>
@@ -1317,8 +1314,6 @@
             </objects>
             <point key="canvasLocation" x="7294" y="-700"/>
         </scene>
-=======
->>>>>>> 8879fab3fea4705035fdf0789be36ddaf7e9fca4
         <!--Offer RideVC-->
         <scene sceneID="lxy-HU-Dgq">
             <objects>
@@ -1338,29 +1333,44 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-mq-mQk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0h6-mq-mQk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-lc-6Bx">
-                                        <rect key="frame" x="32" y="593" width="154" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.2612197221" green="0.74090819610000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="Offer"/>
-                                        <connections>
-                                            <action selector="goBttnClicked:" destination="Lan-qU-XZB" eventType="touchUpInside" id="lLq-iO-WRY"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-0P-Pch">
-                                        <rect key="frame" x="194" y="593" width="149" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-0P-Pch">
+                                        <rect key="frame" x="219" y="593" width="90" height="34"/>
                                         <color key="backgroundColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="90" id="1Hh-zQ-yge"/>
+                                        </constraints>
                                         <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancelPressed:" destination="Lan-qU-XZB" eventType="touchUpInside" id="xkE-fb-dkW"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-lc-6Bx">
+                                        <rect key="frame" x="79" y="593" width="86" height="34"/>
+                                        <color key="backgroundColor" red="0.2612197221" green="0.74090819610000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="86" id="f44-wo-MBx"/>
+                                            <constraint firstAttribute="height" constant="34" id="vbT-ua-fJr"/>
+                                        </constraints>
+                                        <state key="normal" title="Submit"/>
+                                        <connections>
+                                            <action selector="goBttnClicked:" destination="Lan-qU-XZB" eventType="touchUpInside" id="lLq-iO-WRY"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="SXa-0P-Pch" firstAttribute="baseline" secondItem="MYc-lc-6Bx" secondAttribute="firstBaseline" id="2E8-su-ZR4"/>
+                                    <constraint firstItem="MYc-lc-6Bx" firstAttribute="top" secondItem="SXa-0P-Pch" secondAttribute="top" id="2GP-O1-Ua7"/>
+                                    <constraint firstAttribute="trailing" secondItem="SXa-0P-Pch" secondAttribute="trailing" constant="66" id="2ef-PW-hJX"/>
+                                    <constraint firstItem="MYc-lc-6Bx" firstAttribute="leading" secondItem="0h6-mq-mQk" secondAttribute="leading" constant="79" id="iqj-lY-Cu9"/>
+                                    <constraint firstAttribute="bottom" secondItem="MYc-lc-6Bx" secondAttribute="bottom" constant="40" id="jCB-f3-J8P"/>
+                                    <constraint firstItem="SXa-0P-Pch" firstAttribute="leading" secondItem="MYc-lc-6Bx" secondAttribute="trailing" constant="54" id="oaI-KS-bFY"/>
+                                    <constraint firstItem="MYc-lc-6Bx" firstAttribute="top" secondItem="0h6-mq-mQk" secondAttribute="top" constant="593" id="pek-Lk-Aaa"/>
+                                    <constraint firstItem="MYc-lc-6Bx" firstAttribute="baseline" secondItem="SXa-0P-Pch" secondAttribute="firstBaseline" id="x0v-3d-ueY"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="GDb-x5-yhs" appends="YES" id="PPH-3u-4XF"/>
                                 </connections>
@@ -1588,21 +1598,6 @@
                                     <constraint firstAttribute="trailing" secondItem="ZtI-Lv-sGq" secondAttribute="trailing" constant="20" id="kQl-9Z-vey"/>
                                 </constraints>
                             </view>
-<<<<<<< HEAD
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYc-lc-6Bx">
-                                <rect key="frame" x="144" y="582" width="86" height="34"/>
-                                <color key="backgroundColor" red="0.2612197221" green="0.74090819610000003" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="86" id="f44-wo-MBx"/>
-                                    <constraint firstAttribute="height" constant="34" id="vbT-ua-fJr"/>
-                                </constraints>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="goBttnClicked:" destination="Lan-qU-XZB" eventType="touchUpInside" id="lLq-iO-WRY"/>
-                                </connections>
-                            </button>
-=======
->>>>>>> 8879fab3fea4705035fdf0789be36ddaf7e9fca4
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1649,7 +1644,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7966" y="-313"/>
+            <point key="canvasLocation" x="7965.5" y="-313.5"/>
         </scene>
         <!--Select Date View Controller-->
         <scene sceneID="g4X-cw-Ur0">
@@ -1899,7 +1894,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwr-96-CJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7104.8000000000002" y="-376.46176911544228"/>
+            <point key="canvasLocation" x="7745" y="662"/>
         </scene>
     </scenes>
     <resources>
