@@ -12,13 +12,19 @@ class NotifCell: UITableViewCell {
     var testID: String?
 
     @IBOutlet weak var fromLabel: UILabel!
+    var ride: Ride!
     
     var trip: Trip! {
         didSet {
             
-            print(trip?.riderID!)
+            // get ride
+            Ride.getRideWithId(rideId: trip.rideID!) { (ride: Ride) in
+                self.ride = ride
+            }
+            
+            //get user
             User.getUser(userid: (trip?.riderID)!) { (rider: User) in
-                self.fromLabel.text = "\(rider.username!) would like to accept your ride"
+                self.fromLabel.text = "\(rider.username!) would like to accept your ride to \(self.ride.destName) at \(self.ride.departDate)"
                 
             }
         }

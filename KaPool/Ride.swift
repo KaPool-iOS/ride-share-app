@@ -83,7 +83,23 @@ class Ride: NSObject {
              ride.saveInBackground(block: completion)
         })
         
+    }
+    
+    class func getRideWithId(rideId: String, completion:@escaping (_ ride: Ride) -> ()) {
         
+        let qry = PFQuery(className: "Ride")
+        //qry.whereKey("objectID", equalTo: userid)
+        // qry.limit = 1
+        qry.getObjectInBackground(withId: rideId) { (ride: PFObject?, error: Error?) -> Void in
+            if error == nil && ride != nil {
+                
+                completion(Ride.init(ride!))
+                
+            } else {
+                
+                print("Error: \(error)")
+            }
+        }
     }
     
 }
