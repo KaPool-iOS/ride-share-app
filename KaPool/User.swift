@@ -34,9 +34,24 @@ class User: NSObject {
       self.email = user.object(forKey: "email") as? String
       self.profilePic = user.object(forKey: "profilePic") as? UIImage
       
-      
-      
     
+    }
+    
+    class func getUser(userid: String, completion: @escaping (_ user: User) -> ()) {
+        
+        let qry = PFQuery(className: "_User")
+        //qry.whereKey("objectID", equalTo: userid)
+        // qry.limit = 1
+        qry.getObjectInBackground(withId: userid) { (user: PFObject?, error: Error?) -> Void in
+            if error == nil && user != nil {
+                
+                completion(User.init(user!) )
+                
+            } else {
+                
+                print("Error: \(error)")
+            }
+        }
     }
 
   
