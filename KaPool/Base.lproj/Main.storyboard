@@ -477,25 +477,6 @@
             </objects>
             <point key="canvasLocation" x="3377" y="191"/>
         </scene>
-        <!--Message-->
-        <scene sceneID="mwr-9u-oVN">
-            <objects>
-                <tableViewController id="dkT-27-2el" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="s9P-Mz-wCo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="dkT-27-2el" id="4b8-ht-eaI"/>
-                            <outlet property="delegate" destination="dkT-27-2el" id="zF4-GG-oBM"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Message" id="VV9-Hj-aoE"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jC6-TV-WB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5962" y="596"/>
-        </scene>
         <!--Messages-->
         <scene sceneID="cN4-NY-935">
             <objects>
@@ -503,17 +484,53 @@
                     <tabBarItem key="tabBarItem" title="Messages" image="Message-30" id="mAe-K4-olH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Yia-pS-HCP">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Yia-pS-HCP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="dkT-27-2el" kind="relationship" relationship="rootViewController" id="5Xy-PY-Uzv"/>
+                        <segue destination="eFU-wV-pTL" kind="relationship" relationship="rootViewController" id="TWG-wm-LAS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zsy-AZ-kPZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4921" y="709"/>
+        </scene>
+        <!--Notifications View Controller-->
+        <scene sceneID="WXG-XE-hwl">
+            <objects>
+                <viewController id="eFU-wV-pTL" customClass="NotificationsViewController" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l7z-ln-nvy"/>
+                        <viewControllerLayoutGuide type="bottom" id="tgl-LK-dyD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hap-Oo-LLi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Gx-d2-X5F">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="90" id="YWr-WQ-Q4w">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWr-WQ-Q4w" id="o1P-GM-pGl">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="VlW-YB-0a1"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZk-lh-L5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5868" y="727.28635682158927"/>
         </scene>
         <!--Profile-->
         <scene sceneID="8sM-Ya-uKt">
@@ -522,7 +539,7 @@
                     <tabBarItem key="tabBarItem" title="Profile" image="User-30" id="YYv-2y-WiW"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="azu-ne-cJS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="azu-ne-cJS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1249,7 +1266,7 @@
                     <toolbarItems/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="mLf-Zv-nAH">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="mLf-Zv-nAH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

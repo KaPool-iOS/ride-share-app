@@ -56,13 +56,15 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         User.getUser(userid: curr.driver) { (user: User) in
             
             self.user = user
+            self.userLabel.text = user.username
+            /*
             let usernameArr = user.username?.components(separatedBy: "@")
             
             if (usernameArr?.count)! > 0 {
                 self.userLabel.text = usernameArr?[0]
             } else {
                 self.userLabel.text = user.username
-            }
+            } */
             
             
             
