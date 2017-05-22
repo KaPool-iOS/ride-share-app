@@ -11,19 +11,86 @@ import Parse
 
 class ProfileViewController: UIViewController {
   
+  //self.profileImageView.layer.cornerRadius = 10.0f;
+  
+  @IBOutlet weak var editButton: UIButton!
   
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
   @IBOutlet weak var infoLabel: UITextView!
-  var driver: String = ""
-  var name: String?
+
   
+  //car
+  @IBOutlet weak var carMake: UILabel!
+  @IBOutlet weak var carModel: UILabel!
+  @IBOutlet weak var carColor: UILabel!
+  @IBOutlet weak var carYear: UILabel!
+  
+  
+  
+  let defaults = UserDefaults.standard
+
     override func viewDidLoad() {
         super.viewDidLoad()
+  
       
-   
+      //button
+      editButton.layer.cornerRadius = 10
+      
+      //image
+      self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+      self.profileImage.clipsToBounds = true;
+      self.profileImage.layer.borderWidth = 3.0
+      profileImage.layer.borderColor = UIColor.white.cgColor
+      
+      
+ 
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    
+    let username =  defaults.string(forKey: "username")
+    self.navigationController?.navigationBar.topItem?.title = username
+    let infoQuery = PFQuery(className: "_User")
+    
+    infoQuery.findObjectsInBackground (block: { (objects, error) -> Void in
+      if error != nil {
+        
+      
+      } else {
+        
+        for object in objects! {
+          
+          //user
+          self.nameLabel.text = (object.object(forKey: "username") as? String)
+          self.ageLabel.text = (object.object(forKey: "age") as? String)
+          self.infoLabel.text = (object.object(forKey: "about") as? String)
+          
+          
+          //car
+          self.carMake.text = (object.object(forKey: "carMake") as? String)
+          self.carModel.text = (object.object(forKey: "carModel") as? String)
+          self.carColor.text = (object.object(forKey: "carColour") as? String)
+          self.carYear.text = (object.object(forKey: "CarYear") as? String)
+          
+        }
+        
+      }
+      
+      
+    })
+
+  }
+
+  @IBAction func editProfileButton(_ sender: Any) {
+    let vc = self.storyboard?.instantiateViewController(withIdentifier: "editProfile") as! EditProfileViewController
+    
+    vc.fullname = nameLabel.text
+    self.present(vc, animated: true, completion: nil)
+  }
+  
+  
   
 
     override func didReceiveMemoryWarning() {
@@ -32,14 +99,6 @@ class ProfileViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
