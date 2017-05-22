@@ -10,5 +10,6 @@ target 'KaPool' do
   pod 'mailgun', '~> 1.0.3'
   pod 'GoogleMaps'
   pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
   
 end

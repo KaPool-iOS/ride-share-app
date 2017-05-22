@@ -27,6 +27,8 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var locationManager = CLLocationManager()
     var locationLatest:CLLocation!
 
+    //@IBOutlet var tabbar: UITabBar!
+    //@IBOutlet var tabbar: UITabBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -37,7 +39,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
 
         getData()
         // Do any additional setup after loading the view.
@@ -83,18 +85,26 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         then comapre if the places in ride array are close to this place
     */
     
+    
+    
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        
         
         locationLatest = locations[locations.count - 1]
         if self.startLocation == nil {
             self.startLocation = locationLatest
             
-            defaults.set(startLocation.coordinate.latitude, forKey: "latitude")
-            defaults.set(startLocation.coordinate.longitude, forKey: "longitude")
+            print("startLocation is \(startLocation!)")
             
+            let lat = NSNumber(value: startLocation.coordinate.latitude)
+            let lon = NSNumber(value: startLocation.coordinate.longitude)
+            
+            let userLocation: NSDictionary = ["lat": lat, "lon": lon]
+            
+            
+            self.defaults.set(userLocation, forKey: "currentLocation")
+            
+            self.defaults.synchronize()
             
             CLGeocoder().reverseGeocodeLocation(startLocation, completionHandler: {(placemarks, error) -> Void in
                 
@@ -132,14 +142,9 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    @IBAction func onFindRide(_ sender: Any) {
-        
-        
-        
-        
-        
-    }
+   
     
+
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -162,7 +167,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // SOMETHING TO ADD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "rideDetSegue", sender: UITableViewCell.self)
+        //performSegue(withIdentifier: "rideDetSegue", sender: UITableViewCell.self)
         
     }
     
@@ -229,9 +234,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let rideCell = sender as! RideCell
-        let rideDeets = segue.destination as! RideDetailsVC
-        rideDeets.curr = rideCell.ride
+        
     }
     
 

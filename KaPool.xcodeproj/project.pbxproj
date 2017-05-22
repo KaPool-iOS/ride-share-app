@@ -32,6 +32,7 @@
 		6E77A4881ECD7FE80031E7D6 /* 1495109285_user.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */; };
 		6E77A48A1ED02AAB0031E7D6 /* draftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */; };
 		6E77A48C1ED0E3E50031E7D6 /* noride.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A48B1ED0E3E50031E7D6 /* noride.png */; };
+		6EDFCA481ED2942B00B6D1F8 /* location.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDFCA471ED2942B00B6D1F8 /* location.png */; };
 		F891E329D9D6AC86C1D8B5FF /* Pods_KaPool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1495109285_user.png; sourceTree = "<group>"; };
 		6E77A4891ED02AAB0031E7D6 /* draftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = draftViewController.swift; sourceTree = "<group>"; };
 		6E77A48B1ED0E3E50031E7D6 /* noride.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = noride.png; sourceTree = "<group>"; };
+		6EDFCA471ED2942B00B6D1F8 /* location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = location.png; sourceTree = "<group>"; };
 		BECCDA05F45482F48BFB5FBD /* Pods_KaPool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KaPool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,6 +117,7 @@
 				21CE5A521E68D6F3009BE18F /* AppDelegate.swift */,
 				21CE5A561E68D6F3009BE18F /* Main.storyboard */,
 				21CE5A591E68D6F4009BE18F /* Assets.xcassets */,
+				6EDFCA471ED2942B00B6D1F8 /* location.png */,
 				6E77A48B1ED0E3E50031E7D6 /* noride.png */,
 				6E77A4851ECD7F5D0031E7D6 /* 1495109130_calendar.png */,
 				6E77A4871ECD7FE80031E7D6 /* 1495109285_user.png */,
@@ -237,6 +240,7 @@
 			files = (
 				6E77A4881ECD7FE80031E7D6 /* 1495109285_user.png in Resources */,
 				6E77A4821ECC5F0B0031E7D6 /* location-icon-png-4235.png in Resources */,
+				6EDFCA481ED2942B00B6D1F8 /* location.png in Resources */,
 				21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */,
 				6E77A4841ECC5F140031E7D6 /* location-icon-png-4236.png in Resources */,
 				6E77A48C1ED0E3E50031E7D6 /* noride.png in Resources */,
