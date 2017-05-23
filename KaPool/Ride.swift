@@ -39,6 +39,10 @@ class Ride: NSObject {
         self.destinationID = ride?.object(forKey: "Destination") as? String
         self.destName = ride?.object(forKey: "destName") as? String
         self.originName = ride?.object(forKey: "originName") as? String
+        
+        
+        
+        
     }
     
     class func addRide(destination: GMSPlace?, origin: GMSPlace?,

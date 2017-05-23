@@ -31,7 +31,8 @@ class NotifCell: UITableViewCell {
                     self.riderName = ride.destName!
                     self.departDate = ride.departDate!
                     
-                     self.fromLabel.text = "\(rider.username!) would like to accept your ride to \(self.ride.destName) at \(self.ride.departDate)"
+                    let dateStr = self.departDate.toString(dateFormat: "MM/dd h:mm a")
+                     self.fromLabel.text = "\(rider.username!) accepted your ride to \(self.ride.destName!) at \(dateStr)"
                 }
                
             }

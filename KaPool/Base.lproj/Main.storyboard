@@ -486,7 +486,7 @@
             </objects>
             <point key="canvasLocation" x="4921" y="709"/>
         </scene>
-        <!--Notifications View Controller-->
+        <!--Notifications-->
         <scene sceneID="WXG-XE-hwl">
             <objects>
                 <viewController id="eFU-wV-pTL" customClass="NotificationsViewController" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
@@ -514,7 +514,7 @@
                                                     <rect key="frame" x="28" y="8" width="64" height="65"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmj-gK-KCG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmj-gK-KCG">
                                                     <rect key="frame" x="110" y="8" width="249" height="73"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -525,6 +525,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="fromLabel" destination="jmj-gK-KCG" id="0WO-KP-syN"/>
+                                            <segue destination="Ey0-R1-Am5" kind="presentation" id="GKm-Nj-7bu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -532,14 +533,42 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="VlW-YB-0a1"/>
+                    <navigationItem key="navigationItem" title="Notifications" id="VlW-YB-0a1"/>
                     <connections>
                         <outlet property="tableView" destination="7Gx-d2-X5F" id="hoE-9Q-IqB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZk-lh-L5O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6125.6000000000004" y="593.25337331334333"/>
+            <point key="canvasLocation" x="6212" y="525"/>
+        </scene>
+        <!--Trip Map View Controller-->
+        <scene sceneID="Hek-D3-zGX">
+            <objects>
+                <viewController id="Ey0-R1-Am5" customClass="tripMapViewController" customModule="KaPool" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lS7-EW-LiD"/>
+                        <viewControllerLayoutGuide type="bottom" id="xKL-mf-7Z2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YPz-3q-RuA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ioI-MX-7h3" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="ioI-MX-7h3" id="bKH-S7-jPh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c4J-jx-7FT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6974" y="602"/>
         </scene>
         <!--Profile-->
         <scene sceneID="8sM-Ya-uKt">
