@@ -9,6 +9,7 @@
 import UIKit
 import GoogleMaps
 import GooglePlaces
+import Alamofire
 
 class tripMapViewController: UIViewController, GMSMapViewDelegate {
     
@@ -184,14 +185,14 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         mapView.animate(with: update)
         
      //   getPolylineRoute(from: (origin?.coordinate)!, to: (destination?.coordinate)!)
-        drawPath(currentLocation: origin, destinationLoc: destination)
+       // drawPath(currentLocation: (origin?.coordinate)!, destinationLoc: (destination?.coordinate)!)
         
         handleComplete()
         
         
     }
-    
-    func drawPath(currentLocation: GMSPlace, destinationLoc: GMSPlace)
+    /*
+    func drawPath(currentLocation: CLLocationCoordinate2D, destinationLoc: CLLocationCoordinate2D)
     {
         let origin = "\(currentLocation.latitude),\(currentLocation.longitude)"
         let destination = "\(destinationLoc.latitude),\(destinationLoc.longitude)"
@@ -200,24 +201,33 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=YOURKEY"
         
         Alamofire.request(url).responseJSON { response in
-            print(response.request)  // original URL request
-            print(response.response) // HTTP URL response
-            print(response.data)     // server data
+            print(response.request!)  // original URL request
+            print(response.response!) // HTTP URL response
+            print(response.data!)     // server data
             print(response.result)   // result of response serialization
             
-            let json = JSON(data: response.data!)
-            let routes = json["routes"].arrayValue
             
-            for route in routes
-            {
-                let routeOverviewPolyline = route["overview_polyline"].dictionary
-                let points = routeOverviewPolyline?["points"]?.stringValue
-                let path = GMSPath.init(fromEncodedPath: points!)
-                let polyline = GMSPolyline.init(path: path)
-                polyline.map = self.mapView
+            do {
+                let json = try JSONSerialization.jsonObject(with: response.data!)
+                
+                if let json = json as? [String:String] {
+                    
+                    let routes = json["routes"]
+                    
+                    for route in routes
+                    {
+                        let routeOverviewPolyline = route["overview_polyline"].dictionary
+                        let points = routeOverviewPolyline?["points"]?.stringValue
+                        let path = GMSPath.init(fromEncodedPath: points!)
+                        let polyline = GMSPolyline.init(path: path)
+                        polyline.map = self.mapView
+                    }
+                }
+            } catch {
+                print(error.localizedDescription)
             }
         }
-    }
+    }*/
     
     /*
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
