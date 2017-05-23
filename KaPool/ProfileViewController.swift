@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController {
     let vc = self.storyboard?.instantiateViewController(withIdentifier: "editProfile") as! EditProfileViewController
     
     vc.fullname = nameLabel.text
+    vc.age = ageLabel.text
     self.present(vc, animated: true, completion: nil)
   }
   
