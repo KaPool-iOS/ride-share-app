@@ -32,6 +32,9 @@ class RideCell: UITableViewCell {
     @IBOutlet var priceText: UILabel!
     @IBOutlet var seatNumText: UILabel!
     
+    var destCoordinates: CLLocationCoordinate2D!
+    var origCoordinates: CLLocationCoordinate2D!
+    
   
     var ride: Ride! {
         
@@ -83,8 +86,10 @@ class RideCell: UITableViewCell {
             if check == 1 {
                 
                 self.fromText.text = (String) (describing: place.name)
+                self.origCoordinates = place.coordinate
             } else {
                 self.toText.text = (String) (describing: place.name)
+                  self.destCoordinates = place.coordinate
             }
             
         })

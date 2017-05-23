@@ -29,6 +29,10 @@
     </dict>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>In oder to serve you better we need your location!</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Show your location on the map</string>
+    
+    
     <key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

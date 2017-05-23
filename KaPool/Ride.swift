@@ -34,11 +34,15 @@ class Ride: NSObject {
         self.departDate = ride?.object(forKey: "Date") as? Date
         self.price = ride?.object(forKey: "Price") as! Double?
         self.seats = ride?.object(forKey: "SeatsAvail") as! Int?
-        self.rideID = ride?.object(forKey: "objectId") as? String
+        self.rideID = ride?.objectId
         self.originID = ride?.object(forKey: "Origin") as? String
         self.destinationID = ride?.object(forKey: "Destination") as? String
         self.destName = ride?.object(forKey: "destName") as? String
         self.originName = ride?.object(forKey: "originName") as? String
+        
+        
+        
+        
     }
     
     class func addRide(destination: GMSPlace?, origin: GMSPlace?,
@@ -83,7 +87,23 @@ class Ride: NSObject {
              ride.saveInBackground(block: completion)
         })
         
+    }
+    
+    class func getRideWithId(rideId: String, completion:@escaping (_ ride: Ride) -> ()) {
         
+        let qry = PFQuery(className: "Ride")
+        //qry.whereKey("objectID", equalTo: userid)
+        // qry.limit = 1
+        qry.getObjectInBackground(withId: rideId) { (ride: PFObject?, error: Error?) -> Void in
+            if error == nil && ride != nil {
+                
+                completion(Ride.init(ride!))
+                
+            } else {
+                
+                print("Error: \(error)")
+            }
+        }
     }
     
 }

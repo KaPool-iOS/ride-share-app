@@ -13,7 +13,7 @@ import GoogleMaps
 import MapKit
 
 class RideViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MKMapViewDelegate, CLLocationManagerDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     //var tweetsArray: [Tweet]! = [Tweet]()
     var rides: [Ride]! = [Ride]()
@@ -27,6 +27,10 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var locationManager = CLLocationManager()
     var locationLatest:CLLocation!
 
+
+    //@IBOutlet var tabbar: UITabBar!
+    //@IBOutlet var tabbar: UITabBar!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
@@ -37,7 +41,9 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         
-        //locationManager.startUpdatingLocation()
+
+        locationManager.startUpdatingLocation()
+
 
         getData()
         // Do any additional setup after loading the view.
@@ -47,7 +53,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewWillAppear(_ animated: Bool) {
         self.tableView.reloadData()
     }
-
+    
     public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedWhenInUse) {
             // User has granted autorization to location, get location
@@ -72,29 +78,37 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             vc.signal = "offer"
             
             self.present(vc, animated: true, completion: nil)
-
+            
             
         }
     }
     
     /*
-        get user current location
-        convert it into place name
-        then comapre if the places in ride array are close to this place
-    */
+     get user current location
+     convert it into place name
+     then comapre if the places in ride array are close to this place
+     */
+    
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        
-        
         
         locationLatest = locations[locations.count - 1]
         if self.startLocation == nil {
             self.startLocation = locationLatest
             
-            defaults.set(startLocation.coordinate.latitude, forKey: "latitude")
-            defaults.set(startLocation.coordinate.longitude, forKey: "longitude")
+            print("startLocation is \(startLocation!)")
             
+            let lat = NSNumber(value: startLocation.coordinate.latitude)
+            let lon = NSNumber(value: startLocation.coordinate.longitude)
+            
+            let userLocation: NSDictionary = ["lat": lat, "lon": lon]
+            
+            
+            self.defaults.set(userLocation, forKey: "currentLocation")
+            
+            self.defaults.synchronize()
             
             CLGeocoder().reverseGeocodeLocation(startLocation, completionHandler: {(placemarks, error) -> Void in
                 
@@ -110,20 +124,20 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         if placemark.subThoroughfare != nil {
                             
                             address += placemark.subThoroughfare! + " "
-                                                    }
+                        }
                         
                         if placemark.thoroughfare != nil {
                             
                             address += placemark.thoroughfare! + "?"
                             
                         }
-                      
+                        
                         self.currLocName = address
                     }
                     
                 }
                 
- 
+                
             })
             
         }
@@ -132,14 +146,9 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     
-    @IBAction func onFindRide(_ sender: Any) {
-        
-        
-        
-        
-        
-    }
+   
     
+
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -147,6 +156,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "rideCell") as! RideCell
         
         cell.ride = rides[indexPath.row]
+        
         
         return cell
     }
@@ -162,8 +172,8 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     // SOMETHING TO ADD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "rideDetSegue", sender: UITableViewCell.self)
-        
+        //performSegue(withIdentifier: "rideDetSegue", sender: UITableViewCell.self)
+
     }
     
     func getData() {
@@ -173,7 +183,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // construct query
         let query = PFQuery(className: "Ride")
         query.limit = 20
-       
+        
         // fetch data asynchronously
         query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
             if let ride = ride {
@@ -182,12 +192,12 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 if ride.count > 0 {
                     
                     /*for i in (0...ride.count-1).reversed() {
-                        
-                        self.rides.append(Ride.init(ride[i]))
-                        
-                        print (self.showRideAround(originName: self.rides[i].originName!, currLoc: currLocName))
-                        
-                    }*/
+                     
+                     self.rides.append(Ride.init(ride[i]))
+                     
+                     print (self.showRideAround(originName: self.rides[i].originName!, currLoc: currLocName))
+                     
+                     }*/
                     
                     for i in 0...(ride.count - 1) {
                         self.rides.append(Ride.init(ride[i]))
@@ -216,23 +226,31 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             } else {
                 print(error!)
             }
-        } 
+        }
         
     }
-
-
+    
     
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        let rideCell = sender as! RideCell
-        let rideDeets = segue.destination as! RideDetailsVC
-        rideDeets.curr = rideCell.ride
+        if segue.identifier == "rideDetSegue" {
+            let rideCell = sender as! RideCell
+            let rideDeets = segue.destination as! RideDetailsVC
+            rideDeets.curr = rideCell.ride
+            rideDeets.origCoordinates = rideCell.origCoordinates
+            rideDeets.destCoordinates = rideCell.destCoordinates
+            
+            rideDeets.ogName = rideCell.fromText.text
+            rideDeets.destName = rideCell.toText.text
+            
+            
+        }
     }
     
-
+    
 }

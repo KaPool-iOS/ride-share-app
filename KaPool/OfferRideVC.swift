@@ -29,6 +29,9 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     @IBOutlet weak var seatTextField: UITextField!
     var seatAvail: Int = 0
     
+    @IBOutlet weak var radiusTextField: UITextField!
+    var radius: Double = 0.0
+    
     @IBOutlet weak var priceTextField: UITextField!
     let formatter = NumberFormatter()
     var price: Double = 0.00
@@ -89,6 +92,11 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
      
         
         dateLabel.text = currDate
+    }
+    @IBAction func cancelPressed(_ sender: Any) {
+        
+        dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func dismissKB(_ sender: UITapGestureRecognizer) {

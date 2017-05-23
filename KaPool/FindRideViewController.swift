@@ -7,53 +7,195 @@
 //
 
 import UIKit
+import GooglePlaces
+import GoogleMaps
+import MapKit
 
-class FindRideViewController:
-UIViewController {
+class FindRideViewController: UIViewController {
   
-  @IBOutlet weak var fromText: UITextField!
-  
-  @IBOutlet weak var toText: UITextField!
-  
-  @IBOutlet weak var dateText: UITextField!
-  
-  @IBOutlet weak var timeText: UITextField!
-  
-  @IBOutlet weak var seatsText: UILabel!
-  
-  @IBOutlet weak var stepper: UIStepper!
-  
-  @IBAction func stepperChangeValue(_ sender: UIStepper) {
+    @IBOutlet var searchDept: UITextField!
+    @IBOutlet var searchDest: UITextField!
     
-    seatsText.text = Int(sender.value).description
-  }
-  
-  
-
+    
+    var signal = 0
+    @IBOutlet var currentLoc: UIImageView!
+    
+    let defaults = UserDefaults.standard
+    
+    var startLocation: CLLocation!
+    
+    @IBOutlet var tabbar: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      super.viewDidLoad()
-      stepper.wraps = true
-      stepper.autorepeat = true
-      stepper.maximumValue = 4
-      
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+     
+        //tabbar.isHidden = false
+        searchDest.addTarget(self, action: #selector(onDestination), for: .touchDown)
+        
+        searchDept.addTarget(self, action: #selector(onDeparture), for: .touchDown)
+        
+        addTapGesture()
+        searchButton.isEnabled = false
+        searchButton.layer.cornerRadius = 5
+        searchButton.layer.borderWidth = 1
+        
+        searchButton.backgroundColor = UIColor.gray
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func addTapGesture(){
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(FindRideViewController.clickedCurrentIcon(_:)))
+        currentLoc.isUserInteractionEnabled = true
+        currentLoc.addGestureRecognizer(tapGestureRecognizer)
     }
-    */
+    
+    func clickedCurrentIcon(_ sender: UITapGestureRecognizer){
+        
+        
+        let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
+        
+        print("I am testing")
+        let lat = locDict?.object(forKey: "lat") as! CLLocationDegrees
+        
+        let lon = locDict?.object(forKey: "lon") as! CLLocationDegrees
+        
+        let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
+        
+        CLGeocoder().reverseGeocodeLocation(userLocation, completionHandler: {(placemarks, error) -> Void in
+            
+            if error != nil {
+                
+                print(error!)
+                
+            } else {
+                
+                if let placemark = placemarks?[0] {
+                    
+                    var address = ""
+                    if placemark.subThoroughfare != nil {
+                        
+                        address += placemark.subThoroughfare! + " "
+                    }
+                    
+                    if placemark.thoroughfare != nil {
+                        
+                        address += placemark.thoroughfare!
+                        
+                    }
+                    //set current location when user clicks on the gps icon
+                    self.searchDept.text = address
+                }
+                
+            }
+            
+            
+        })
+        
+        
+        
+    }
+    
+    func onDestination() {
+        
+        signal = 2
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        
+        // Set a filter to return only addresses.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+        autocompleteController.primaryTextColor = UIColor.blue
+        present(autocompleteController, animated: true, completion: nil)
+        
+    }
+    
+    func onDeparture() {
+        
+        
+        signal = 1
+        let autocompleteController = GMSAutocompleteViewController()
+        autocompleteController.delegate = self
+        
+        // Set a filter to return only addresses.
+        let filter = GMSAutocompleteFilter()
+        filter.type = .address
+        autocompleteController.autocompleteFilter = filter
+        autocompleteController.primaryTextColor = UIColor.blue
+        present(autocompleteController, animated: true, completion: nil)
 
+    }
+
+    @IBOutlet var searchButton: UIButton!
+    
+    
+    @IBAction func onSearch(_ sender: Any) {
+        
+        
+        
+    }
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.characters.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+
+    
+}
+
+extension FindRideViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+    
+
+        dismiss(animated: true, completion: nil)
+        
+        if signal == 1 {
+            searchDept.text = place.name
+        } else {
+            searchDest.text = place.name
+        }
+        signal = 0
+        searchButton.isEnabled = true
+        searchButton.backgroundColor = hexStringToUIColor(hex: "#40C4F1")
+        
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+    
 }
