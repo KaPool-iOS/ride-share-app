@@ -273,8 +273,6 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             
                             print ("origin lon is \(self.rides[i].originLon!)")
                             
-                           
-                            
                             print ("from Find origin lat is \(String(describing: self.originLoc?.coordinate.latitude))")
                             
                             print ("from Find origin lon is \(String(describing: self.originLoc?.coordinate.longitude))")

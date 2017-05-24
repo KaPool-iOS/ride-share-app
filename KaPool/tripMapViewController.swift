@@ -146,31 +146,18 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         mapView.camera = camera
         mapView.delegate = self
         
+        var point1: CLLocationCoordinate2D?
+        var point2: CLLocationCoordinate2D?
+        
         let path = GMSMutablePath()
         
         var bounds = GMSCoordinateBounds()
-        
-        for trip in trips {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: (trip.pickupLocation?.coordinate.latitude)!, longitude: (trip.pickupLocation?.coordinate.longitude)!)
-            marker.map = self.mapView
-            marker.title = trip.pickupName
-            
-            path.add((trip.pickupLocation?.coordinate)!)
-            
-            bounds = bounds.includingCoordinate(marker.position)
-            
-            marker.icon = GMSMarker.markerImage(with: UIColor.blue)
-        }
-        
-        // adds origin and destination markers
         
         let ogMarker = GMSMarker()
         ogMarker.position = CLLocationCoordinate2D(latitude: origin!.coordinate.latitude, longitude: (origin?.coordinate.longitude)!)
         ogMarker.map = self.mapView
         ogMarker.title = "Origin"
         ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
-        
         
         let destMarker = GMSMarker()
         destMarker.position = CLLocationCoordinate2D(latitude: destination!.coordinate.latitude, longitude: destination!.coordinate.longitude)
@@ -180,10 +167,36 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
         path.add((origin?.coordinate)!)
         path.add((destination?.coordinate)!)
- 
+        
         
         bounds = bounds.includingCoordinate(ogMarker.position)
         bounds = bounds.includingCoordinate(destMarker.position)
+        
+        point1 = origin?.coordinate
+        
+        for trip in trips {
+            
+            let marker = GMSMarker()
+            marker.position = (trip.pickupLocation?.coordinate)!
+            marker.map = self.mapView
+            marker.title = trip.pickupName
+            
+            path.add((trip.pickupLocation?.coordinate)!)
+            
+            bounds = bounds.includingCoordinate(marker.position)
+            
+            marker.icon = GMSMarker.markerImage(with: UIColor.blue)
+            
+            point2 = trip.pickupLocation?.coordinate
+            
+            fetchMapData(from: point1!, to: point2!)
+            
+            point1 = point2
+        }
+        
+        // adds origin and destination markers
+        
+        
         
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 100)

@@ -78,12 +78,20 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         
         let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
         
-        let name = locDict?.object(forKey: "deptName") as! String
+        let name = "Test"
+            //TODO: locDict?.object(forKey: "deptName") as? String
         
         Trip.addTrip(rideid: curr.rideID!,pickupName: name, pickupLocation: userLocation ,
                      driverAccepted: false, riderid: (PFUser.current()?.objectId)!, driverid: curr.driver ) {
                         (sucess: Bool, error: Error?) in
-                        print ("trip added")
+                        
+                        if ((error) != nil) {
+                            print (error?.localizedDescription)
+                            
+                        } else {
+                            print ("trip added")
+                            
+                        }
                         
         }
         
