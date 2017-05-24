@@ -22,6 +22,12 @@ class Ride: NSObject {
     var rideID: String?
     var destName: String?
     var originName: String?
+    var radius:Double?
+    var originLat:CLLocationDegrees?
+    var originLon:CLLocationDegrees?
+    
+    var destLat:CLLocationDegrees?
+    var destLon:CLLocationDegrees?
     
     
     
@@ -39,10 +45,16 @@ class Ride: NSObject {
         self.destinationID = ride?.object(forKey: "Destination") as? String
         self.destName = ride?.object(forKey: "destName") as? String
         self.originName = ride?.object(forKey: "originName") as? String
+        self.radius = ride?.object(forKey: "PickupRadius") as? Double
+        
+        self.originLat = ride?.object(forKey: "originLat") as? Double
+        self.originLon = ride?.object(forKey: "originLon") as? Double
+        
+        self.destLat = ride?.object(forKey: "destLat") as? Double
+        self.destLon = ride?.object(forKey: "destLon") as? Double
     }
     
-    class func addRide(destination: GMSPlace?, origin: GMSPlace?,
-                       price: Double?, departDate: Date?, seats: Int?, withCompletion completion: PFBooleanResultBlock?) {
+    class func addRide(destination: GMSPlace?, origin: GMSPlace?, radius: Double?, originLat: Double?, originLon: Double?, destLat:Double?, destLon:Double?, price: Double?, departDate: Date?, seats: Int?, withCompletion completion: PFBooleanResultBlock?) {
         
         
         let placesClient = GMSPlacesClient()
@@ -57,8 +69,14 @@ class Ride: NSObject {
         ride["Active"] = true
         ride["SeatsAvail"] = seats
         ride["Driver"] = PFUser.current()?.objectId
+        ride["PickupRadius"] = radius
         
+        ride["originLat"] = originLat
+        ride["originLon"] = originLon
         
+        ride["destLat"] = destLat
+        ride["destLon"] = destLon
+            
         placesClient.lookUpPlaceID((origin?.placeID)!, callback: { (place, error) -> Void in
             
             if let error = error {
@@ -68,6 +86,7 @@ class Ride: NSObject {
             print("the place is \(place!.name)")
            
             ride["originName"] = place!.name
+            
         })
         
         placesClient.lookUpPlaceID((destination?.placeID)!, callback: { (place, error) -> Void in
@@ -97,7 +116,7 @@ class Ride: NSObject {
                 
             } else {
                 
-                print("Error: \(error)")
+                print("Error: \(String(describing: error))")
             }
         }
     }

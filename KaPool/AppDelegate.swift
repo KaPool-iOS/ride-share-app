@@ -51,6 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // color of window
         window?.backgroundColor = .white
         
+        //clear user default when app starts
+        let appDomain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: appDomain)
         return true
     }
 

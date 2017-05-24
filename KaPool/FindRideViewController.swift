@@ -11,13 +11,23 @@ import GooglePlaces
 import GoogleMaps
 import MapKit
 
+
+
+
 class FindRideViewController: UIViewController {
   
     @IBOutlet var searchDept: UITextField!
     @IBOutlet var searchDest: UITextField!
     
     
+    
     var signal = 0
+    var distance: Double?
+    
+    var locOrigin:CLLocation?
+    
+    var locDest:CLLocation?
+    
     @IBOutlet var currentLoc: UIImageView!
     
     let defaults = UserDefaults.standard
@@ -85,6 +95,7 @@ class FindRideViewController: UIViewController {
                     }
                     //set current location when user clicks on the gps icon
                     self.searchDept.text = address
+                    self.locOrigin = userLocation
                 }
                 
             }
@@ -95,6 +106,10 @@ class FindRideViewController: UIViewController {
         
         
     }
+    
+    
+    
+    
     
     func onDestination() {
         
@@ -133,8 +148,43 @@ class FindRideViewController: UIViewController {
     @IBAction func onSearch(_ sender: Any) {
         
         
+        //self.delegate?.doneSearch(searchDept.text!, searchDest.text!)
+        
+        
+        defaults.set(searchDest.text, forKey: "destName")
+        defaults.set(searchDept.text, forKey: "deptName")
+        //print ("Distance in miles is \(calDistance(dept: searchDept.text!, dest: searchDest.text!))")
+        
+        
+        defaults.set(locOrigin?.coordinate.latitude, forKey: "originLatitude")
+        defaults.set(locOrigin?.coordinate.longitude, forKey: "originLongtitude")
+        
+        calDistance()
+        
+        defaults.set(locDest?.coordinate.latitude, forKey: "destLatitude")
+        defaults.set(locDest?.coordinate.longitude, forKey: "destLongtitude")
+        
+        
+        
+        
+        defaults.set(1, forKey: "signal")
+        
+        defaults.synchronize()
+        
+        self.dismiss(animated: true, completion: nil)
         
     }
+    
+    func calDistance()  {
+        
+        let distanceInMeters = locOrigin?.distance(from: locDest!)
+        
+        defaults.set(distanceInMeters!/1609, forKey: "distance")
+        print("distance from find ride\(distanceInMeters!/1609)")
+        
+        
+    }
+    
     func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -160,6 +210,8 @@ class FindRideViewController: UIViewController {
     
 }
 
+
+
 extension FindRideViewController: GMSAutocompleteViewControllerDelegate {
     
     // Handle the user's selection.
@@ -167,11 +219,18 @@ extension FindRideViewController: GMSAutocompleteViewControllerDelegate {
     
 
         dismiss(animated: true, completion: nil)
+        let address1 = (place.formattedAddress?.components(separatedBy: ",")[0])! + " "
+        let address2 = (place.formattedAddress?.components(separatedBy: ",")[1])! + " "
+        let address3 = (place.formattedAddress?.components(separatedBy: ",")[2])!
         
         if signal == 1 {
-            searchDept.text = place.name
+            searchDept.text = address1 + address2 + address3
+            locOrigin = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            
+            
         } else {
-            searchDest.text = place.name
+            searchDest.text = address1 + address2 + address3
+            locDest = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         }
         signal = 0
         searchButton.isEnabled = true

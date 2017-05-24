@@ -57,11 +57,6 @@ class RideCell: UITableViewCell {
 
     
     
-    func getTime() {
-        
-        
-        
-    }
     func getPlace(_ placeID: String?, check: Int){
         
         let placesClient = GMSPlacesClient()
@@ -78,10 +73,10 @@ class RideCell: UITableViewCell {
                 return
             }
             
-            print("Place name: \(place.name)")
-            print("Place address \(String(describing: place.formattedAddress!))")
-            print("Place placeID \(place.placeID)")
-            print("Place attributions \(String(describing: place.attributions))")
+            //print("Place name: \(place.name)")
+            //print("Place address \(String(describing: place.formattedAddress!))")
+            //print("Place placeID \(place.placeID)")
+            //print("Place attributions \(String(describing: place.attributions))")
             
             if check == 1 {
                 

@@ -32,9 +32,10 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     @IBOutlet weak var radiusTextField: UITextField!
     var radius: Double = 0.0
     
-    @IBOutlet weak var priceTextField: UITextField!
+    
+    @IBOutlet var priceText: UITextField!
     let formatter = NumberFormatter()
-    var price: Double = 0.00
+    
     
     // place variables
     @IBOutlet weak var frmBttn: UIButton!
@@ -54,11 +55,14 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     var frmLoc: GMSPlace?
     var toFlag: Int = 0
     var fromFlag: Int = 0
-    
-    // map variables
+        // map variables
     @IBOutlet weak var mapView: GMSMapView!
 
-
+    var originLat:CLLocationDegrees?
+    var originLon:CLLocationDegrees?
+    
+    var destLat:CLLocationDegrees?
+    var destLon:CLLocationDegrees?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -244,11 +248,16 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
     @IBAction func goBttnClicked(_ sender: Any) {
       
        
+        var price:Double?
         
-        if (priceTextField.text != nil && priceTextField.text?.isEmpty == false) {
-             self.price = Double(priceTextField.text!) ?? 0.0
-            formatter.numberStyle = .currency
-            priceTextField.text = formatter.string(from: price as NSNumber)
+        if (priceText.text?.isEmpty == false) {
+            print("Iam here")
+            price = Double(priceText.text!) ?? 0.0
+            //formatter.numberStyle = .currency
+            //priceText.text = formatter.string(from: price! as NSNumber)
+            
+            print ("The price is \(priceText.text!)")
+
         }
     
         
@@ -271,27 +280,36 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         alert3.addButton(withTitle: "Understood")
         alert3.show()
         
-        print(departDate.timeIntervalSinceReferenceDate)
+        
         
       }
-      else if (price < 0.01){
-        print(priceTextField.text!)
+      else if (price! < 0.01){
+        print(priceText.text!)
         let alert4 = UIAlertView()
         alert4.title = "Alert"
         alert4.message = "please add at least 1 cent!!"
         alert4.addButton(withTitle: "Understood")
         alert4.show()
-      }
-      
-      
-      else{
         
-        Ride.addRide(destination: toLoc, origin: frmLoc, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
+      } else if radiusTextField.text?.isEmpty == true {
+        
+        let alert5 = UIAlertView()
+        alert5.title = "Alertxxx"
+        alert5.message = "please add at least 1 cent!!"
+        alert5.addButton(withTitle: "Understood")
+        alert5.show()
+
+      } else {
+        
+        radius = (Double) (radiusTextField.text!)!
+        
+        Ride.addRide(destination: toLoc, origin: frmLoc, radius: radius, originLat: self.originLat, originLon: originLon, destLat: destLat, destLon: destLon, price: price, departDate: departDate, seats: seatAvail) { (success: Bool, error: Error?) in
           print("ride added from go")
           
         }
         
         let vc = storyboard?.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
+        
         
         self.present(vc, animated: true, completion: nil)
       }
@@ -392,16 +410,23 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.toBttn.setTitle(self.toLoc?.name, for: .normal)
             self.toBttn.setTitleColor(UIColor.blue, for: .normal)
             
+            self.originLat = place.coordinate.latitude
+            self.originLon = place.coordinate.longitude
+            
         } else {
             self.frmLoc = place
             
            // print (self.frmLoc?.name)
             
             
-            self.frmBttn.setTitle(self.frmLoc?.name, for: .normal
-            )
+            self.frmBttn.setTitle(self.frmLoc?.name, for: .normal)
             
             self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
+            
+            self.destLat = place.coordinate.latitude
+            self.destLon = place.coordinate.longitude
+            
+            
         }
         /*
         // Get the address components.
