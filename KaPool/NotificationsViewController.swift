@@ -69,8 +69,8 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let tripCell = sender as! NotifCell
         let tripDetails = segue.destination as! tripMapViewController
         tripDetails.ride = tripCell.ride
-        tripDetails.pickupLoc = tripCell.trip.pickupID
-        
+        tripDetails.pickupLoc = tripCell.trip.pickupLocation
+        tripDetails.pickupName = tripCell.trip.pickupName
         
     }
     

@@ -19,6 +19,7 @@ class Ride: NSObject {
     var departDate: Date?
     var price: Double?
     var seats: Int?
+    var seatsRemaining: Int?
     var rideID: String?
     var destName: String?
     var originName: String?
@@ -40,6 +41,7 @@ class Ride: NSObject {
         self.departDate = ride?.object(forKey: "Date") as? Date
         self.price = ride?.object(forKey: "Price") as! Double?
         self.seats = ride?.object(forKey: "SeatsAvail") as! Int?
+        self.seatsRemaining = ride?.object(forKey: "seatsRemaining") as! Int?
         self.rideID = ride?.objectId
         self.originID = ride?.object(forKey: "Origin") as? String
         self.destinationID = ride?.object(forKey: "Destination") as? String
@@ -53,6 +55,7 @@ class Ride: NSObject {
         
         self.destLat = ride?.object(forKey: "destLat") as? Double
         self.destLon = ride?.object(forKey: "destLon") as? Double
+  
 
     }
     
@@ -70,6 +73,7 @@ class Ride: NSObject {
         ride["Origin"] = origin?.placeID
         ride["Active"] = true
         ride["SeatsAvail"] = seats
+        ride["seatsRemaining"] = seats
         ride["Driver"] = PFUser.current()?.objectId
         ride["PickupRadius"] = radius
         

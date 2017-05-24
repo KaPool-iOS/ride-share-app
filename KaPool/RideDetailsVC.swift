@@ -37,6 +37,8 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
     
     var user: User!
     
+    let defaults = UserDefaults.standard
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,16 +59,6 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
             
             self.user = user
             self.userLabel.text = user.username
-            /*
-            let usernameArr = user.username?.components(separatedBy: "@")
-            
-            if (usernameArr?.count)! > 0 {
-                self.userLabel.text = usernameArr?[0]
-            } else {
-                self.userLabel.text = user.username
-            } */
-            
-            
             
         } 
         
@@ -77,8 +69,18 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         
         //if ()
         // check if rider id == driver id, if  true delete
+        let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
         
-        Trip.addTrip(rideid: curr.rideID!,pickup: "EidIb2xsb3dheSBSb2FkLCBIb2xsb3dheSwgVW5pdGVkIEtpbmdkb20",
+        print("I am testing")
+        let lat = locDict?.object(forKey: "lat") as! CLLocationDegrees
+        
+        let lon = locDict?.object(forKey: "lon") as! CLLocationDegrees
+        
+        let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
+        
+        let name = locDict?.object(forKey: "deptName") as! String
+        
+        Trip.addTrip(rideid: curr.rideID!,pickupName: name, pickupLocation: userLocation ,
                      driverAccepted: false, riderid: (PFUser.current()?.objectId)!, driverid: curr.driver ) {
                         (sucess: Bool, error: Error?) in
                         print ("trip added")
