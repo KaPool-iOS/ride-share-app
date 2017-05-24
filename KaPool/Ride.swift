@@ -45,6 +45,7 @@ class Ride: NSObject {
         self.destinationID = ride?.object(forKey: "Destination") as? String
         self.destName = ride?.object(forKey: "destName") as? String
         self.originName = ride?.object(forKey: "originName") as? String
+
         self.radius = ride?.object(forKey: "PickupRadius") as? Double
         
         self.originLat = ride?.object(forKey: "originLat") as? Double
@@ -52,6 +53,7 @@ class Ride: NSObject {
         
         self.destLat = ride?.object(forKey: "destLat") as? Double
         self.destLon = ride?.object(forKey: "destLon") as? Double
+
     }
     
     class func addRide(destination: GMSPlace?, origin: GMSPlace?, radius: Double?, originLat: Double?, originLon: Double?, destLat:Double?, destLon:Double?, price: Double?, departDate: Date?, seats: Int?, withCompletion completion: PFBooleanResultBlock?) {

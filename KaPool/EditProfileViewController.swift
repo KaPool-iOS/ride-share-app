@@ -7,18 +7,66 @@
 //
 
 import UIKit
+import Parse
 
 class EditProfileViewController: UIViewController {
-      
-  @IBOutlet weak var nameLabel: UILabel!
   
-    var fullname:String?
+  //user
+  @IBOutlet weak var nameField: UITextField!
+  @IBOutlet weak var ageField: UITextField!
+  
+  //car
+  @IBOutlet weak var carYearField: UITextField!
+  @IBOutlet weak var carMakeField: UITextField!
+  @IBOutlet weak var carModelField: UITextField!
+  @IBOutlet weak var carColorField: UITextField!
+  
+  // buttons
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var saveButton: UIButton!
+  
+  // user
+  var fullname:String?
+  var age:String?
+  
+    // car
+  var carYear:String?
+  var carMake:String?
+  var carModel:String?
+  var carColor:String?
+  
 
+  @IBOutlet weak var profileImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        self.nameLabel?.text = fullname
+        self.nameField?.text = fullname
+        self.ageField?.text = age
+      
+        self.carYearField?.text = carYear
+        self.carMakeField?.text = carMake
+        self.carModelField?.text = carModel
+        self.carColorField?.text = carColor
+      
+      
         // Do any additional setup after loading the view.
+      
+      
+      
+      
+      
+      //button
+      cancelButton.layer.cornerRadius = 10
+      saveButton.layer.cornerRadius = 10
+      
+      //image
+      self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2;
+      self.profileImage.clipsToBounds = true;
+      self.profileImage.layer.borderWidth = 3.0
+      profileImage.layer.borderColor = UIColor.white.cgColor
+      
+      
+      
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,6 +74,106 @@ class EditProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+  @IBAction func onCancel(_ sender: Any) {
+    self.dismiss(animated: true, completion: nil)
+  }
+  
+  @IBAction func onSave(_ sender: Any) {
+    
+    if(nameField?.text?.isEmpty)!{
+      alertControl(title: "KaShare", message: "Please fill all fields!")
+      
+      
+     
+      
+      
+    } else {
+      
+      
+      let user = PFUser.current()
+      
+      user?.username = self.nameField?.text
+      
+      UserDefaults.standard.set(user?.username, forKey: "username")
+      UserDefaults.standard.synchronize()
+      
+      user?["fullname"] = self.nameField?.text
+      
+      user?.saveInBackground(block: { (success, error) in
+        if success {
+          self.dismiss(animated: true, completion: nil)
+          
+          
+          user?.saveInBackground(block: { (success, error) in
+            if success {
+              self.dismiss(animated: true, completion: nil)
+          let postQuery = PFQuery(className: "User")
+        
+          postQuery.findObjectsInBackground (block: { (objects, error) -> Void in
+            if error == nil {
+              
+            
+              for object in objects! {
+                print("Object is \(object["username"]!)")
+            
+                if object["username"]! as? String == self.fullname! {
+                  object["username"] = self.nameField?.text
+                  object["age"] = self.ageField?.text
+                  
+                  object["CarYear"] = self.carYearField?.text
+                  object["carColour"] = self.carColorField?.text
+                  object["carModel"] = self.carModelField?.text
+                  object["carMake"] = self.carMakeField?.text
+                  object.saveInBackground()
+                }
+              }
+              
+            }
+            
+          })
+          
+        }
+      })
+        }
+      })
+      
+      let userQuery = PFQuery(className: "_User")
+      userQuery.findObjectsInBackground (block: { (objects, error) -> Void in
+        if error == nil {
+   
+          for object in objects! {
+            print("Object is \(object["username"]!)")
+            if object["username"]! as? String == self.fullname! {
+              object["age"] = self.ageField?.text
+              
+              object["CarYear"] = self.carYearField?.text
+              object["carColour"] = self.carColorField?.text
+              object["carModel"] = self.carModelField?.text
+              object["carMake"] = self.carMakeField?.text
+              object.saveInBackground()
+            }
+          }
+          
+        }
+        
+      })
+      
+    }
+    
+    
+  }
+  
+  
+  func alertControl (title: String, message: String) {
+    
+    let alertControler = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    
+    //button in alert box
+    alertControler.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+    
+    self.present(alertControler, animated: true, completion: nil)
+  }
+  
 
     /*
     // MARK: - Navigation
