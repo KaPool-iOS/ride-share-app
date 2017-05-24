@@ -184,28 +184,28 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         mapView.animate(with: update)
         
      //   getPolylineRoute(from: (origin?.coordinate)!, to: (destination?.coordinate)!)
-        drawPath(currentLocation: origin, destinationLoc: destination)
+      //  drawPath(currentLocation: origin, destinationLoc: destination)
         
         handleComplete()
         
         
     }
-    
+  /*
     func drawPath(currentLocation: GMSPlace, destinationLoc: GMSPlace)
     {
-        let origin = "\(currentLocation.latitude),\(currentLocation.longitude)"
-        let destination = "\(destinationLoc.latitude),\(destinationLoc.longitude)"
+    //    let origin = "\(currentLocation.latitude),\(currentLocation.longitude)"
+    //    let destination = "\(destinationLoc.latitude),\(destinationLoc.longitude)"
         
         
         let url = "https://maps.googleapis.com/maps/api/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=YOURKEY"
         
-        Alamofire.request(url).responseJSON { response in
-            print(response.request)  // original URL request
-            print(response.response) // HTTP URL response
-            print(response.data)     // server data
-            print(response.result)   // result of response serialization
+    //    Alamofire.request(url).responseJSON { response in
+          //  print(response.request)  // original URL request
+       //     print(response.response) // HTTP URL response
+      //      print(response.data)     // server data
+       //     print(response.result)   // result of response serialization
             
-            let json = JSON(data: response.data!)
+       //     let json = JSON(data: response.data!)
             let routes = json["routes"].arrayValue
             
             for route in routes
@@ -218,7 +218,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
             }
         }
     }
-    
+*/    
     /*
     func getPolylineRoute(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D){
         

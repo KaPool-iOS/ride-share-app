@@ -51,8 +51,12 @@ class ProfileViewController: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     
     let username =  defaults.string(forKey: "username")
+    
+    
     self.navigationController?.navigationBar.topItem?.title = username
     let infoQuery = PFQuery(className: "_User")
+    
+    infoQuery.whereKey("username", equalTo: username!)
     
     infoQuery.findObjectsInBackground (block: { (objects, error) -> Void in
       if error != nil {
@@ -88,8 +92,16 @@ class ProfileViewController: UIViewController {
     
     vc.fullname = nameLabel.text
     vc.age = ageLabel.text
+    
+    vc.carYear = carYear.text
+    vc.carMake = carMake.text
+    vc.carColor = carColor.text
+    vc.carModel = carModel.text
+    
+    
     self.present(vc, animated: true, completion: nil)
   }
+  
   
   
   
