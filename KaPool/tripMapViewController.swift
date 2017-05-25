@@ -19,50 +19,14 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
     @IBOutlet weak var timeView: UIView!
    
     @IBOutlet weak var decisionView: UIView!
-    var pickupLoc: String!
+    var pickupLoc: CLLocation!
+    var pickupName: String!
     var tripArr: [Trip] = []
-    var otherRidersLoc: [GMSPlace] = []
+    var otherRidersLoc: [Trip] = []
     var origin: GMSPlace?
     var destination: GMSPlace?
-    var ride: Ride! /*{
-        
-        didSet {
-            Trip.getTrips(rideid: ride.rideID!) { (trips: [Trip]) in
-                
-                self.tripArr = trips
-                
-                let placesClient = GMSPlacesClient()
-                
-                placesClient.lookUpPlaceID((ride.originID)!, callback: { (place, error) -> Void in
-                    
-                    if let error = error {
-                        print("lookup place id query error: \(error.localizedDescription)")
-                        return
-                    }
-                    
-                    self.origin = place
-                    
-                    placesClient.lookUpPlaceID((self.ride.destinationID)!, callback: { (place, error) -> Void in
-                        
-                        if let error = error {
-                            print("lookup place id query error: \(error.localizedDescription)")
-                            return
-                        }
-                        
-                        self.destination = place
-                        
-                        self.getOtherRiders(trips: self.tripArr, complete: {
-                            self.fixMap(trips: self.otherRidersLoc, handleComplete: {
-                                print ("map done")
-                            })
-                        })
-                    })
-                    
-                })
-            }
-        }
-    }*/
-
+    var ride: Ride!
+    let apiKey: String = "AIzaSyBXq3sMUeCLnoAkjSvKWaMSXvMKrDLyZ0s"
     @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
@@ -91,7 +55,13 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     }
                     
                     self.destination = place
+                 
+        
                     
+                    self.fixMap(trips: self.tripArr, handleComplete: {
+                        self.handleViews()
+                    })
+                    /*
                     self.getOtherRiders(trips: self.tripArr, complete: {
                         
                         print("other riders got")
@@ -101,16 +71,8 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                             // brings views to front
                             
                             self.handleViews()
-                            
-                           
-                            
-                            
-                            
-                            
-                            
-                            
                         })
-                    })
+                    }) */
                 })
                 
             })
@@ -138,13 +100,22 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
         
     }
-    
+    /*
     func getOtherRiders(trips: [Trip], complete:@escaping () -> ()) {
         
-        let placesClient = GMSPlacesClient()
-        let myGroup = DispatchGroup()
+        //let placesClient = GMSPlacesClient()
+       // let myGroup = DispatchGroup()
+        
+        for trip in trips {
+            
+            self.otherRidersLoc.append(trip)
+        }
+        
+       /*
         var tripCt = 0
         while tripCt < trips.count {
+            
+           
             
             myGroup.enter()
             placesClient.lookUpPlaceID((trips[tripCt].pickupID)!, callback: { (place, error) -> Void in
@@ -164,10 +135,10 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         myGroup.notify(queue: DispatchQueue.main, execute: {
             print("Finished all requests.")
             complete ()
-        })
-    }
+        }) */
+    } */
     
-    func fixMap(trips: [GMSPlace], handleComplete:(()->())) {
+    func fixMap(trips: [Trip], handleComplete:(()->())) {
         
         let camera = GMSCameraPosition.camera(withLatitude: origin!.coordinate.latitude,
                                               longitude: origin!.coordinate.longitude,
@@ -175,31 +146,18 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         mapView.camera = camera
         mapView.delegate = self
         
+        var point1: CLLocationCoordinate2D?
+        var point2: CLLocationCoordinate2D?
+        
         let path = GMSMutablePath()
         
         var bounds = GMSCoordinateBounds()
-        
-        for trip in trips {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: trip.coordinate.latitude, longitude: trip.coordinate.longitude)
-            marker.map = self.mapView
-            marker.title = trip.name
-            
-            path.add(trip.coordinate)
-            
-            bounds = bounds.includingCoordinate(marker.position)
-            
-            marker.icon = GMSMarker.markerImage(with: UIColor.blue)
-        }
-        
-        // adds origin and destination markers
         
         let ogMarker = GMSMarker()
         ogMarker.position = CLLocationCoordinate2D(latitude: origin!.coordinate.latitude, longitude: (origin?.coordinate.longitude)!)
         ogMarker.map = self.mapView
         ogMarker.title = "Origin"
         ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
-        
         
         let destMarker = GMSMarker()
         destMarker.position = CLLocationCoordinate2D(latitude: destination!.coordinate.latitude, longitude: destination!.coordinate.longitude)
@@ -209,10 +167,36 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
         path.add((origin?.coordinate)!)
         path.add((destination?.coordinate)!)
- 
+        
         
         bounds = bounds.includingCoordinate(ogMarker.position)
         bounds = bounds.includingCoordinate(destMarker.position)
+        
+        point1 = origin?.coordinate
+        
+        for trip in trips {
+            
+            let marker = GMSMarker()
+            marker.position = (trip.pickupLocation?.coordinate)!
+            marker.map = self.mapView
+            marker.title = trip.pickupName
+            
+            path.add((trip.pickupLocation?.coordinate)!)
+            
+            bounds = bounds.includingCoordinate(marker.position)
+            
+            marker.icon = GMSMarker.markerImage(with: UIColor.blue)
+            
+            point2 = trip.pickupLocation?.coordinate
+            
+            fetchMapData(from: point1!, to: point2!)
+            
+            point1 = point2
+        }
+        
+        // adds origin and destination markers
+        
+        
         
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
@@ -233,7 +217,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
         let directionURL = "https://maps.googleapis.com/maps/api/directions/json?" +
             "origin=\(from.latitude),\(from.longitude)&destination=\(to.latitude),\(to.longitude)&" +
-        "key=AIzaSyDpmL6EF08flh5k3sXyuCeVXm1MRX70MqE"
+        "key=\(self.apiKey)"
         
         
         
@@ -268,6 +252,9 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
     }
    
+    @IBAction func driverDeclined(_ sender: Any) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -259,9 +259,11 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let ride = ride {
                 // do something with the array of object returned by the call
                 
+                
                 if ride.count > 0  {
                     for i in 0...(ride.count - 1) {
-                        //self.rides.append(Ride.init(ride[i]))
+
+
                         
                         let rideTemp = Ride.init(ride[i])
                         
@@ -269,12 +271,11 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         if signal == 1 {
                             
                             let originLocation:CLLocation = CLLocation(latitude: rideTemp.destLat!, longitude: rideTemp.destLon!)
+
                             
                             print ("origin lat is \(rideTemp.originLat!)")
                             
                             print ("origin lon is \(rideTemp.originLon!)")
-                            
-                           
                             
                             print ("from Find origin lat is \(String(describing: self.originLoc?.coordinate.latitude))")
                             

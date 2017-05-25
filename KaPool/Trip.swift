@@ -17,8 +17,9 @@ class Trip: NSObject {
     var rideID: String?
     var riderID: String?
     var driverID: String?
-    var pickupID: String?
-    var accepted: Bool?
+    var pickupName: String?
+    var pickupLocation: CLLocation?
+    var response: Int?
     
     init(_ trip: PFObject) {
         
@@ -30,18 +31,26 @@ class Trip: NSObject {
         self.rideID = trip.object(forKey: "rideID") as? String
         self.riderID = trip.object(forKey: "riderID") as? String
         self.driverID = trip.object(forKey: "driverID") as? String
-        self.pickupID = trip.object(forKey: "pickupLoc") as? String
-        self.accepted = trip.object(forKey: "driverAccepted") as! Bool
+        self.pickupName = trip.object(forKey: "pickupLoc") as? String
+        self.response = trip.object(forKey: "driverResponse") as? Int
         
+        let lat = trip.object(forKey: "pickupLat") as! Double
+        let lon = trip.object(forKey: "pickupLong") as! Double
+        
+        let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
+        
+        self.pickupLocation = userLocation
     }
     
-    class func addTrip(rideid: String, pickup: String, driverAccepted: Bool, riderid: String, driverid: String, withCompletion completion: PFBooleanResultBlock?) {
+    class func addTrip(rideid: String, pickupName: String, pickupLocation: CLLocation, driverAccepted: Bool, riderid: String, driverid: String, withCompletion completion: PFBooleanResultBlock?) {
         
         let trip = PFObject(className: "Trip")
         
         trip["rideID"] = rideid
-        trip["pickupLoc"] = pickup
-        trip["driverAccepted"] = false
+        trip["pickupLoc"] = pickupName
+        trip["pickupLong"] = pickupLocation.coordinate.longitude
+        trip["pickupLat"] = pickupLocation.coordinate.latitude
+        trip["driverResponse"] = 0
         trip["riderID"] = riderid
         trip["driverID"] = driverid
         
@@ -83,6 +92,7 @@ class Trip: NSObject {
         
     }
     
+    // get all trips that have been accepted
     class func getTrips(rideid: String, completion: @escaping (_ trips: [Trip]) -> ()) {
         getNotifs() { (trips: [Trip]) in
             
@@ -90,7 +100,7 @@ class Trip: NSObject {
             
             // gets all valid trips for the current ride
             for trip in trips {
-                if trip.rideID == rideid && trip.accepted == true {
+                if trip.rideID == rideid && trip.response == 1 {
                     tripsFound.append(trip)
                 }
             }
