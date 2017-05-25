@@ -115,7 +115,8 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         }
         
-        getData(distance: distance, signal: self.signal)
+        getData(signal: self.signal)
+        self.signal = 0
 
     }
     
@@ -243,15 +244,15 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     }
     
-    func getData(distance: Double, signal: Int) {
+    func getData(signal: Int) {
         
         rides.removeAll()
-
         
         locationManager.stopUpdatingLocation()
         // construct query
         let query = PFQuery(className: "Ride")
         query.limit = 20
+        var count = 0
         
         // fetch data asynchronously
         query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
@@ -260,18 +261,18 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                 
                 if ride.count > 0  {
                     for i in 0...(ride.count - 1) {
-                        self.rides.append(Ride.init(ride[i]))
+                        //self.rides.append(Ride.init(ride[i]))
                         
-                        
+                        let rideTemp = Ride.init(ride[i])
                         
                         //calling from find ride
                         if signal == 1 {
                             
-                            let originLocation:CLLocation = CLLocation(latitude: self.rides[i].destLat!, longitude: self.rides[i].destLon!)
+                            let originLocation:CLLocation = CLLocation(latitude: rideTemp.destLat!, longitude: rideTemp.destLon!)
                             
-                            print ("origin lat is \(self.rides[i].originLat!)")
+                            print ("origin lat is \(rideTemp.originLat!)")
                             
-                            print ("origin lon is \(self.rides[i].originLon!)")
+                            print ("origin lon is \(rideTemp.originLon!)")
                             
                            
                             
@@ -280,9 +281,9 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             print ("from Find origin lon is \(String(describing: self.originLoc?.coordinate.longitude))")
                             
                             
-                            print ("dest lat is \(self.rides[i].destLat!)")
+                            print ("dest lat is \(rideTemp.destLat!)")
                             
-                            print ("dest lat is \(self.rides[i].destLon!)")
+                            print ("dest lat is \(rideTemp.destLon!)")
                             
                             print ("from Find dest lat is \(String(describing: self.destLoc?.coordinate.latitude))")
                             
@@ -293,19 +294,19 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             self.dist1 = self.calDistance(locOrigin: originLocation, locDest: self.originLoc!)
                             
                             
-                            let destLocation:CLLocation = CLLocation(latitude: self.rides[i].originLat!, longitude: self.rides[i].originLon!)
+                            let destLocation:CLLocation = CLLocation(latitude: rideTemp.originLat!, longitude: rideTemp.originLon!)
                             
                             self.dist2 = self.calDistance(locOrigin: destLocation, locDest: self.destLoc!)
                             
                             print ("dist2 is \(self.dist2)")
                             print ("dist1 is \(self.dist1)")
                             
-                            print ("the radius is \(self.rides[i].radius!)")
+                            print ("the radius is \(rideTemp.radius!)")
                             
-                            if self.dist2 > self.rides[i].radius! || self.dist1 > self.rides[i].radius! {
+                            if self.dist2 < rideTemp.radius! && self.dist1 < rideTemp.radius! {
                                 
-                                self.rides.remove(at: i)
-                                
+                                self.rides.append(Ride.init(ride[i]))
+                                count += 1
                             }
                         }
                         
@@ -336,6 +337,18 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             } else {
                 print(error!)
             }
+        }
+        
+        if count == 0 && signal == 1{
+            
+            let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
+            noDataLabel.text          = "No Ride Found"
+            noDataLabel.textColor     = UIColor.black
+            noDataLabel.font = UIFont(name: "Noteworthy", size: 25)
+            noDataLabel.textAlignment = .center
+            self.tableView.backgroundView  = noDataLabel
+            self.tableView.separatorStyle  = .none
+            
         }
         
     }
