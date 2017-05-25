@@ -258,14 +258,19 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
             if let ride = ride {
                 // do something with the array of object returned by the call
                 
+                
                 if ride.count > 0  {
                     for i in 0...(ride.count - 1) {
-                        self.rides.append(Ride.init(ride[i]))
+ 
                         
+                        self.rides.append(Ride.init(ride[i]))
                         
                         
                         //calling from find ride
                         if signal == 1 {
+                            
+                            print(self.rides[i].destLat!)
+                            print(self.rides[i].destLon!)
                             
                             let originLocation:CLLocation = CLLocation(latitude: self.rides[i].destLat!, longitude: self.rides[i].destLon!)
                             

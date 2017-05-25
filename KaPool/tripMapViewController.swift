@@ -252,6 +252,9 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
     }
    
+    @IBAction func driverDeclined(_ sender: Any) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
