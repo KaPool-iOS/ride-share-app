@@ -32,9 +32,21 @@ class NotifCell: UITableViewCell {
                     self.departDate = ride.departDate!
                     
                     let dateStr = self.departDate.toString(dateFormat: "MM/dd h:mm a")
-                     self.fromLabel.text = "\(rider.username!) accepted your ride to \(self.ride.destName!) at \(dateStr)"
+                    
+                    var txtStr: String? = ""
+                    print (self.trip.response)
+                    if self.trip.response == 0 {
+                        txtStr = "\(rider.username!) is a requesting a ride to \(self.ride.destName!) on \(dateStr)"
+                    } else if self.trip.response == -1 {
+                        txtStr = "You have declined \(rider.username!) for a ride to \(self.ride.destName!) on \(dateStr)"
+                    } else if self.trip.response == 1 {
+                        txtStr = "You have accepted \(rider.username!) for a ride to \(self.ride.destName!) on \(dateStr)"
+                    }
+                    
+                    self.fromLabel.text = txtStr
                 }
-               
+                
+                
             }
         }
     }

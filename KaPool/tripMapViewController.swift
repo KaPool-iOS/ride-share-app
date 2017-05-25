@@ -10,9 +10,15 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import Alamofire
+import Parse
+
+protocol tripMapViewControllerDelegate: class {
+    func returningtoView(tripId: String, response: Int)
+}
 
 class tripMapViewController: UIViewController, GMSMapViewDelegate {
     
+    weak var delegate: tripMapViewControllerDelegate?
     @IBOutlet weak var requestorPic: GMSMapView!
     
     @IBOutlet weak var statsView: UIView!
@@ -27,6 +33,8 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
     var destination: GMSPlace?
     var ride: Ride!
     let apiKey: String = "AIzaSyBXq3sMUeCLnoAkjSvKWaMSXvMKrDLyZ0s"
+    var currTripID: String?
+    
     @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
@@ -55,9 +63,6 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     }
                     
                     self.destination = place
-                 
-        
-                    
                     self.fixMap(trips: self.tripArr, handleComplete: {
                         self.handleViews()
                     })
@@ -253,7 +258,47 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
     }
    
     @IBAction func driverDeclined(_ sender: Any) {
+        let query = PFQuery(className: "Trip")
+        // query.whereKey("objectId", equalTo: ride.rideID! as String)
         
+        query.getObjectInBackground(withId: currTripID!) { (rideFound: PFObject?, error: Error?) -> Void in
+            if error == nil && rideFound != nil {
+                
+                rideFound?.setValue(-1, forKey: "driverResponse")
+                rideFound?.saveInBackground()
+                
+                self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
+                    
+                self.navigationController?.popViewController(animated: true)
+                
+                
+            } else {
+                
+                print("Error: \(String(describing: error))")
+            }
+        }
+    }
+    
+    @IBAction func driverAccepted(_ sender: Any) {
+        let query = PFQuery(className: "Trip")
+       // query.whereKey("objectId", equalTo: ride.rideID! as String)
+    
+        query.getObjectInBackground(withId: currTripID!) { (rideFound: PFObject?, error: Error?) -> Void in
+            if error == nil && rideFound != nil {
+                
+                rideFound?.setValue(1, forKey: "driverResponse")
+                rideFound?.saveInBackground()
+                
+                self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
+
+                self.navigationController?.popViewController(animated: true)
+
+                
+            } else {
+                
+                print("Error: \(String(describing: error))")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

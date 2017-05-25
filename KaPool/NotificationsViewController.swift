@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, tripMapViewControllerDelegate{
     
     var notifs: [Trip] = []
 
@@ -23,15 +23,30 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         
         
         Trip.getNotifs { (trips: [Trip]) in
-            self.notifs = trips
+            
+            var tmpArr: [Trip] = []
+            
+             for trip in trips.reversed() {
+                tmpArr.append(trip)
+            }
+            
+            self.notifs = tmpArr
             self.tableView.reloadData()
             
-            
-            
         }
-        
-
         // Do any additional setup after loading the view.
+    }
+    
+    func returningtoView(tripId: String, response: Int) {
+        
+        self.hidesBottomBarWhenPushed = true
+        for trip in self.notifs {
+            if trip.tripID == tripId {
+                trip.response = response
+            }
+        }
+        tableView.reloadData()
+    
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -40,8 +55,16 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "notifCell") as! NotifCell
         cell.trip = self.notifs[indexPath.row]
         
-        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        if (self.notifs[indexPath.row].response != 0) {
+            return nil
+        }
+        
+        return indexPath
     }
     
     
@@ -71,6 +94,9 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         tripDetails.ride = tripCell.ride
         tripDetails.pickupLoc = tripCell.trip.pickupLocation
         tripDetails.pickupName = tripCell.trip.pickupName
+        tripDetails.currTripID = tripCell.trip.tripID
+        
+        self.hidesBottomBarWhenPushed = true
         
     }
     

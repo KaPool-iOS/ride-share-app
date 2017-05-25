@@ -140,8 +140,6 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         mapView.animate(with: update)
         
         handleComplete()
-        
-        
     }
     
     

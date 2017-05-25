@@ -338,6 +338,8 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             
             self.currPlace = self.likelyPlaces[0]
             self.frmLoc = self.currPlace
+            self.originLat = self.currPlace?.coordinate.latitude
+            self.originLon = self.currPlace?.coordinate.longitude
             //print("CURRPLACE IS \(self.currPlace!)")
             
         })
@@ -410,8 +412,8 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.toBttn.setTitle(self.toLoc?.name, for: .normal)
             self.toBttn.setTitleColor(UIColor.blue, for: .normal)
             
-            self.originLat = place.coordinate.latitude
-            self.originLon = place.coordinate.longitude
+            self.destLat = place.coordinate.latitude
+            self.destLon = place.coordinate.longitude
             
         } else {
             self.frmLoc = place
@@ -423,8 +425,8 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
             self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
             
-            self.destLat = place.coordinate.latitude
-            self.destLon = place.coordinate.longitude
+            self.originLat = place.coordinate.latitude
+            self.originLon = place.coordinate.longitude
             
             
         }

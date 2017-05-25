@@ -79,12 +79,8 @@ class ProfileViewController: UIViewController {
           self.carYear.text = (object.object(forKey: "CarYear") as? String)
           
         }
-        
       }
-      
-      
     })
-
   }
 
   @IBAction func editProfileButton(_ sender: Any) {
@@ -101,10 +97,6 @@ class ProfileViewController: UIViewController {
     
     self.present(vc, animated: true, completion: nil)
   }
-  
-  
-  
-  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
