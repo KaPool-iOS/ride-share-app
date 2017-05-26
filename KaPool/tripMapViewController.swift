@@ -248,7 +248,6 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     let durationTxt = duration["text"] as? String
                     
                     
-                    
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
                     let polypoints = (overviewPolyline["points"] as? String) ?? ""
                     let line  = polypoints
@@ -317,7 +316,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                 
                 rideFound?.setValue(1, forKey: "driverResponse")
                 rideFound?.saveInBackground()
-                
+             
                 self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
                 self.navigationController?.popViewController(animated: true)
 

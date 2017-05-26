@@ -35,12 +35,13 @@ class Map: NSObject {
                     
                     let routesArray = (mapResponse["routes"] as? Array) ?? []
                     
-                    let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
+                    let routes = (routesArray.first as? Dictionary<String, Any>) ?? [:]
                     
-                    let legs = (routes["legs"] as? Dictionary<String,AnyObject>) ?? [:]
-                    let duration = (legs["duration"] as? Dictionary<String,AnyObject>) ?? [:]
+                    let legs = routes["legs"] as! Array<Dictionary<String, Any>>
+                    travelMins(legs: legs)
+                  //  let duration = legs[0]["duration"] as! Dictionary<String,AnyObject>
                     
-                    let durationTxt = duration["text"] as? String
+    //                let durationTxt = duration["text"] as? String
                     
                     
                     
@@ -54,8 +55,53 @@ class Map: NSObject {
         
     }
     
-    class func travelMins(minString: String) {
+    class func travelMins(legs: Array<Dictionary<String, Any>>) -> Int {
         
+        var totalDistanceInMeters = 0
+        var totalDurationInSeconds = 0
+        
+        for leg in legs {
+            print (leg)
+            
+            let dist = leg["distance"] as! Dictionary<String,Any>
+            let dur = leg["duration"] as! Dictionary<String,Any>
+           
+        
+            totalDistanceInMeters += dist["value"] as! Int
+            totalDurationInSeconds += dur["value"] as! Int
+        }
+        
+        
+        let distanceInKilometers: Double = Double(totalDistanceInMeters / 1000)
+        let totalDistance = "Total Distance: \(distanceInKilometers) Km"
+        
+        
+        let mins = totalDurationInSeconds / 60
+        let hours = mins / 60
+        let days = hours / 24
+        let remainingHours = hours % 24
+        let remainingMins = mins % 60
+        let remainingSecs = totalDurationInSeconds % 60
+        
+        
+        var totalDuration = ""
+        var totalStr = stringifyDur(mins: Double(remainingMins), hours: Double(remainingHours), days: Double(days))
+        
+        return totalDurationInSeconds
+        
+    }
+    
+    class func stringifyDur(mins: Double, hours: Double, days: Double) -> String {
+        var totalDuration = ""
+        if days != 0 {
+            totalDuration = "\(days) d, \(hours) h, \(mins) mins"
+        } else if hours != 0 {
+            totalDuration = "\(hours) h, \(mins) mins"
+        } else if mins != 0 {
+            totalDuration = "\(hours) mins"
+        }
+        
+        return totalDuration
     }
     
     class func addPolyLine(mapView: GMSMapView, encodedString: String) {

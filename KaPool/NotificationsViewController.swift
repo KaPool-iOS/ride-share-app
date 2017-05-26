@@ -18,11 +18,11 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*
+        
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: "refresh:", for: UIControlEvents.valueChanged)
-        tableView.addSubview(refreshControl) */
+        refreshControl.attributedTitle = NSAttributedString(string: "Finding Your Riders")
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -42,13 +42,14 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         // Do any additional setup after loading the view.
     }
-    /*
-    func refresh(refreshControl: UIRefreshControl) {
+    
+    func handleRefresh(refreshControl: UIRefreshControl) {
         // Do some reloading of data and update the table view's data source
         // Fetch more objects from a web service, for example...
         
         // Simply adding an object to the data source for this example
-        /*
+        
+        
         Trip.getNotifs { (trips: [Trip]) in
             
             var tmpArr: [Trip] = []
@@ -58,11 +59,12 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             }
             
             self.notifs = tmpArr
+            
             self.tableView.reloadData()
             refreshControl.endRefreshing()
  
-        }*/
-    } */
+        } 
+    }
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         tableView.reloadData()
@@ -132,6 +134,7 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
             tripDetails.currTripID = tripCell.trip.tripID
             
             self.hidesBottomBarWhenPushed = true
+            tripDetails.delegate = self
         }
         
     }

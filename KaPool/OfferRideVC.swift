@@ -475,14 +475,14 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
 
             let ogMarker = GMSMarker()
-            ogMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
+            ogMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
             ogMarker.map
                 = self.mapView
             ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
             
             
             let destMarker = GMSMarker()
-            destMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
+            destMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
             destMarker.map
                 = self.mapView
             destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
@@ -527,21 +527,21 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
                 
 
                 let ogMarker = GMSMarker()
-                ogMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
+                ogMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
                 ogMarker.map
                     = self.mapView
-                ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
+                ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
 
                                 
                 let destMarker = GMSMarker()
-                destMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
+                destMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
                 destMarker.map
                     = self.mapView
-                destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
+                destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
                 
                 let path = GMSMutablePath()
                 
-                               path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
+                path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
                 path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
                 
                 
