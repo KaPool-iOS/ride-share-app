@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* GOOGLE MAPS & GOOGLE PLACES */
         
         GMSServices.provideAPIKey("AIzaSyBJWjJ6M8cIbUKqgs6XsnIoIVRn1Fi7h44")
-        GMSPlacesClient.provideAPIKey("AIzaSyBS7DXM7CHBBhu6oddwQWJrjWDa3ByCBjg")
+        GMSPlacesClient.provideAPIKey("AIzaSyC9rD0E5jSLioCIaqA2kFp4-RiWEtmubXk")
         
         /* PARSE */
         Parse.enableLocalDatastore()

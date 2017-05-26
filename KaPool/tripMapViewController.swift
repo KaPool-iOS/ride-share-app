@@ -10,9 +10,15 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 import Alamofire
+import Parse
+
+protocol tripMapViewControllerDelegate: class {
+    func returningtoView(tripId: String, response: Int)
+}
 
 class tripMapViewController: UIViewController, GMSMapViewDelegate {
     
+    weak var delegate: tripMapViewControllerDelegate?
     @IBOutlet weak var requestorPic: GMSMapView!
     
     @IBOutlet weak var statsView: UIView!
@@ -27,6 +33,8 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
     var destination: GMSPlace?
     var ride: Ride!
     let apiKey: String = "AIzaSyBXq3sMUeCLnoAkjSvKWaMSXvMKrDLyZ0s"
+    var currTripID: String?
+    
     @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
@@ -55,9 +63,6 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     }
                     
                     self.destination = place
-                 
-        
-                    
                     self.fixMap(trips: self.tripArr, handleComplete: {
                         self.handleViews()
                     })
@@ -162,6 +167,8 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         let destMarker = GMSMarker()
         destMarker.position = CLLocationCoordinate2D(latitude: destination!.coordinate.latitude, longitude: destination!.coordinate.longitude)
         destMarker.map = self.mapView
+        destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
+
         
         destMarker.title = "Destination"
         
@@ -170,7 +177,10 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         
         
         bounds = bounds.includingCoordinate(ogMarker.position)
-        bounds = bounds.includingCoordinate(destMarker.position)
+        
+        if trips.isEmpty == true {
+            bounds = bounds.includingCoordinate(destMarker.position)
+        }
         
         point1 = origin?.coordinate
         
@@ -232,6 +242,12 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     
                     let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
                     
+                    let legs = (routes["legs"] as? Dictionary<String,AnyObject>) ?? [:]
+                    let duration = (legs["duration"] as? Dictionary<String,AnyObject>) ?? [:]
+                    
+                    let durationTxt = duration["text"] as? String
+                    
+                    
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
                     let polypoints = (overviewPolyline["points"] as? String) ?? ""
                     let line  = polypoints
@@ -241,6 +257,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         }
         
     }
+  
     
     func addPolyLine(encodedString: String) {
         
@@ -251,9 +268,64 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         polyline.map = mapView
         
     }
+    
+    func travelMins(minString: String) {
+        
+    }
    
     @IBAction func driverDeclined(_ sender: Any) {
+        let query = PFQuery(className: "Trip")
+        // query.whereKey("objectId", equalTo: ride.rideID! as String)
         
+        query.getObjectInBackground(withId: currTripID!) { (rideFound: PFObject?, error: Error?) -> Void in
+            if error == nil && rideFound != nil {
+                
+                rideFound?.setValue(-1, forKey: "driverResponse")
+                rideFound?.saveInBackground()
+                
+                self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
+                    
+                self.navigationController?.popViewController(animated: true)
+                
+                
+            } else {
+                
+                print("Error: \(String(describing: error))")
+            }
+        }
+    }
+    
+    @IBAction func driverAccepted(_ sender: Any) {
+        let query = PFQuery(className: "Trip")
+       // query.whereKey("objectId", equalTo: ride.rideID! as String)
+    
+        query.getObjectInBackground(withId: currTripID!) { (rideFound: PFObject?, error: Error?) -> Void in
+            if error == nil && rideFound != nil {
+                
+                let innerqry = PFQuery(className: "Ride")
+                
+                innerqry.getObjectInBackground(withId: self.ride.rideID!) { (curr: PFObject?, error: Error?) -> Void in
+                    var seatsRem = self.ride.seatsRemaining
+                    seatsRem = seatsRem! - 1
+                    
+                    curr?.setValue(seatsRem, forKey: "seatsRemaining")
+                    curr?.saveInBackground()
+                }
+                
+                
+                
+                rideFound?.setValue(1, forKey: "driverResponse")
+                rideFound?.saveInBackground()
+             
+                self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
+                self.navigationController?.popViewController(animated: true)
+
+                
+            } else {
+                
+                print("Error: \(String(describing: error))")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {
