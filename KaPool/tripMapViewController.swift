@@ -168,9 +168,13 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         destMarker.position = CLLocationCoordinate2D(latitude: destination!.coordinate.latitude, longitude: destination!.coordinate.longitude)
         destMarker.map = self.mapView
         destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
-
-        
         destMarker.title = "Destination"
+        
+        let currMarker = GMSMarker()
+        currMarker.position = CLLocationCoordinate2D(latitude: pickupLoc!.coordinate.latitude , longitude: pickupLoc!.coordinate.longitude)
+        currMarker.map = self.mapView
+        currMarker.icon = GMSMarker.markerImage(with: UIColor.purple)
+        currMarker.snippet = "YOU"
         
         path.add((origin?.coordinate)!)
         path.add((destination?.coordinate)!)

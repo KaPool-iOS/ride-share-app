@@ -38,11 +38,8 @@ class Map: NSObject {
                     let routes = (routesArray.first as? Dictionary<String, Any>) ?? [:]
                     
                     let legs = routes["legs"] as! Array<Dictionary<String, Any>>
-                    travelMins(legs: legs)
-                  //  let duration = legs[0]["duration"] as! Dictionary<String,AnyObject>
-                    
-    //                let durationTxt = duration["text"] as? String
-                    
+                    let totalSecs = travelMins(legs: legs)
+                    let minsString = stringifyDur(totalDurInSec: totalSecs)
                     
                     
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
@@ -54,6 +51,7 @@ class Map: NSObject {
         }
         
     }
+    
     
     class func travelMins(legs: Array<Dictionary<String, Any>>) -> Int {
         
@@ -72,33 +70,35 @@ class Map: NSObject {
         }
         
         
-        let distanceInKilometers: Double = Double(totalDistanceInMeters / 1000)
-        let totalDistance = "Total Distance: \(distanceInKilometers) Km"
+ //       let distanceInKilometers: Double = Double(totalDistanceInMeters / 1000)
+   //     let totalDistance = "Total Distance: \(distanceInKilometers) Km"
         
         
-        let mins = totalDurationInSeconds / 60
-        let hours = mins / 60
-        let days = hours / 24
-        let remainingHours = hours % 24
-        let remainingMins = mins % 60
-        let remainingSecs = totalDurationInSeconds % 60
         
-        
-        var totalDuration = ""
-        var totalStr = stringifyDur(mins: Double(remainingMins), hours: Double(remainingHours), days: Double(days))
-        
+   //     var totalDuration = ""
+     //   var totalStr = stringifyDur(mins: Double(remainingMins), hours: Double(remainingHours), days: Double(days))
+
         return totalDurationInSeconds
         
     }
     
-    class func stringifyDur(mins: Double, hours: Double, days: Double) -> String {
+    class func stringifyDur(totalDurInSec: Int) -> String {
+        
+        let mins = totalDurInSec / 60
+        let hours = mins / 60
+        let days = hours / 24
+        let remainingHours = hours % 24
+        let remainingMins = mins % 60
+        //      let remainingSecs = totalDurationInSeconds % 60
+
+        
         var totalDuration = ""
         if days != 0 {
-            totalDuration = "\(days) d, \(hours) h, \(mins) mins"
+            totalDuration = "\(days) d, \(remainingHours) h, \(remainingMins) mins"
         } else if hours != 0 {
-            totalDuration = "\(hours) h, \(mins) mins"
+            totalDuration = "\(remainingHours) h, \(remainingMins) mins"
         } else if mins != 0 {
-            totalDuration = "\(hours) mins"
+            totalDuration = "\(remainingHours) mins"
         }
         
         return totalDuration
