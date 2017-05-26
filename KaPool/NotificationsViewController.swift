@@ -37,9 +37,13 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        tableView.reloadData()
+    }
+    
     func returningtoView(tripId: String, response: Int) {
         
-        self.hidesBottomBarWhenPushed = true
         for trip in self.notifs {
             if trip.tripID == tripId {
                 trip.response = response
