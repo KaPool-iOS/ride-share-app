@@ -120,6 +120,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         ogMarker.position = CLLocationCoordinate2D(latitude: origCoordinates.latitude, longitude: origCoordinates.longitude)
         ogMarker.map = self.mapView
         ogMarker.title = ogName
+        ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
         
         
         let destMarker = GMSMarker()
@@ -127,6 +128,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         destMarker.map = self.mapView
         
         destMarker.title = destName
+        destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
         
         path.add(origCoordinates)
         path.add(destCoordinates)
@@ -135,8 +137,11 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         bounds = bounds.includingCoordinate(ogMarker.position)
         bounds = bounds.includingCoordinate(destMarker.position)
         
+        Map.fetchMapData(mapView: mapView, from: ogMarker.position, to: destMarker.position)
+        
         
         let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+       // mapView.animate(with: update)
         mapView.animate(with: update)
         
         handleComplete()

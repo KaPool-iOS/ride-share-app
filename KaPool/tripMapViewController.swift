@@ -237,6 +237,13 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     
                     let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
                     
+                    let legs = (routes["legs"] as? Dictionary<String,AnyObject>) ?? [:]
+                    let duration = (legs["duration"] as? Dictionary<String,AnyObject>) ?? [:]
+                    
+                    let durationTxt = duration["text"] as? String
+                    
+                    
+                    
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
                     let polypoints = (overviewPolyline["points"] as? String) ?? ""
                     let line  = polypoints
@@ -246,6 +253,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         }
         
     }
+  
     
     func addPolyLine(encodedString: String) {
         
@@ -254,6 +262,10 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         polyline.strokeWidth = 5
         polyline.strokeColor = .blue
         polyline.map = mapView
+        
+    }
+    
+    func travelMins(minString: String) {
         
     }
    

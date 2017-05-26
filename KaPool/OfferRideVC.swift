@@ -415,6 +415,41 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.destLat = place.coordinate.latitude
             self.destLon = place.coordinate.longitude
             
+            self.mapView.clear()
+            
+
+            let ogMarker = GMSMarker()
+            ogMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
+            ogMarker.map
+                = self.mapView
+            ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
+            
+            
+            let destMarker = GMSMarker()
+            destMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
+            destMarker.map
+                = self.mapView
+            destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
+            
+            let path = GMSMutablePath()
+            
+            var bounds = GMSCoordinateBounds()
+            path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
+            path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
+            
+            
+            bounds = bounds.includingCoordinate(ogMarker.position)
+            bounds = bounds.includingCoordinate(destMarker.position)
+            
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+            mapView.animate(with: update)
+
+            
+            
+            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!)
+ 
+            
+            
         } else {
             self.frmLoc = place
             
@@ -429,7 +464,53 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.originLon = place.coordinate.longitude
             
             
+            self.mapView.clear()
+            var bounds = GMSCoordinateBounds()
+
+            if self.destLat != nil && self.destLon != nil {
+                
+
+                let ogMarker = GMSMarker()
+                ogMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
+                ogMarker.map
+                    = self.mapView
+                ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
+
+                                
+                let destMarker = GMSMarker()
+                destMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
+                destMarker.map
+                    = self.mapView
+                destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
+                
+                let path = GMSMutablePath()
+                
+                               path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
+                path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
+                
+                
+                bounds = bounds.includingCoordinate(ogMarker.position)
+                bounds = bounds.includingCoordinate(destMarker.position)
+                
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                mapView.animate(with: update)
+                
+                Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!)
+            } else {
+                let marker = GMSMarker()
+                marker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
+                marker.map
+                    = self.mapView
+                
+                bounds = bounds.includingCoordinate(marker.position)
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                mapView.animate(with: update)
+            }
+            
+            
+            
         }
+        
         /*
         // Get the address components.
         if let addressLines = place.addressComponents {
