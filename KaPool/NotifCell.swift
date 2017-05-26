@@ -33,17 +33,43 @@ class NotifCell: UITableViewCell {
                     
                     let dateStr = self.departDate.toString(dateFormat: "MM/dd h:mm a")
                     
-                    var txtStr: String? = ""
-                    print (self.trip.response)
+                    
+                    let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 15)]
+                    let dateBold = NSMutableAttributedString(string:dateStr, attributes:attrs)
+                    let nameBold = NSMutableAttributedString(string:rider.username! as String, attributes:attrs)
+                    let destBold = NSMutableAttributedString(string:self.ride.destName! as String, attributes:attrs)
+
+                    
+                    var txtStr = NSMutableAttributedString(string:"")
+                   
                     if self.trip.response == 0 {
-                        txtStr = "\(rider.username!) is a requesting a ride to \(self.ride.destName!) on \(dateStr)"
+                        
+                        txtStr.append(nameBold)
+                        txtStr.append(NSMutableAttributedString(string:" is a requesting a ride to "))
+                        txtStr.append(destBold)
+                        txtStr.append(NSMutableAttributedString(string:" on "))
+                        txtStr.append(dateBold)
+                      //  "\(nameBold) is a requesting a ride to \(destBold) on \(dateBold)"
                     } else if self.trip.response == -1 {
-                        txtStr = "You have declined \(rider.username!) for a ride to \(self.ride.destName!) on \(dateStr)"
+                        
+                        txtStr.append(NSMutableAttributedString(string:"You declined "))
+                        txtStr.append(nameBold)
+                        txtStr.append(NSMutableAttributedString(string:" for a ride to "))
+                        txtStr.append(destBold)
+                         txtStr.append(NSMutableAttributedString(string:" on "))
+                        txtStr.append(dateBold)
+                       // txtStr = "You have declined \(nameBold) for a ride to \(destBold) on \(dateBold)"
                     } else if self.trip.response == 1 {
-                        txtStr = "You have accepted \(rider.username!) for a ride to \(self.ride.destName!) on \(dateStr)"
+                       // txtStr = "You have accepted \(nameBold) for a ride to \(destBold) on \(dateBold)"
+                        txtStr.append(NSMutableAttributedString(string:"You accepted "))
+                        txtStr.append(nameBold)
+                        txtStr.append(NSMutableAttributedString(string:" for a ride to "))
+                        txtStr.append(destBold)
+                        txtStr.append(NSMutableAttributedString(string:" on "))
+                        txtStr.append(dateBold)
                     }
                     
-                    self.fromLabel.text = txtStr
+                    self.fromLabel.attributedText = txtStr
                 }
                 
                 

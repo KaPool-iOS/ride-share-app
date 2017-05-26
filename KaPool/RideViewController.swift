@@ -58,6 +58,10 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
 
         locationManager.startUpdatingLocation()
+        
+        
+      //  navigationController?.navigationBar.barTintColor = UIColor(red: 67/255, green: 189/255, blue: 236/255, alpha: 1.0)
+      //   tabBarController?.tabBar.barTintColor = UIColor(red: 67/255, green: 189/255, blue: 236/255, alpha: 0.5)
 
         
         

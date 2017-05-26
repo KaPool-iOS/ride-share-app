@@ -46,8 +46,9 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         self.priceLabel.text = String(format:"$%.0f", curr.price!)
         
         self.dateLabel.text = curr.departDate?.toString(dateFormat: "MMM d, yyyy  h:mm a")
-        self.seatsLabel.text = (String) (describing: curr.seats!)
-        
+        self.seatsLabel.text = "\(curr.seatsRemaining!)/\(curr.seats!)"
+            
+
         self.originLabel.text = ogName
         self.destLabel.text = destName
         
@@ -69,12 +70,12 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         
         //if ()
         // check if rider id == driver id, if  true delete
-        let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
+  //      let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
         
         print("I am testing")
-        let lat = locDict?.object(forKey: "lat") as! CLLocationDegrees
+        let lat = defaults.object(forKey: "originLatitude") as! CLLocationDegrees
         
-        let lon = locDict?.object(forKey: "lon") as! CLLocationDegrees
+        let lon = defaults.object(forKey: "originLongtitude") as! CLLocationDegrees
         
         let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
         

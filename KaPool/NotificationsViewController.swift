@@ -12,11 +12,17 @@ import Parse
 class NotificationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, tripMapViewControllerDelegate{
     
     var notifs: [Trip] = []
+    var refreshControl = UIRefreshControl()
 
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: "refresh:", for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl) */
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -36,7 +42,27 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         }
         // Do any additional setup after loading the view.
     }
-    
+    /*
+    func refresh(refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        /*
+        Trip.getNotifs { (trips: [Trip]) in
+            
+            var tmpArr: [Trip] = []
+            
+            for trip in trips.reversed() {
+                tmpArr.append(trip)
+            }
+            
+            self.notifs = tmpArr
+            self.tableView.reloadData()
+            refreshControl.endRefreshing()
+ 
+        }*/
+    } */
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         tableView.reloadData()
@@ -93,14 +119,17 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        let tripCell = sender as! NotifCell
-        let tripDetails = segue.destination as! tripMapViewController
-        tripDetails.ride = tripCell.ride
-        tripDetails.pickupLoc = tripCell.trip.pickupLocation
-        tripDetails.pickupName = tripCell.trip.pickupName
-        tripDetails.currTripID = tripCell.trip.tripID
+        if segue.identifier == "tripMapSeg" {
         
-        self.hidesBottomBarWhenPushed = true
+            let tripCell = sender as! NotifCell
+            let tripDetails = segue.destination as! tripMapViewController
+            tripDetails.ride = tripCell.ride
+            tripDetails.pickupLoc = tripCell.trip.pickupLocation
+            tripDetails.pickupName = tripCell.trip.pickupName
+            tripDetails.currTripID = tripCell.trip.tripID
+            
+            self.hidesBottomBarWhenPushed = true
+        }
         
     }
     
