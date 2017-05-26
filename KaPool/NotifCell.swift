@@ -40,7 +40,7 @@ class NotifCell: UITableViewCell {
                     let destBold = NSMutableAttributedString(string:self.ride.destName! as String, attributes:attrs)
 
                     
-                    var txtStr = NSMutableAttributedString(string:"")
+                    let txtStr = NSMutableAttributedString(string:"")
                    
                     if self.trip.response == 0 {
                         

@@ -319,8 +319,6 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                 rideFound?.saveInBackground()
                 
                 self.delegate?.returningtoView(tripId: self.currTripID!, response: 1)
-                
-               
                 self.navigationController?.popViewController(animated: true)
 
                 

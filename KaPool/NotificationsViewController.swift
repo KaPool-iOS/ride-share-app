@@ -69,12 +69,15 @@ class NotificationsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func returningtoView(tripId: String, response: Int) {
-        
+        print("reached")
+        print(self.notifs)
         for trip in self.notifs {
             if trip.tripID == tripId {
                 trip.response = response
             }
         }
+        
+        print(self.notifs)
         tableView.reloadData()
     
     }

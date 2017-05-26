@@ -127,8 +127,8 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         
         self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
         
-        self.originLat = frmLoc?.coordinate.latitude
-        self.originLon = frmLoc?.coordinate.longitude
+        self.originLat = currPlace?.coordinate.latitude
+        self.originLon = currPlace?.coordinate.longitude
         
         
         self.mapView.clear()
