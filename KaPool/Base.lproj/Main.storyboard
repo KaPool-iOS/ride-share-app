@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Smc-SP-fcH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -166,7 +166,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="94"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17a-1i-Gsf" id="OZg-qx-DQV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jIW-mk-2Ty">
@@ -352,7 +352,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLt-go-0PJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6436" y="-357.57121439280365"/>
+            <point key="canvasLocation" x="5366" y="-413"/>
         </scene>
         <!--Find a Ride-->
         <scene sceneID="tyl-lu-VO2">
@@ -507,7 +507,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWr-WQ-Q4w" id="o1P-GM-pGl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="User-30" translatesAutoresizingMaskIntoConstraints="NO" id="sX8-pI-gCH">
@@ -668,7 +668,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VuM-kQ-NZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5756" y="-820"/>
+            <point key="canvasLocation" x="4705" y="-835"/>
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="lKF-Jw-6Ox">
@@ -946,6 +946,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LqI-7n-GNA">
+                                <rect key="frame" x="221" y="418" width="101" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="change image "/>
+                                <connections>
+                                    <action selector="changeImage:" destination="H2A-Xo-eA1" eventType="touchUpInside" id="UVy-2R-6uj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -957,7 +965,7 @@
                         <outlet property="carModelField" destination="kDP-tq-rxt" id="phX-iR-oAg"/>
                         <outlet property="carYearField" destination="XlE-vf-p9n" id="raG-x8-ipy"/>
                         <outlet property="nameField" destination="k5J-R3-DHc" id="fm1-EM-jXm"/>
-                        <outlet property="profileImage" destination="2P9-ci-Z57" id="TDo-xQ-jTK"/>
+                        <outlet property="profileImage" destination="2P9-ci-Z57" id="oj0-a5-HLo"/>
                         <outlet property="saveButton" destination="jRi-f2-xJg" id="fEx-gO-iRd"/>
                     </connections>
                 </viewController>
@@ -1285,7 +1293,7 @@
                         <outlet property="editButton" destination="ak5-BM-HjM" id="SyD-mH-HZW"/>
                         <outlet property="infoLabel" destination="t1w-Fb-d0f" id="TMZ-5k-5yV"/>
                         <outlet property="nameLabel" destination="3VZ-8v-YOX" id="6zg-Cq-l7A"/>
-                        <outlet property="profileImage" destination="6M1-Pb-WEA" id="B6m-BB-R7i"/>
+                        <outlet property="profileImage" destination="6M1-Pb-WEA" id="Yfe-GO-ZfP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eHv-5U-vEN" userLabel="First Responder" sceneMemberID="firstResponder"/>
