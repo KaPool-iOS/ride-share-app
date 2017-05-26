@@ -9,11 +9,12 @@
 import UIKit
 import Parse
 
-class EditProfileViewController: UIViewController {
+class EditProfileViewController: UIViewController, UIPickerViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   //user
   @IBOutlet weak var nameField: UITextField!
   @IBOutlet weak var ageField: UITextField!
+
   
   //car
   @IBOutlet weak var carYearField: UITextField!
@@ -35,23 +36,38 @@ class EditProfileViewController: UIViewController {
   var carModel:String?
   var carColor:String?
   
-
+  // image
+  
+  var im:UIImageView!
+  
+  
   @IBOutlet weak var profileImage: UIImageView!
+
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
         self.nameField?.text = fullname
         self.ageField?.text = age
-      
         self.carYearField?.text = carYear
         self.carMakeField?.text = carMake
         self.carModelField?.text = carModel
         self.carColorField?.text = carColor
+    
       
+      
+      
+      
+        //profileImage?.image = im.image
+      
+        
+      
+        //im.image = profileImage?.image
+        profileImage?.layer.cornerRadius = (profileImage?.frame.size.width)! / 2
+        profileImage?.clipsToBounds = true
       
         // Do any additional setup after loading the view.
       
-      
+ 
       
       
       
@@ -99,6 +115,15 @@ class EditProfileViewController: UIViewController {
       
       user?["fullname"] = self.nameField?.text
       
+      
+      let image = UIImagePNGRepresentation((profileImage?.image)!)
+      let imageF = PFFile(name:"file.jpg", data:image!)
+      
+      user?["ProfilePic"] = imageF
+      
+      
+      
+      
       user?.saveInBackground(block: { (success, error) in
         if success {
           self.dismiss(animated: true, completion: nil)
@@ -124,6 +149,9 @@ class EditProfileViewController: UIViewController {
                   object["carColour"] = self.carColorField?.text
                   object["carModel"] = self.carModelField?.text
                   object["carMake"] = self.carMakeField?.text
+                  
+                  
+                  object["ProfilePic"] = imageF
                   object.saveInBackground()
                 }
               }
@@ -164,6 +192,8 @@ class EditProfileViewController: UIViewController {
   }
   
   
+  
+  
   func alertControl (title: String, message: String) {
     
     let alertControler = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
@@ -173,6 +203,30 @@ class EditProfileViewController: UIViewController {
     
     self.present(alertControler, animated: true, completion: nil)
   }
+  
+  @IBAction func changeImage(_ sender: Any) {
+    let picker  = UIImagePickerController()
+    
+    picker.delegate = self
+    
+    
+    
+    picker.sourceType = .photoLibrary
+    
+    picker.allowsEditing = true
+    
+    present(picker, animated:true, completion:nil)
+    
+    
+    
+  }
+  
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    im?.image = info[UIImagePickerControllerEditedImage] as? UIImage
+    self.dismiss(animated: true, completion: nil)
+  }
+  
   
 
     /*
