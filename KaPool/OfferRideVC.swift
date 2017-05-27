@@ -162,7 +162,11 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
             mapView.animate(with: update)
             
-            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!)
+            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (totalSecs: Int) in
+                
+            }
+            
+            
         } else {
             let marker = GMSMarker()
             marker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
@@ -502,7 +506,9 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
 
             
             
-            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!)
+            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (Int) in
+                
+            }
  
             
             
@@ -551,7 +557,9 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
                 let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
                 mapView.animate(with: update)
                 
-                Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!)
+                Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (totalSecs: Int) in
+                    
+                }
             } else {
                 let marker = GMSMarker()
                 marker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)

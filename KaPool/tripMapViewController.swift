@@ -35,6 +35,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
     let apiKey: String = "AIzaSyBXq3sMUeCLnoAkjSvKWaMSXvMKrDLyZ0s"
     var currTripID: String?
     
+    @IBOutlet weak var extraTime: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
@@ -143,7 +144,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         }) */
     } */
     
-    func fixMap(trips: [Trip], handleComplete:(()->())) {
+    func fixMap(trips: [Trip], handleComplete:@escaping (()->())) {
         
         let camera = GMSCameraPosition.camera(withLatitude: origin!.coordinate.latitude,
                                               longitude: origin!.coordinate.longitude,
@@ -187,44 +188,74 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
         }
         
         point1 = origin?.coordinate
+        point2 = pickupLoc?.coordinate
+        
+        var tripWithoutRider = 0
+        var tripWithRider = 0
         
         for trip in trips {
             
-            let marker = GMSMarker()
-            marker.position = (trip.pickupLocation?.coordinate)!
-            marker.map = self.mapView
-            marker.title = trip.pickupName
-            
-            path.add((trip.pickupLocation?.coordinate)!)
-            
-            bounds = bounds.includingCoordinate(marker.position)
-            
-            marker.icon = GMSMarker.markerImage(with: UIColor.blue)
-            
-            point2 = trip.pickupLocation?.coordinate
-            
-            fetchMapData(from: point1!, to: point2!)
-            
-            point1 = point2
+            travelTime(from: point1!, to: point2!) { (totalSecs: Int) in
+                let marker = GMSMarker()
+                marker.position = (trip.pickupLocation?.coordinate)!
+                marker.map = self.mapView
+                marker.title = trip.pickupName
+                
+                path.add((trip.pickupLocation?.coordinate)!)
+                
+                bounds = bounds.includingCoordinate(marker.position)
+                
+                marker.icon = GMSMarker.markerImage(with: UIColor.blue)
+                
+                point2 = trip.pickupLocation?.coordinate
+                
+                self.fetchMapData(from: point1!, to: point2!)
+                
+                tripWithoutRider += totalSecs
+                point1 = point2
+                
+            }
         }
         
-        // adds origin and destination markers
+        if trips.isEmpty == true {
+            point2 = origin?.coordinate
+        }
         
-        
-        
-        
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
-        mapView.animate(with: update)
-        
-     //   getPolylineRoute(from: (origin?.coordinate)!, to: (destination?.coordinate)!)
+        // get trip with rider, point2 is last loc
+        travelTime(from: point2!, to: (pickupLoc?.coordinate)!) { (totalSecs: Int) in
+            tripWithRider = tripWithoutRider + totalSecs
+            point2 = (self.pickupLoc?.coordinate)! // changed point2 to be riderLoc
+        }
+       
+        travelTime(from: point1!, to: (destination?.coordinate)!) { (totalSecs: Int) in
+            
+            tripWithoutRider += totalSecs
+            
+            self.travelTime(from: point2!, to: (self.destination?.coordinate)!, returnTime: { (total: Int) in
+                tripWithRider += total
+                
+                tripWithRider = tripWithoutRider + totalSecs
+                
+                let timeDiff = tripWithRider - tripWithoutRider
+                let timeDiffTxt = Map.stringifyDur(totalDurInSec: timeDiff)
+                
+                self.extraTime.text = "+\(timeDiffTxt)"
+                
+                // adds origin and destination markers
+                
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+                self.mapView.animate(with: update)
+                
+                //   getPolylineRoute(from: (origin?.coordinate)!, to: (destination?.coordinate)!)
+                
+                // drawPath(currentLocation: (origin?.coordinate)!, destinationLoc: (destination?.coordinate)!)
+                self.fetchMapData(from: (self.origin?.coordinate)!, to: (self.destination?.coordinate)!)
+                
+                
+                handleComplete()
 
-       // drawPath(currentLocation: (origin?.coordinate)!, destinationLoc: (destination?.coordinate)!)
-        fetchMapData(from: (origin?.coordinate)!, to: (destination?.coordinate)!)
-
-        
-        handleComplete()
-        
-        
+            })
+        }
     }
     
     func fetchMapData(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) {
@@ -244,12 +275,7 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                     
                     let routesArray = (mapResponse["routes"] as? Array) ?? []
                     
-                    let routes = (routesArray.first as? Dictionary<String, AnyObject>) ?? [:]
-                    
-                    let legs = (routes["legs"] as? Dictionary<String,AnyObject>) ?? [:]
-                    let duration = (legs["duration"] as? Dictionary<String,AnyObject>) ?? [:]
-                    
-                    let durationTxt = duration["text"] as? String
+                    let routes = (routesArray.first as? Dictionary<String, Any>) ?? [:]
                     
                     
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
@@ -260,6 +286,33 @@ class tripMapViewController: UIViewController, GMSMapViewDelegate {
                 }
         }
         
+    }
+    
+    func travelTime (from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, returnTime: @escaping (
+        _ totalSecs: Int) -> ()) {
+        let directionURL = "https://maps.googleapis.com/maps/api/directions/json?" +
+            "origin=\(from.latitude),\(from.longitude)&destination=\(to.latitude),\(to.longitude)&" +
+        "key=\(self.apiKey)"
+    
+        
+        Alamofire.request(directionURL).responseJSON
+            { response in
+                
+                if let JSON = response.result.value {
+                    
+                    let mapResponse: [String: AnyObject] = JSON as! [String : AnyObject]
+                    
+                    let routesArray = (mapResponse["routes"] as? Array) ?? []
+                    
+                    let routes = (routesArray.first as? Dictionary<String, Any>) ?? [:]
+                    
+                    let legs = routes["legs"] as! Array<Dictionary<String, Any>>
+                    let totalSecs = Map.travelMins(legs: legs)
+                 
+                    
+                    returnTime(totalSecs)
+                }
+        }
     }
   
     

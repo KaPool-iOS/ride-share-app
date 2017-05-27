@@ -18,7 +18,7 @@ class Map: NSObject {
 
     
     
-    class func fetchMapData(mapView: GMSMapView, from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) {
+    class func fetchMapData(mapView: GMSMapView, from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping (_ time: Int )->()) {
         
         let directionURL = "https://maps.googleapis.com/maps/api/directions/json?" +
             "origin=\(from.latitude),\(from.longitude)&destination=\(to.latitude),\(to.longitude)&" +
@@ -39,16 +39,20 @@ class Map: NSObject {
                     
                     let legs = routes["legs"] as! Array<Dictionary<String, Any>>
                     let totalSecs = travelMins(legs: legs)
-                    let minsString = stringifyDur(totalDurInSec: totalSecs)
                     
                     
                     let overviewPolyline = (routes["overview_polyline"] as? Dictionary<String,AnyObject>) ?? [:]
                     let polypoints = (overviewPolyline["points"] as? String) ?? ""
+        
                     let line  = polypoints
                     
                     self.addPolyLine(mapView: mapView, encodedString: line)
+              
+                    completion(totalSecs)
                 }
         }
+        
+  
         
     }
     

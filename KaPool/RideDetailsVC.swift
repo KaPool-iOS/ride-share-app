@@ -66,6 +66,8 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    
+    
     @IBAction func riderAccepted(_ sender: Any) {
         
         //if ()
@@ -105,7 +107,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
     }
     
     
-    func addMap(handleComplete:(()->())) {
+    func addMap(handleComplete:@escaping (()->())) {
         
         let camera = GMSCameraPosition.camera(withLatitude: origCoordinates.latitude,
                                               longitude: origCoordinates.longitude,
@@ -138,14 +140,17 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         bounds = bounds.includingCoordinate(ogMarker.position)
         bounds = bounds.includingCoordinate(destMarker.position)
         
-        Map.fetchMapData(mapView: mapView, from: ogMarker.position, to: destMarker.position)
-        
-        
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
-       // mapView.animate(with: update)
-        mapView.animate(with: update)
-        
-        handleComplete()
+        Map.fetchMapData(mapView: mapView, from: ogMarker.position, to: destMarker.position) { (totalSecs: Int) in
+            
+    
+            self.estDurLabel.text = Map.stringifyDur(totalDurInSec: totalSecs)
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+            // mapView.animate(with: update)
+            self.mapView.animate(with: update)
+            
+            handleComplete()
+            
+        }
     }
     
     
