@@ -26,6 +26,11 @@
 		6E0A995C1EA5C16B0039BE67 /* Ride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0A995B1EA5C16B0039BE67 /* Ride.swift */; };
 		6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */; };
 		6E2AE63B1EA0B1F7005C21A9 /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */; };
+		6E36CC351ED6E3A000764FA2 /* Search-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E36CC341ED6E3A000764FA2 /* Search-50.png */; };
+		6E36CC371ED6EAC200764FA2 /* searchRide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E36CC361ED6EAC200764FA2 /* searchRide.png */; };
+		6E36CC391ED6F9DB00764FA2 /* Appointment Reminders-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E36CC381ED6F9DB00764FA2 /* Appointment Reminders-50.png */; };
+		6E36CC3B1ED6FD2300764FA2 /* Add-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E36CC3A1ED6FD2300764FA2 /* Add-50.png */; };
+		6E36CC3D1ED6FDEB00764FA2 /* Add-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E36CC3C1ED6FDEB00764FA2 /* Add-40.png */; };
 		6E57A1021EA49E10005CF461 /* RideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A1011EA49E10005CF461 /* RideViewController.swift */; };
 		6E57A1081EA4A2C2005CF461 /* RideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E57A1071EA4A2C2005CF461 /* RideCell.swift */; };
 		6E77A4801ECAB7910031E7D6 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E77A47F1ECAB7910031E7D6 /* arrow.png */; };
@@ -63,6 +68,11 @@
 		6E0A995B1EA5C16B0039BE67 /* Ride.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ride.swift; sourceTree = "<group>"; };
 		6E2AE6361E9C1C23005C21A9 /* SignupFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupFirstViewController.swift; sourceTree = "<group>"; };
 		6E2AE63A1EA0B1F7005C21A9 /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		6E36CC341ED6E3A000764FA2 /* Search-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search-50.png"; sourceTree = "<group>"; };
+		6E36CC361ED6EAC200764FA2 /* searchRide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchRide.png; sourceTree = "<group>"; };
+		6E36CC381ED6F9DB00764FA2 /* Appointment Reminders-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Appointment Reminders-50.png"; sourceTree = "<group>"; };
+		6E36CC3A1ED6FD2300764FA2 /* Add-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Add-50.png"; sourceTree = "<group>"; };
+		6E36CC3C1ED6FDEB00764FA2 /* Add-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Add-40.png"; sourceTree = "<group>"; };
 		6E57A1011EA49E10005CF461 /* RideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideViewController.swift; sourceTree = "<group>"; };
 		6E57A1071EA4A2C2005CF461 /* RideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RideCell.swift; sourceTree = "<group>"; };
 		6E77A47F1ECAB7910031E7D6 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
@@ -122,7 +132,12 @@
 				6E175FD41E92E51D00040B25 /* Models */,
 				21CE5A521E68D6F3009BE18F /* AppDelegate.swift */,
 				21CE5A561E68D6F3009BE18F /* Main.storyboard */,
+				6E36CC341ED6E3A000764FA2 /* Search-50.png */,
 				21CE5A591E68D6F4009BE18F /* Assets.xcassets */,
+				6E36CC3C1ED6FDEB00764FA2 /* Add-40.png */,
+				6E36CC361ED6EAC200764FA2 /* searchRide.png */,
+				6E36CC3A1ED6FD2300764FA2 /* Add-50.png */,
+				6E36CC381ED6F9DB00764FA2 /* Appointment Reminders-50.png */,
 				6EDFCA471ED2942B00B6D1F8 /* location.png */,
 				6E77A48B1ED0E3E50031E7D6 /* noride.png */,
 				6E77A4851ECD7F5D0031E7D6 /* 1495109130_calendar.png */,
@@ -249,11 +264,16 @@
 			files = (
 				6E77A4881ECD7FE80031E7D6 /* 1495109285_user.png in Resources */,
 				6E77A4821ECC5F0B0031E7D6 /* location-icon-png-4235.png in Resources */,
+				6E36CC391ED6F9DB00764FA2 /* Appointment Reminders-50.png in Resources */,
 				6EDFCA481ED2942B00B6D1F8 /* location.png in Resources */,
+				6E36CC3D1ED6FDEB00764FA2 /* Add-40.png in Resources */,
+				6E36CC371ED6EAC200764FA2 /* searchRide.png in Resources */,
 				21CE5A5D1E68D6F4009BE18F /* LaunchScreen.storyboard in Resources */,
 				6E77A4841ECC5F140031E7D6 /* location-icon-png-4236.png in Resources */,
 				6E77A48C1ED0E3E50031E7D6 /* noride.png in Resources */,
+				6E36CC351ED6E3A000764FA2 /* Search-50.png in Resources */,
 				6E77A4801ECAB7910031E7D6 /* arrow.png in Resources */,
+				6E36CC3B1ED6FD2300764FA2 /* Add-50.png in Resources */,
 				6E77A4861ECD7F5D0031E7D6 /* 1495109130_calendar.png in Resources */,
 				21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */,
 				21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */,
