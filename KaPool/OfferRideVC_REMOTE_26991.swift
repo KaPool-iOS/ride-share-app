@@ -474,7 +474,7 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
             self.destLat = place.coordinate.latitude
             self.destLon = place.coordinate.longitude
-   
+            
             self.mapView.clear()
             
 
@@ -511,7 +511,6 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             }
  
             
-
             
         } else {
             self.frmLoc = place
@@ -572,11 +571,8 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
                 mapView.animate(with: update)
             }
             
-
             
             
-            self.originLat = place.coordinate.latitude
-            self.originLon = place.coordinate.longitude
         }
         
         

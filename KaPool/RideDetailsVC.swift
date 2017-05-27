@@ -46,8 +46,9 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         self.priceLabel.text = String(format:"$%.0f", curr.price!)
         
         self.dateLabel.text = curr.departDate?.toString(dateFormat: "MMM d, yyyy  h:mm a")
-        self.seatsLabel.text = (String) (describing: curr.seats!)
-        
+        self.seatsLabel.text = "\(curr.seatsRemaining!)/\(curr.seats!)"
+            
+
         self.originLabel.text = ogName
         self.destLabel.text = destName
         
@@ -65,16 +66,18 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     
+    
+    
     @IBAction func riderAccepted(_ sender: Any) {
         
         //if ()
         // check if rider id == driver id, if  true delete
-        let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
+  //      let locDict = defaults.object(forKey: "currentLocation") as? NSDictionary
         
         print("I am testing")
-        let lat = locDict?.object(forKey: "lat") as! CLLocationDegrees
+        let lat = defaults.object(forKey: "originLatitude") as! CLLocationDegrees
         
-        let lon = locDict?.object(forKey: "lon") as! CLLocationDegrees
+        let lon = defaults.object(forKey: "originLongtitude") as! CLLocationDegrees
         
         let userLocation:CLLocation = CLLocation(latitude: lat, longitude: lon)
         
@@ -104,7 +107,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
     }
     
     
-    func addMap(handleComplete:(()->())) {
+    func addMap(handleComplete:@escaping (()->())) {
         
         let camera = GMSCameraPosition.camera(withLatitude: origCoordinates.latitude,
                                               longitude: origCoordinates.longitude,
@@ -120,6 +123,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         ogMarker.position = CLLocationCoordinate2D(latitude: origCoordinates.latitude, longitude: origCoordinates.longitude)
         ogMarker.map = self.mapView
         ogMarker.title = ogName
+        ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
         
         
         let destMarker = GMSMarker()
@@ -127,6 +131,7 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         destMarker.map = self.mapView
         
         destMarker.title = destName
+        destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
         
         path.add(origCoordinates)
         path.add(destCoordinates)
@@ -135,13 +140,17 @@ class RideDetailsVC: UIViewController, GMSMapViewDelegate {
         bounds = bounds.includingCoordinate(ogMarker.position)
         bounds = bounds.includingCoordinate(destMarker.position)
         
-        
-        let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
-        mapView.animate(with: update)
-        
-        handleComplete()
-        
-        
+        Map.fetchMapData(mapView: mapView, from: ogMarker.position, to: destMarker.position) { (totalSecs: Int) in
+            
+    
+            self.estDurLabel.text = Map.stringifyDur(totalDurInSec: totalSecs)
+            let update = GMSCameraUpdate.fit(bounds, withPadding: 100)
+            // mapView.animate(with: update)
+            self.mapView.animate(with: update)
+            
+            handleComplete()
+            
+        }
     }
     
     

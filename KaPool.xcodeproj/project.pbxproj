@@ -18,6 +18,7 @@
 		21858DED1ED2B508005FF501 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DEC1ED2B508005FF501 /* Trip.swift */; };
 		21858DEF1ED2CACC005FF501 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DEE1ED2CACC005FF501 /* NotificationsViewController.swift */; };
 		21858DF11ED2DBF2005FF501 /* NotifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21858DF01ED2DBF2005FF501 /* NotifCell.swift */; };
+		21BA825D1ED821A700E99B7F /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21BA825C1ED821A700E99B7F /* Map.swift */; };
 		21CE5A531E68D6F3009BE18F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21CE5A521E68D6F3009BE18F /* AppDelegate.swift */; };
 		21CE5A581E68D6F3009BE18F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A561E68D6F3009BE18F /* Main.storyboard */; };
 		21CE5A5A1E68D6F4009BE18F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 21CE5A591E68D6F4009BE18F /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		21858DEC1ED2B508005FF501 /* Trip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		21858DEE1ED2CACC005FF501 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		21858DF01ED2DBF2005FF501 /* NotifCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifCell.swift; sourceTree = "<group>"; };
+		21BA825C1ED821A700E99B7F /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 		21CE5A4F1E68D6F3009BE18F /* KaPool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KaPool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21CE5A521E68D6F3009BE18F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21CE5A571E68D6F3009BE18F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				6E0A995B1EA5C16B0039BE67 /* Ride.swift */,
 				21162A731EC691FC00681C4E /* User.swift */,
 				21858DEC1ED2B508005FF501 /* Trip.swift */,
+				21BA825C1ED821A700E99B7F /* Map.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				6E57A1021EA49E10005CF461 /* RideViewController.swift in Sources */,
 				0B7E02DF1EA5C1F5007FB045 /* FindRideViewController.swift in Sources */,
 				211E55951ED3BD5E00D48E1F /* tripMapViewController.swift in Sources */,
+				21BA825D1ED821A700E99B7F /* Map.swift in Sources */,
 				217FAF3C1EC1018A001D6A4D /* SelectDateViewController.swift in Sources */,
 				0BD935891ED273B300CA271F /* EditProfileViewController.swift in Sources */,
 				6E2AE6371E9C1C23005C21A9 /* SignupFirstViewController.swift in Sources */,

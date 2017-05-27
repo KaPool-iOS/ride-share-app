@@ -120,66 +120,6 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
         }
         
     }
-    @IBAction func revertToCurrLoc(_ sender: Any) {
-        self.frmLoc = currPlace
-        
-        self.frmBttn.setTitle("Your Location", for: .normal)
-        
-        self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
-        
-        self.originLat = currPlace?.coordinate.latitude
-        self.originLon = currPlace?.coordinate.longitude
-        
-        
-        self.mapView.clear()
-        var bounds = GMSCoordinateBounds()
-        
-        if self.destLat != nil && self.destLon != nil {
-            
-            
-            let ogMarker = GMSMarker()
-            ogMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
-            ogMarker.map
-                = self.mapView
-            ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
-            
-            
-            let destMarker = GMSMarker()
-            destMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
-            destMarker.map
-                = self.mapView
-            destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
-            
-            let path = GMSMutablePath()
-            
-            path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
-            path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
-            
-            
-            bounds = bounds.includingCoordinate(ogMarker.position)
-            bounds = bounds.includingCoordinate(destMarker.position)
-            
-            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-            mapView.animate(with: update)
-            
-            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (totalSecs: Int) in
-                
-            }
-            
-            
-        } else {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
-            marker.map
-                = self.mapView
-            
-            bounds = bounds.includingCoordinate(marker.position)
-            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-            mapView.animate(with: update)
-        }
-        
-
-    }
     
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -398,8 +338,6 @@ class OfferRideVC: UIViewController, CLLocationManagerDelegate, SelectDateViewCo
             
             self.currPlace = self.likelyPlaces[0]
             self.frmLoc = self.currPlace
-            self.originLat = self.currPlace?.coordinate.latitude
-            self.originLon = self.currPlace?.coordinate.longitude
             //print("CURRPLACE IS \(self.currPlace!)")
             
         })
@@ -474,44 +412,6 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
             self.destLat = place.coordinate.latitude
             self.destLon = place.coordinate.longitude
-   
-            self.mapView.clear()
-            
-
-            let ogMarker = GMSMarker()
-            ogMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
-            ogMarker.map
-                = self.mapView
-            ogMarker.icon = GMSMarker.markerImage(with: UIColor.red)
-            
-            
-            let destMarker = GMSMarker()
-            destMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
-            destMarker.map
-                = self.mapView
-            destMarker.icon = GMSMarker.markerImage(with: UIColor.green)
-            
-            let path = GMSMutablePath()
-            
-            var bounds = GMSCoordinateBounds()
-            path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
-            path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
-            
-            
-            bounds = bounds.includingCoordinate(ogMarker.position)
-            bounds = bounds.includingCoordinate(destMarker.position)
-            
-            let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-            mapView.animate(with: update)
-
-            
-            
-            Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (Int) in
-                
-            }
- 
-            
-
             
         } else {
             self.frmLoc = place
@@ -523,66 +423,11 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
             self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
             
-            self.originLat = place.coordinate.latitude
-            self.originLon = place.coordinate.longitude
-            
-            
-            self.mapView.clear()
-            var bounds = GMSCoordinateBounds()
-
-            if self.destLat != nil && self.destLon != nil {
-                
-
-                let ogMarker = GMSMarker()
-                ogMarker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
-                ogMarker.map
-                    = self.mapView
-                ogMarker.icon = GMSMarker.markerImage(with: UIColor.green)
-
-                                
-                let destMarker = GMSMarker()
-                destMarker.position = CLLocationCoordinate2D(latitude: self.destLat!, longitude: self.destLon!)
-                destMarker.map
-                    = self.mapView
-                destMarker.icon = GMSMarker.markerImage(with: UIColor.red)
-                
-                let path = GMSMutablePath()
-                
-                path.add(CLLocationCoordinate2D(latitude: destLat!, longitude: destLon!))
-                path.add(CLLocationCoordinate2D(latitude: originLat!, longitude: originLon!))
-                
-                
-                bounds = bounds.includingCoordinate(ogMarker.position)
-                bounds = bounds.includingCoordinate(destMarker.position)
-                
-                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-                mapView.animate(with: update)
-                
-                Map.fetchMapData(mapView: self.mapView, from: (self.frmLoc?.coordinate)!, to: (self.toLoc?.coordinate)!) { (totalSecs: Int) in
-                    
-                }
-            } else {
-                let marker = GMSMarker()
-                marker.position = CLLocationCoordinate2D(latitude: self.originLat!, longitude: self.originLon!)
-                marker.map
-                    = self.mapView
-                
-                bounds = bounds.includingCoordinate(marker.position)
-                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-                mapView.animate(with: update)
-            }
-            
-
             
             
             self.originLat = place.coordinate.latitude
             self.originLon = place.coordinate.longitude
         }
-        
-        
-        
-        
-        
         /*
         // Get the address components.
         if let addressLines = place.addressComponents {

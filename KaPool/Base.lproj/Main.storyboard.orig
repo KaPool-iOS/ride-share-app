@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Etv-hf-Y2q">
+=======
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Smc-SP-fcH">
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -138,7 +143,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="165"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="17a-1i-Gsf" id="OZg-qx-DQV">
+<<<<<<< HEAD
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164.5"/>
+=======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hef-FO-1b9">
@@ -290,7 +299,8 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OLt-go-0PJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6130" y="-174"/>
+<<<<<<< HEAD
+            <point key="canvasLocation" x="6613.6000000000004" y="-862.21889055472275"/>
         </scene>
         <!--Upcoming Trip-->
         <scene sceneID="Jrv-Zs-3P8">
@@ -375,6 +385,9 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xcy-UR-TTW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9096.7999999999993" y="-331.48425787106447"/>
+=======
+            <point key="canvasLocation" x="6130" y="-174"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
         </scene>
         <!--Find a Ride-->
         <scene sceneID="tyl-lu-VO2">
@@ -525,7 +538,11 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YWr-WQ-Q4w" id="o1P-GM-pGl">
+<<<<<<< HEAD
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+=======
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="User-30" translatesAutoresizingMaskIntoConstraints="NO" id="sX8-pI-gCH">
@@ -690,7 +707,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VuM-kQ-NZU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
+            <point key="canvasLocation" x="4921" y="-170"/>
+=======
             <point key="canvasLocation" x="4705" y="-835"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
         </scene>
         <!--Edit Profile View Controller-->
         <scene sceneID="lKF-Jw-6Ox">
@@ -1427,7 +1448,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i5D-IE-xqD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="5470" y="439"/>
+=======
+            <point key="canvasLocation" x="5334" y="-94"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
         </scene>
         <!--Offer RideVC-->
         <scene sceneID="lxy-HU-Dgq">
@@ -1732,8 +1757,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DlO-wi-SGf" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
                                 <subviews>
+<<<<<<< HEAD
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oTt-zz-Vc0">
+                                        <rect key="frame" x="21" y="40" width="333" height="94"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+=======
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTt-zz-Vc0">
                                         <rect key="frame" x="18" y="40" width="333" height="94"/>
+>>>>>>> 81b28f6e44322693c74375da89a2bb57eb7f54d1
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location-icon-png-4236.png" translatesAutoresizingMaskIntoConstraints="NO" id="jta-W2-pNA">
                                                 <rect key="frame" x="24" y="12" width="14" height="19"/>

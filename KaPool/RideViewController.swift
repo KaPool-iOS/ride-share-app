@@ -52,6 +52,14 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        /*
+        var refreshControl = UIRefreshControl()
+        
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Rides Loading")
+        refreshControl.addTarget(self, action: #selector(self.handleRefresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)*/
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -63,6 +71,10 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
 
         locationManager.startUpdatingLocation()
+        
+        
+      //  navigationController?.navigationBar.barTintColor = UIColor(red: 67/255, green: 189/255, blue: 236/255, alpha: 1.0)
+      //   tabBarController?.tabBar.barTintColor = UIColor(red: 67/255, green: 189/255, blue: 236/255, alpha: 0.5)
 
         self.tableView.reloadData()
         
@@ -70,6 +82,14 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         //getData(distance: 0, signal: self.signal)
         // Do any additional setup after loading the view.
     }
+    /*
+    func handleRefresh(refreshControl: UIRefreshControl) {
+        // Do some reloading of data and update the table view's data source
+        // Fetch more objects from a web service, for example...
+        
+        // Simply adding an object to the data source for this example
+        
+            } */
     
     // SOMETHING TO ADD
     override func viewWillAppear(_ animated: Bool) {

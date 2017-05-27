@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController {
   
   @IBOutlet weak var editButton: UIButton!
   
+  //@IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var profileImage: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var ageLabel: UILabel!
@@ -30,7 +31,7 @@ class ProfileViewController: UIViewController {
   
   
   let defaults = UserDefaults.standard
-
+  let user = PFUser.current()!
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -56,7 +57,7 @@ class ProfileViewController: UIViewController {
     self.navigationController?.navigationBar.topItem?.title = username
     let infoQuery = PFQuery(className: "_User")
     
-    infoQuery.whereKey("username", equalTo: username!)
+     infoQuery.whereKey("username", equalTo: username!)
     
     infoQuery.findObjectsInBackground (block: { (objects, error) -> Void in
       if error != nil {
@@ -71,6 +72,22 @@ class ProfileViewController: UIViewController {
           self.ageLabel.text = (object.object(forKey: "age") as? String)
           self.infoLabel.text = (object.object(forKey: "about") as? String)
           
+          let avaFile: PFFile = (object.object(forKey: "ProfilePic") as? PFFile)!
+          
+          avaFile.getDataInBackground { (data, error) in
+            
+            if let imageData = data {
+              
+              if let downloadedImage = UIImage(data: imageData) {
+                
+                print ("Inside here")
+                self.profileImage.image = downloadedImage
+                self.profileImage.layer.cornerRadius = self.profileImage.frame.size.width / 2
+                self.profileImage.clipsToBounds = true
+              }
+            }
+          }
+          
           
           //car
           self.carMake.text = (object.object(forKey: "carMake") as? String)
@@ -79,12 +96,8 @@ class ProfileViewController: UIViewController {
           self.carYear.text = (object.object(forKey: "CarYear") as? String)
           
         }
-        
       }
-      
-      
     })
-
   }
 
   @IBAction func editProfileButton(_ sender: Any) {
@@ -98,13 +111,17 @@ class ProfileViewController: UIViewController {
     vc.carColor = carColor.text
     vc.carModel = carModel.text
     
+    //vc.im = profileImage
+    if profileImage != nil {
+      
+      vc.im = profileImage
+    }
+    
+    
+    //vc.im.image = profileImage.image
     
     self.present(vc, animated: true, completion: nil)
   }
-  
-  
-  
-  
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
