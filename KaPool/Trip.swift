@@ -21,6 +21,8 @@ class Trip: NSObject {
     var pickupLocation: CLLocation?
     var response: Int?
     
+    
+    
     init(_ trip: PFObject) {
         
         super.init()

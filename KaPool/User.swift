@@ -55,7 +55,7 @@ class User: NSObject {
                 
             } else {
                 
-                print("Error: \(error)")
+                print("Error: \(String(describing: error))")
             }
         }
     }

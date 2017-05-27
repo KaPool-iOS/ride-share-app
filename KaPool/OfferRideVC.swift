@@ -410,8 +410,8 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             self.toBttn.setTitle(self.toLoc?.name, for: .normal)
             self.toBttn.setTitleColor(UIColor.blue, for: .normal)
             
-            self.originLat = place.coordinate.latitude
-            self.originLon = place.coordinate.longitude
+            self.destLat = place.coordinate.latitude
+            self.destLon = place.coordinate.longitude
             
         } else {
             self.frmLoc = place
@@ -423,10 +423,10 @@ extension OfferRideVC: GMSAutocompleteViewControllerDelegate {
             
             self.frmBttn.setTitleColor(UIColor.blue, for: .normal)
             
-            self.destLat = place.coordinate.latitude
-            self.destLon = place.coordinate.longitude
             
             
+            self.originLat = place.coordinate.latitude
+            self.originLon = place.coordinate.longitude
         }
         /*
         // Get the address components.

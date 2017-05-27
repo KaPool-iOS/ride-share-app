@@ -17,6 +17,11 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var tableView: UITableView!
     //var tweetsArray: [Tweet]! = [Tweet]()
     var rides: [Ride]! = [Ride]()
+    var trips: [Trip]! = [Trip]()
+    
+    //@IBOutlet var driverPic: UIImageView!
+    
+    //@IBOutlet var driverName: UILabel!
     
     var startLocation: CLLocation!
     let defaults = UserDefaults.standard
@@ -59,6 +64,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
         locationManager.startUpdatingLocation()
 
+        self.tableView.reloadData()
         
         
         //getData(distance: 0, signal: self.signal)
@@ -66,57 +72,65 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     // SOMETHING TO ADD
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        var distance:Double = 0.0
+        
         //self.tableView.reloadData()
+        print ("signal is \(signal)")
         
-        if let destName = defaults.object(forKey: "destName") as? String {
+            var distance:Double = 0.0
             
-            if let deptName = defaults.object(forKey: "deptName") as? String {
-                print ("Here is destination \(destName)")
-                print ("Here is origin \(deptName)")
-
+            if (defaults.object(forKey: "destName") as? String) != nil {
                 
-                if let dist = defaults.object(forKey: "distance")  {
-                    
-                    print ("Here is it \(distance)")
+                if (defaults.object(forKey: "deptName") as? String) != nil {
                     
                     
                     
-                    if let signalFromFindRide = defaults.object(forKey: "signal") as? Int {
+                    if let dist = defaults.object(forKey: "distance")  {
                         
-                        self.signal = signalFromFindRide
-                        distance = dist as! Double
+                        print ("Here is it \(distance)")
                         
-                        if let originLat = defaults.object(forKey: "originLatitude") {
+                        
+                        
+                        if let signalFromFindRide = defaults.object(forKey: "signal") as? Int {
                             
-                            if let originLon = defaults.object(forKey: "originLongtitude") {
+                            self.signal = signalFromFindRide
+                            distance = dist as! Double
+                            
+                            if let originLat = defaults.object(forKey: "originLatitude") {
                                 
-                                self.originLoc = CLLocation(latitude: originLat as! CLLocationDegrees, longitude: originLon as! CLLocationDegrees)
-                            }
-                            
-                        }
-                        
-                        if let destLat = defaults.object(forKey: "destLatitude") {
-                            
-                            
-                            if let destLon = defaults.object(forKey: "destLongtitude") {
-                                
-                                self.destLoc = CLLocation(latitude: destLat as! CLLocationDegrees, longitude: destLon as! CLLocationDegrees)
+                                if let originLon = defaults.object(forKey: "originLongtitude") {
+                                    
+                                    self.originLoc = CLLocation(latitude: originLat as! CLLocationDegrees, longitude: originLon as! CLLocationDegrees)
+                                }
                                 
                             }
                             
-                            
+                            if let destLat = defaults.object(forKey: "destLatitude") {
+                                
+                                
+                                if let destLon = defaults.object(forKey: "destLongtitude") {
+                                    
+                                    self.destLoc = CLLocation(latitude: destLat as! CLLocationDegrees, longitude: destLon as! CLLocationDegrees)
+                                    
+                                    print ("ok")
+                                    getData(signal: self.signal)
+                                    self.signal = 0
+                                }
+                                
+                                
+                            }
                         }
                     }
                 }
+                
             }
-            
-        }
+
         
-        getData(signal: self.signal)
-        self.signal = 0
+        
+        //getData(signal: self.signal)
+        //self.signal = 0
+
 
     }
     
@@ -226,6 +240,7 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.ride = rides[indexPath.row]
         
         
+        
         return cell
     }
     
@@ -246,16 +261,18 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func getData(signal: Int) {
         
+        
         rides.removeAll()
         
         locationManager.stopUpdatingLocation()
         // construct query
         let query = PFQuery(className: "Ride")
         query.limit = 20
-        var count = 0
+        
         
         // fetch data asynchronously
         query.findObjectsInBackground { (ride: [PFObject]?, error: Error?) -> Void in
+            
             if let ride = ride {
                 // do something with the array of object returned by the call
                 
@@ -270,88 +287,49 @@ class RideViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         //calling from find ride
                         if signal == 1 {
                             
-                            let originLocation:CLLocation = CLLocation(latitude: rideTemp.destLat!, longitude: rideTemp.destLon!)
+                            let destLocation:CLLocation = CLLocation(latitude: rideTemp.destLat!, longitude: rideTemp.destLon!)
+                            let originLocation:CLLocation = CLLocation(latitude: rideTemp.originLat!, longitude: rideTemp.originLon!)
 
                             
-                            print ("origin lat is \(rideTemp.originLat!)")
-                            
-                            print ("origin lon is \(rideTemp.originLon!)")
-                            
-                            print ("from Find origin lat is \(String(describing: self.originLoc?.coordinate.latitude))")
-                            
-                            print ("from Find origin lon is \(String(describing: self.originLoc?.coordinate.longitude))")
-                            
-                            
-                            print ("dest lat is \(rideTemp.destLat!)")
-                            
-                            print ("dest lat is \(rideTemp.destLon!)")
-                            
-                            print ("from Find dest lat is \(String(describing: self.destLoc?.coordinate.latitude))")
-                            
-                            print ("from Find dest lon is \(String(describing: self.destLoc?.coordinate.longitude))")
-
-                            
-                            
+                          
                             self.dist1 = self.calDistance(locOrigin: originLocation, locDest: self.originLoc!)
-                            
-                            
-                            let destLocation:CLLocation = CLLocation(latitude: rideTemp.originLat!, longitude: rideTemp.originLon!)
-                            
                             self.dist2 = self.calDistance(locOrigin: destLocation, locDest: self.destLoc!)
                             
-                            print ("dist2 is \(self.dist2)")
-                            print ("dist1 is \(self.dist1)")
-                            
-                            print ("the radius is \(rideTemp.radius!)")
-                            
                             if self.dist2 < rideTemp.radius! && self.dist1 < rideTemp.radius! {
-                                
                                 self.rides.append(Ride.init(ride[i]))
-                                count += 1
                             }
                         }
                         
                     }
-                    
-                    
-                    
-                    
-                } else {
-                    
-                    
-                    let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-                    noDataLabel.text          = "No Upcoming Ride"
-                    noDataLabel.textColor     = UIColor.black
-                    noDataLabel.font = UIFont(name: "Noteworthy", size: 25)
-                    noDataLabel.textAlignment = .center
-                    self.tableView.backgroundView  = noDataLabel
-                    self.tableView.separatorStyle  = .none
-                    
                 }
                 
-                
-                
                 self.tableView.reloadData()
-                // self.instaPosts = posts
-                
+
+                if self.rides.count == 0 {
+                    
+                    self.alertControl(title: "Kapool", message: "No Ride found!")
+                    
+                }
                 
             } else {
                 print(error!)
             }
         }
         
-        if count == 0 && signal == 1{
-            
-            let noDataLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height))
-            noDataLabel.text          = "No Ride Found"
-            noDataLabel.textColor     = UIColor.black
-            noDataLabel.font = UIFont(name: "Noteworthy", size: 25)
-            noDataLabel.textAlignment = .center
-            self.tableView.backgroundView  = noDataLabel
-            self.tableView.separatorStyle  = .none
-            
-        }
         
+        
+      
+        
+    }
+    
+    func alertControl (title: String, message: String) {
+        
+        let alertControler = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        //button in alert box
+        alertControler.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        
+        self.present(alertControler, animated: true, completion: nil)
     }
     
     func calDistance(locOrigin: CLLocation, locDest: CLLocation) -> Double {

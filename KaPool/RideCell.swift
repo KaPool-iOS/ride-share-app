@@ -9,6 +9,7 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import Parse
 
 extension Date
 {
@@ -24,8 +25,6 @@ extension Date
 class RideCell: UITableViewCell {
 
     
-    
-    
     @IBOutlet var fromText: UILabel!
     @IBOutlet var toText: UILabel!
     @IBOutlet var dateText: UILabel!
@@ -35,23 +34,77 @@ class RideCell: UITableViewCell {
     var destCoordinates: CLLocationCoordinate2D!
     var origCoordinates: CLLocationCoordinate2D!
     
+    @IBOutlet var driverName: UILabel!
+    @IBOutlet var driverPic: UIImageView!
   
     var ride: Ride! {
         
         didSet {
             
-            
+        
             getPlace(ride.originID, check: 1)
             getPlace(ride.destinationID,check: 0)
             priceText.text = (String) (describing: ride.price!).components(separatedBy: ".0")[0]
             dateText.text = ride.departDate?.toString(dateFormat: "MM/dd")
             seatNumText.text = (String) (describing: ride.seats!)
             
+            getDriverInfo(driverId: ride.driver)
+            
+            
+            
         }
     }
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+    }
+    
+    func getDriverInfo(driverId: String) {
+        
+        
+        let infoQuery = PFQuery(className: "_User")
+        
+        infoQuery.whereKey("objectId", equalTo: driverId)
+        
+        infoQuery.findObjectsInBackground (block: { (objects, error) -> Void in
+            //print("good")
+            if error != nil {
+                
+                print ("inside here")
+               
+            } else {
+                
+                for object in objects! {
+                    
+                    let avaFile : PFFile = (object.object(forKey: "ProfilePic") as? PFFile)!
+                    
+                    avaFile.getDataInBackground { (data, error) in
+                        
+                        if let imageData = data {
+                            
+                            if let downloadedImage = UIImage(data: imageData) {
+                                
+                                
+                                self.driverPic.image = downloadedImage
+                                self.driverPic.layer.cornerRadius = self.driverPic.frame.size.width / 3
+                                self.driverPic.clipsToBounds = true
+                            }
+                        }
+                    }
+                    
+                    self.driverName.text = object.object(forKey: "username") as? String
+                    
+                }
+                
+                
+                
+            }
+            
+            
+        })
+        
+        
         
     }
 
@@ -73,10 +126,7 @@ class RideCell: UITableViewCell {
                 return
             }
             
-            //print("Place name: \(place.name)")
-            //print("Place address \(String(describing: place.formattedAddress!))")
-            //print("Place placeID \(place.placeID)")
-            //print("Place attributions \(String(describing: place.attributions))")
+            
             
             if check == 1 {
                 

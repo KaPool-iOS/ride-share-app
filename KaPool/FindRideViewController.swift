@@ -35,6 +35,7 @@ class FindRideViewController: UIViewController {
     var startLocation: CLLocation!
     
     @IBOutlet var tabbar: UIView!
+    @IBOutlet var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +50,10 @@ class FindRideViewController: UIViewController {
         searchButton.layer.cornerRadius = 5
         searchButton.layer.borderWidth = 1
         
-        searchButton.backgroundColor = UIColor.gray
+        cancelButton.layer.cornerRadius = 5
+        cancelButton.layer.cornerRadius = 1
+        
+        searchButton.backgroundColor = hexStringToUIColor(hex: "#B8B8B8")
     }
     
     
@@ -155,7 +159,7 @@ class FindRideViewController: UIViewController {
         defaults.set(searchDept.text, forKey: "deptName")
         //print ("Distance in miles is \(calDistance(dept: searchDept.text!, dest: searchDest.text!))")
         
-        
+        print ("here")
         defaults.set(locOrigin?.coordinate.latitude, forKey: "originLatitude")
         defaults.set(locOrigin?.coordinate.longitude, forKey: "originLongtitude")
         
@@ -234,7 +238,7 @@ extension FindRideViewController: GMSAutocompleteViewControllerDelegate {
         }
         signal = 0
         searchButton.isEnabled = true
-        searchButton.backgroundColor = hexStringToUIColor(hex: "#40C4F1")
+        searchButton.backgroundColor = hexStringToUIColor(hex: "#F99D52")
         
     }
     
